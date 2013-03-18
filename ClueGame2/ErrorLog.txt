@@ -1,0 +1,114 @@
+Cell 0, 1in the boardConfig file contains more than two letters
+Cell 0, 1 in the boardConfig file contains more than two letters
+Cell 0, 1 in the boardConfig file contains more than two letters
+Cell not containd in legend
+Cell 0, 0is not containd in legend
+Cell 0, 0 is not containd in legend
+Cell 0, 0 is not containd in legend
+Legend File not formated Correctly
+Legend File not formated Correctly
+Row 0 in legend File not formated Correctly
+Not all rows in the boardConfig file are the same length
+Not all rows in the boardConfig file are the same length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Row 17 in the boardConfig file is a defferent length
+Door Direction is not Valid
+Row 17 in the boardConfig file is a defferent length
+Door Direction is not Valid
+Row 17 in the boardConfig file is a defferent length
+Door Direction is not Valid
+Row 17 in the boardConfig file is a defferent length
+Door Direction is not Valid
+Row 17 in the boardConfig file is a defferent length
+Door Direction is not Valid
+Row 17 in the boardConfig file is a different length
+Door Direction is not Valid
+Row 17 in the boardConfig file is a different length
+Door Direction in row3, 3 is not Valid
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, 3 is not valid
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Door direction in row 3, column 2 is not valid
+Door direction in row 3, column 2 is not valid
+Door direction in row 3, column 2 is not valid
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated CorrectlyRow 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Row 17 in the boardConfig file is a different length
+Door direction in row 3, column 3 is not valid
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly

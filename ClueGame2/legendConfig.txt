@@ -1,0 +1,11 @@
+R,Trophy Room
+T,Toilet
+C,Crown Gem Room
+D,Dungeon Room
+A,Animal Room
+M,Computer Room
+O,Deadly Objects Room
+S,Server Room
+P,Python Room
+X,Closet
+W,WalkWay

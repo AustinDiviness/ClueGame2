@@ -1,0 +1,42 @@
+clue
+
+init 
+	-board
+		- load cvs file
+	-players
+		- # of human
+		- # of computer
+		- how many players
+		- order of players
+
+round human
+	- any order
+		- accuse ( if in room of accusing)
+			- pick person and weapon
+			- game over
+		- move
+			- roll dice
+			- move on walk way or go in room
+		- investate
+			- pick room, person, weapon
+			- move weapon and player to room
+			- go around in circle to try to disprove theory
+			- if can show card to everyone
+			
+	- next person
+	
+	
+computer
+	- move
+		- pick a target room. if want to accuse pick that room
+		- rool dice 
+		- choose closest square to room if not in the room itself
+	- can accuse?
+		-yes: accuse
+		- no: investagate
+	- investagate
+		- pick random person, weapon, building that is not marked.
+		- if card shown mark off
+	- can accuse?
+		yes: accuse
+		no : next player
