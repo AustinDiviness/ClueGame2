@@ -116,8 +116,7 @@ public class Board {
 	
 	public RoomCell getRoomCellAt(int row, int column) 
 	{
-		int location = calcIndex(row, column);
-		return (RoomCell) cells.get(location);
+		return (RoomCell) cells.get(calcIndex(row, column));
 	}
 	public BoardCell getCellAt(int location)
 	{
@@ -126,8 +125,7 @@ public class Board {
 	
 	public BoardCell cellAt(int row, int column)
 	{ // returns a cell at a row and column
-		int location = calcIndex(row, column);
-		return cells.get(location);
+		return cells.get(calcIndex(row, column));
 	}
 
 	public LinkedList<Integer> getAdjList(int index) 
@@ -139,16 +137,14 @@ public class Board {
 	public DoorDirection getDoorDirection(int row, int column)
 	{ // Returns the Door Direction as a string
 	  // It is returned as a string and not a DoorDirection because making DoorDirection
-		int location = calcIndex(row, column);
-		if (cells.get(location) instanceof RoomCell )
-			return ((RoomCell)cells.get(location)).getDoorDirection();
+		if (cells.get(calcIndex(row, column)) instanceof RoomCell )
+			return ((RoomCell)cells.get(calcIndex(row, column))).getDoorDirection();
 		return DoorDirection.NONE;
 			
 	}
 	
 	public String getRoomNameAt(int row, int column)
 	{ // Return the room name of a given cell
-		int cal = calcIndex(row, column);
 		String s = rooms.get(cells.get(calcIndex(row,column)).getCellCharacter());
 		return s;
 	}

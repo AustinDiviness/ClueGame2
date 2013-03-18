@@ -131,37 +131,24 @@ public class BoardTest {
 		Assert.assertTrue(!board.getRoomNameAt(7, 0).equals("Toilet"));
 	}
 	
-	@Test
+	@Test (expected=BadConfigFormatException.class)
 	public void invalidBoardConfiguration()
 	{
-		board = null;
-		try 
-		{
-			board = new Board("badBoardSize.csv");
+
+		board = new Board("badBoardSize.csv");
+		try {
 			board.loadConfigFiles();
-			Assert.assertTrue(false);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch(BadConfigFormatException e)
-		{
-			Assert.assertTrue(true);
-		}catch(FileNotFoundException e)
-		{
-			Assert.assertTrue(false);
-		}
-		
-		board = null;
-		try 
-		{
-			board = new Board("badBoardParse.csv");
+
+		board = new Board("badBoardParse.csv");
+		try {
 			board.loadConfigFiles();
-			Assert.assertTrue(false);
-		}
-		catch(BadConfigFormatException e)
-		{
-			Assert.assertTrue(true);
-		}catch(FileNotFoundException e)
-		{
-			Assert.assertTrue(false);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

@@ -152,7 +152,6 @@ public class BoardFactory {
 	private void loadBoard() throws FileNotFoundException
 	{ // takes each line of the board and gives it to parseBoard for evaluation
 		File file = new File(boardFileName);
-		
 		Scanner scan = new Scanner(file);
 		
 		while(scan.hasNextLine())
