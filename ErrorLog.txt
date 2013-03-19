@@ -8,3 +8,6 @@ Cell 1, 1 is not contained in legend
 Row 2 in the boardConfig file is a different length
 Row 1 in legend File not formated Correctly
 Row 17 in the boardConfig file is a different length
+Cell 1, 1 is not contained in legend
+Row 2 in the boardConfig file is a different length
+Row 1 in legend File not formated Correctly
