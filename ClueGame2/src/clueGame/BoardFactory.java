@@ -191,9 +191,9 @@ public class BoardFactory {
 			// Makes sure the type is a valid room type
 			if(characerRoomsMap.containsKey(cellType.charAt(0)))
 			{ 
-				switch(cellType)
+				switch(cellType.charAt(0))
 				{
-				case "W": return new WalkwayCell(cellType.charAt(0));
+				case 'W': return new WalkwayCell(cellType.charAt(0));
 				default: 
 				{
 					CharactersSeen.add(cellType.charAt(0)); 

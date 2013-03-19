@@ -1,3 +1,5 @@
+package clueGame;
+
 public class Card {
 	public final CardType type;
 	public final String name;
