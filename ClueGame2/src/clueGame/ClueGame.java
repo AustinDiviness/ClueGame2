@@ -8,6 +8,7 @@ public class ClueGame {
 
     private Solution solution;
     private ArrayList<Player> players;
+    private Card lastCardShown = null;
 
 	public ClueGame(String string, String string2, String string3,
 			String string4) {
@@ -27,7 +28,7 @@ public class ClueGame {
 	}
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
-		
+	    // TODO make sure that lastCardShown is set	
 	}
 	
 	public boolean checkAccusation(Solution solution) {
@@ -63,5 +64,8 @@ public class ClueGame {
         this.players = players;
     }
 
+    public Card getLastCardShown() {
+        return lastCardShown;
+    }
 
 }

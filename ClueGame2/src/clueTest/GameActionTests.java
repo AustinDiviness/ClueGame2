@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import jave.util.Random;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -112,61 +113,251 @@ public class GameActionTests {
 
 	@Test
 	public void test1Player1Card() {
-        Player one = new Player("Player one");
-        Player two = new Player("Player two");
+        String tempString = "Bobby Pin";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet(solution.person);
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
-        cg.handleSuggestion(
-		fail("Not yet implemented");
+        cg.handleSuggestion(solution.person, solution.room, tempString, two);
+        assertEquals(tempString, cg.getLastCardShown());
 	}
 	
 	@Test
 	public void test1Player2Cards() {
-		fail("Not yet implemented");
+        int card1 = 0;
+        int card2 = 0;
+        String tempString = "Bobby Pin";
+        String tempString2 = "Piano Wire";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
+        cards.add(new Card(CardType.WEAPON, tempString2));
+        one.setCards(cards);
+        cg.setPlayers(players);
+        for (int i = 0; i < 100; ++i) {
+            cg.handleSuggestion(solution.person, solution.room, tempString, two);
+            if (cg.getLastCardShown().equals(tempString)) {
+                ++card1;
+            }
+            else if (cg.getLastCardShown().equals(tempString2)) {
+                ++card2;
+            }
+            else {
+                fail("unknown card was shown");
+            }
+        }
+        assertTrue(card1 > 0);
+        assertTrue(card2 > 0);
 	}
 	
 	@Test
 	public void test2Players2Cards() {
-		fail("Not yet implemented");
+        int card1 = 0;
+        int card2 = 0;
+        String tempString = "Bobby Pin";
+        String tempString2 = "Piano Wire";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        players.add(three);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
+        HashSet otherCards = new HashSet( new Card(CardType.WEAPON, tempString2));
+        one.setCards(cards);
+        two.setCards(otherCards);
+        cg.setPlayers(players);
+        for (int i = 0; i < 100; ++i) {
+            cg.handleSuggestion(solution.person, solution.room, tempString, three);
+            if (cg.getLastCardShown().equals(tempString)) {
+                ++card1;
+            }
+            else if (cg.getLastCardShown().equals(tempString2)) {
+                ++card2;
+            }
+            else {
+                fail("unknown card was shown");
+            }
+        }
+        assertTrue(card1 > 0);
+        assertTrue(card2 > 0);
 	}
 
 	@Test
 	public void testHumanPlayerCard() {
-		fail("Not yet implemented");
+        int card1 = 0;
+        int card2 = 0;
+        String tempString = "Bobby Pin";
+        String tempString2 = "Piano Wire";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        HumanPlayer two = new HumanPlayer("HumanPlayer two");
+        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        players.add(three);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
+        HashSet otherCards = new HashSet( new Card(CardType.WEAPON, tempString2));
+        one.setCards(cards);
+        two.setCards(otherCards);
+        cg.setPlayers(players);
+        for (int i = 0; i < 100; ++i) {
+            cg.handleSuggestion(solution.person, solution.room, tempString, three);
+            if (cg.getLastCardShown().equals(tempString)) {
+                ++card1;
+            }
+            else if (cg.getLastCardShown().equals(tempString2)) {
+                ++card2;
+            }
+            else {
+                fail("unknown card was shown");
+            }
+        }
+        assertTrue(card1 > 0);
+        assertTrue(card2 > 0);
 	}
 
 	@Test
 	public void testNoCard() {
-		fail("Not yet implemented");
+        String tempString = "Bobby Pin";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
+        one.setCards(cards);
+        cg.setPlayers(players);
+        cg.handleSuggestion(solution.person, solution.room, solution.weapon, two);
+        assertTrue(cg.getLastCardShown() == null);
 	}
 
 	@Test
 	public void testTargetComputerPlayerIncludesRoom() {
-		fail("Not yet implemented");
+        // row: 9 col: 3 distance 3
+        int distance = 3;
+        ComputerPlayer player = new ComputerPlayer("player one");
+        player.setRow(9);
+        player.setCol(3);
+        cg.board.calcTargets(player.getRow(), player.getCol(), distance);
+        HashSet<BoardCell> targets = cg.board.getTargets();
+        boolean doorwayFlag = false;
+        for (BoardCell cell: targets) {
+            if (cell.isDoorway()) {
+                doorwayFlag = true;
+                break;
+            }
+        }
+        assertTrue(doorwayFlag);
 	}
 
 	@Test
 	public void testTargetComputerPlayerIncludesNoRoom() {
-		fail("Not yet implemented");
+        // row: 9 col: 3 distance 2
+        int distance = 3;
+        ComputerPlayer player = new ComputerPlayer("player one");
+        player.setRow(9);
+        player.setCol(3);
+        cg.board.calcTargets(player.getRow(), player.getCol(), distance);
+        HashSet<BoardCell> targets = cg.board.getTargets();
+        boolean doorwayFlag = false;
+        for (BoardCell cell: targets) {
+            if (cell.isDoorway()) {
+                doorwayFlag = true;
+                break;
+            }
+        }
+        assertFalse(doorwayFlag);
 	}
 	
 	@Test
 	public void testTargetComputerPlayerIncludesLastVisitedRoom() {
-		fail("Not yet implemented");
+        // row: 9 col: 4 distance 2
+        int distance = 2;
+        ComputerPlayer player = new ComputerPlayer("player one");
+        player.setRow(9);
+        player.setCol(4);
+        player.setLastRoomVisited('C');
+        cg.board.calcTargets(player.getRow(), player.getCol(), distance);
+        HashSet<BoardCell> targets = cg.board.getTargets();
+        boolean doorwayFlag = false;
+        for (BoardCell cell: targets) {
+            if (cell.isDoorway()) {
+                doorwayFlag = true;
+                break;
+            }
+        }
+        assertFalse(doorwayFlag);
 	}
 
 	@Test
 	public void testCorrectSuggestion() {
-		fail("Not yet implemented");
+        String tempString = "Bobby Pin";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
+        one.setCards(cards);
+        cg.setPlayers(players);
+        cg.handleSuggestion(solution.person, solution.room, solution.weapon, two);
+        assertTrue(cg.getLastCardShown() == null);
 	}
 	
 	@Test
 	public void testRandomSuggestion() {
-		fail("Not yet implemented");
+        Random rand = new Random();
+        int card1 = 0;
+        int card2 = 0;
+        String tempString = "Bobby Pin";
+        String tempString2 = "Piano Wire";
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        HumanPlayer two = new HumanPlayer("HumanPlayer two");
+        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        players.add(three);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(new Card(CardType.WEAPON, tempString));
+        HashSet otherCards = new HashSet( new Card(CardType.WEAPON, tempString2));
+        one.setCards(cards);
+        two.setCards(otherCards);
+        cg.setPlayers(players);
+        for (int i = 0; i < 100; ++i) {
+            if (rand.nextInt(2) == 1) { 
+                cg.handleSuggestion(solution.person, solution.room, tempString, three);
+            }
+            else {
+                cg.handleSuggestion(solution.person, solution.room, tempString2, three);
+            }
+            if (cg.getLastCardShown().equals(tempString)) {
+                ++card1;
+            }
+            else if (cg.getLastCardShown().equals(tempString2)) {
+                ++card2;
+            }
+            else {
+                fail("unknown card was shown");
+            }
+        }
+        assertTrue(card1 > 0);
+        assertTrue(card2 > 0);
+
 	}
 }
