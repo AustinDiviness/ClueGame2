@@ -85,26 +85,34 @@ public class GameActionTests {
 	
 	@Test
 	public void testCheckingAndAccusationTrue() {
-		fail("Not yet implemented");
+        Solution answer = cg.getSolution();
+        assertTrue(cg.checkAccusation(answer));
 	}
 
 	@Test
 	public void testCheckingAndAccusationWrongPerson() {
-		fail("Not yet implemented");
+        Solution wrongPerson = cg.getSolution();
+        wrongPerson.setPerson("President Bush");
+        assertFalse(cg.checkAccusation(wrongPerson));
 	}
 
 	@Test
 	public void testCheckingAndAccusationWrongWeapon() {
-		fail("Not yet implemented");
+        Solution wrongWeapon = cg.getSolution();
+        wrongWeapon.setWeapon("Military");
+        assertFalse(cg.checkAccusation(wrongWeapon));
 	}
 	
 	@Test
 	public void testCheckingAndAccusationWrongRoom() {
-		fail("Not yet implemented");
+        Solution wrongRoom = cg.getSolution();
+        wrongRoom.setRoom("Iraq");
+        assertFalse(cg.checkAccusation(wrongRoom));
 	}
 
 	@Test
 	public void test1Player1Card() {
+
 		fail("Not yet implemented");
 	}
 	
