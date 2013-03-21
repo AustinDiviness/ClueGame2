@@ -9,10 +9,12 @@ public class ClueGame {
     private Solution solution;
     private ArrayList<Player> players;
     private Card lastCardShown = null;
+	public Board board;
 
 	public ClueGame(String string, String string2, String string3,
 			String string4) {
 		// TODO Auto-generated constructor stub
+		solution = new Solution();
 	}
 
 	public void deal() {
@@ -57,7 +59,7 @@ public class ClueGame {
     }
 
     public Solution getSolution() {
-        return Solution;
+        return solution;
     }
     
     public void setPlayers(ArrayList<Player> players) {
@@ -67,5 +69,10 @@ public class ClueGame {
     public Card getLastCardShown() {
         return lastCardShown;
     }
+
+	public ArrayList<Player> getPeople() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
