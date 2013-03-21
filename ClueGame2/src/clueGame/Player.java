@@ -12,9 +12,14 @@ public abstract class Player {
 		return new Card(CardType.ROOM, "b");
 	}
 
-	public ArrayList<Card> getCards() {
+	public Set<Card> getCards() {
 		// TODO Auto-generated method stub
-		return new ArrayList<Card>();
+		return new Set<Card>();
 	}
+
+    public void setCards(Set<Card> cards) {
+        this.mycards = cards;
+    }
+        
 	
 }

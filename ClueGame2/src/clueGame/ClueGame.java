@@ -7,6 +7,7 @@ import java.util.Map;
 public class ClueGame {
 
     private Solution solution;
+    private ArrayList<Player> players;
 
 	public ClueGame(String string, String string2, String string3,
 			String string4) {
@@ -43,14 +44,24 @@ public class ClueGame {
 		return null;
 	}
 
-	public ArrayList<Player> getPeople() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ArrayList<Player> getPlayers() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    // getters and setters
+
+    public void setSolution(Solution solution) {
+        this.solution = solution;
+    }
+
+    public Solution getSolution() {
+        return Solution;
+    }
+    
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
 
 }

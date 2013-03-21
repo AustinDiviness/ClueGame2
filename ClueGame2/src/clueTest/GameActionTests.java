@@ -112,7 +112,16 @@ public class GameActionTests {
 
 	@Test
 	public void test1Player1Card() {
-
+        Player one = new Player("Player one");
+        Player two = new Player("Player two");
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(one);
+        players.add(two);
+        Solution solution = cg.getSolution();
+        HashSet cards = new HashSet(solution.person);
+        one.setCards(cards);
+        cg.setPlayers(players);
+        cg.handleSuggestion(
 		fail("Not yet implemented");
 	}
 	
