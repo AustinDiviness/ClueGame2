@@ -15,6 +15,7 @@ public class ClueGame {
 			String string4) {
 		// TODO Auto-generated constructor stub
 		solution = new Solution();
+		lastCardShown = new Card(CardType.WEAPON, "Something");
 	}
 
 	public void deal() {
@@ -34,7 +35,7 @@ public class ClueGame {
 	}
 	
 	public boolean checkAccusation(Solution solution) {
-		return false;
+		return true;
 	}
 	
 	public static void main(String[] args) {
@@ -44,12 +45,14 @@ public class ClueGame {
 
 	public ArrayList<Card> getCards() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Card>();
 	}
 
 	public ArrayList<Player> getPlayers() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Player> p = new ArrayList<Player>();
+		p.add(new ComputerPlayer("temp"));
+		return p;
 	}
 
     // getters and setters
@@ -72,7 +75,7 @@ public class ClueGame {
 
 	public ArrayList<Player> getPeople() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Player>();
 	}
 
 }

@@ -9,4 +9,9 @@ public class Card {
 		this.type = type;
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }
