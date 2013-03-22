@@ -30,33 +30,31 @@ public class GameActionTests {
 	
 	@Before
 	public void setup() {
+        // create and load Clue Game with default config files
 		cg = new ClueGame("person.csv","weaponCards.csv","boardConfig.csv", "legendConfig.txt");
 		try {
 			cg.loadConfigFiles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	@Test
 	public void testCardsFromFile() {
+        // test that cards were properly created from config files
 		ArrayList<Card> deck =  cg.getCards();
-		
 		assertEquals(TOTALCARDS, deck.size());
-
-		assertTrue(deck.contains("Pipe"));
-		assertTrue(deck.contains("Colonel Mustard"));
-		assertTrue(deck.contains("Animal Room"));
+		assertTrue(deck.contains("Pipe")); // tests weapon cards
+		assertTrue(deck.contains("Colonel Mustard")); // tests people cards
+		assertTrue(deck.contains("Animal Room")); // tests room cards
 		assertTrue(deck.get(10).type == CardType.ROOM);
 	}
 
 	@Test
 	public void testPeopleFromFile() {
+        // test that players were properly created from config file
 		ArrayList<Player> crowd =  cg.getPeople();
-		
 		assertEquals(TOTALPEOPLE, crowd.size());
-
 		assertTrue(crowd.contains("Professor Plum"));
 		assertTrue(crowd.contains("Colonel Mustard"));
 		assertTrue(crowd.contains("Mrs. White"));
@@ -64,18 +62,13 @@ public class GameActionTests {
 
 	@Test
 	public void testDealTest() {
-		
-		
-		
+        // test that all cards were properly dealt and that players have about
+        // the same number of cards
 		cg.deal();
-		
 		assertEquals(0, cg.getCards().size());
-		
 		ArrayList<Player> p = cg.getPlayers();
-		
 		int i = p.get(0).getCards().size();
 		ArrayList<Card> testDeck = new ArrayList<Card>();
-		
 		for (Player o : p) {
 			assertFalse(Math.abs(o.getCards().size()-i)>1);
 			testDeck.addAll(o.getCards());
@@ -91,12 +84,14 @@ public class GameActionTests {
 	
 	@Test
 	public void testCheckingAndAccusationTrue() {
+        // test that a correct accusation can be made
         Solution answer = cg.getSolution();
         assertTrue(cg.checkAccusation(answer));
 	}
 
 	@Test
 	public void testCheckingAndAccusationWrongPerson() {
+        // test an accusation with a wrong person
         Solution wrongPerson = cg.getSolution();
         wrongPerson.setPerson("President Bush");
         assertFalse(cg.checkAccusation(wrongPerson));
@@ -104,6 +99,7 @@ public class GameActionTests {
 
 	@Test
 	public void testCheckingAndAccusationWrongWeapon() {
+        // test an accusation with a wrong weapon
         Solution wrongWeapon = cg.getSolution();
         wrongWeapon.setWeapon("Military");
         assertFalse(cg.checkAccusation(wrongWeapon));
@@ -111,6 +107,7 @@ public class GameActionTests {
 	
 	@Test
 	public void testCheckingAndAccusationWrongRoom() {
+        // test and accusation with a wrong room
         Solution wrongRoom = cg.getSolution();
         wrongRoom.setRoom("Iraq");
         assertFalse(cg.checkAccusation(wrongRoom));
@@ -118,6 +115,8 @@ public class GameActionTests {
 
 	@Test
 	public void test1Player1Card() {
+        // test that suggestions are handled properly. One player
+        // with one card version
         String tempString = "Bobby Pin";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
@@ -135,6 +134,8 @@ public class GameActionTests {
 	
 	@Test
 	public void test1Player2Cards() {
+        // test that suggestions are handled properly. One player
+        // with two cards version
         int card1 = 0;
         int card2 = 0;
         String tempString = "Bobby Pin";
@@ -168,6 +169,8 @@ public class GameActionTests {
 	
 	@Test
 	public void test2Players2Cards() {
+        // test that suggestions are handled properly. Two players
+        // with two cards version
         int card1 = 0;
         int card2 = 0;
         String tempString = "Bobby Pin";
@@ -205,6 +208,7 @@ public class GameActionTests {
 
 	@Test
 	public void testHumanPlayerCard() {
+        // test that suggestions are handled properly with human players
         int card1 = 0;
         int card2 = 0;
         String tempString = "Bobby Pin";
@@ -242,6 +246,7 @@ public class GameActionTests {
 
 	@Test
 	public void testNoCard() {
+        // test for when there is no card to reveal from suggestion
         String tempString = "Bobby Pin";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
@@ -257,8 +262,10 @@ public class GameActionTests {
         assertTrue(cg.getLastCardShown() == null);
 	}
 
+
 	@Test
 	public void testTargetComputerPlayerIncludesRoom() {
+        // test that a computer player can pottentialy move to a room
         // row: 9 col: 3 distance 3
         int distance = 3;
         ComputerPlayer player = new ComputerPlayer("player one");
@@ -278,6 +285,7 @@ public class GameActionTests {
 
 	@Test
 	public void testTargetComputerPlayerIncludesNoRoom() {
+        // test when a computer player can move with no rooms available
         // row: 9 col: 3 distance 2
         int distance = 3;
         ComputerPlayer player = new ComputerPlayer("player one");
@@ -297,6 +305,8 @@ public class GameActionTests {
 	
 	@Test
 	public void testTargetComputerPlayerIncludesLastVisitedRoom() {
+        // test when the only room available is the last room visited for the 
+        // computer player
         // row: 9 col: 4 distance 2
         int distance = 2;
         ComputerPlayer player = new ComputerPlayer("player one");
@@ -317,6 +327,7 @@ public class GameActionTests {
 
 	@Test
 	public void testCorrectSuggestion() {
+        // test that the suggestion was correct on all accounts
         String tempString = "Bobby Pin";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
@@ -334,6 +345,7 @@ public class GameActionTests {
 	
 	@Test
 	public void testRandomSuggestion() {
+        // test random suggestions
         Random rand = new Random();
         int card1 = 0;
         int card2 = 0;
