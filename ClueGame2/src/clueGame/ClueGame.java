@@ -11,11 +11,11 @@ public class ClueGame {
     private Card lastCardShown = null;
 	public Board board;
 
-	public ClueGame(String string, String string2, String string3,
-			String string4) {
-		// TODO Auto-generated constructor stub
+	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
+		// TODO properly set variables
 		solution = new Solution();
 		lastCardShown = new Card(CardType.WEAPON, "Something");
+		board = new Board(boardConfig, roomLegendConfig);
 	}
 
 	public void deal() {
@@ -24,6 +24,7 @@ public class ClueGame {
 	
 	public void loadConfigFiles() throws FileNotFoundException {
 		// TODO load config files for game board, rooms, players, and weapons
+		board.loadConfigFiles();
 	}
 	
 	public void selectAnswer() {
