@@ -24,13 +24,13 @@ import clueGame.Solution;
 
 public class GameActionTests {
 	ClueGame cg;
-	private final int TOTALCARDS = 2;
-	private final int TOTALPEOPLE = 2;
+	private final int TOTALCARDS = 5;
+	private final int TOTALPEOPLE = 3;
 	
 	@Before
 	public void setup() {
         // create and load Clue Game with default config files
-		cg = new ClueGame("person.csv","testWeaponCards.csv","boardConfig.csv", "legendConfig.txt");
+		cg = new ClueGame("testPeople.csv","testWeaponCards.csv","boardConfig.csv", "legendConfig.txt");
 		try {
 			cg.loadConfigFiles();
 		} catch (FileNotFoundException e) {
@@ -42,6 +42,9 @@ public class GameActionTests {
 	public void testCardsFromFile() {
         // test that cards were properly created from config files
 		ArrayList<Card> deck = cg.getCards();
+		for (Card card: deck) {
+			System.out.println(card + " is in deck");
+		}
 		assertEquals(TOTALCARDS, deck.size());
 		assertTrue(deck.contains("Lead Pipe")); // tests weapon cards
 		assertTrue(deck.contains("Colonel Mustard")); // tests people cards

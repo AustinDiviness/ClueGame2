@@ -25,6 +25,7 @@ public class ClueGame {
 		lastCardShown = new Card(CardType.WEAPON, "Something");
 		board = new Board(boardConfig, roomLegendConfig);
 		deck = new ArrayList<Card>();
+		players = new ArrayList<Player>();
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
 	}
@@ -37,6 +38,7 @@ public class ClueGame {
 		// TODO load config files for game board, rooms, players, and weapons
 		board.loadConfigFiles();
 		loadWeapons(weaponsConfig);
+		loadPeople(peopleConfig);
 	}
 	
 	public void selectAnswer() {
@@ -81,6 +83,40 @@ public class ClueGame {
 			System.out.println(line);
 		}
 		System.out.println("-----------");
+		deck.addAll(weaponCards);
+	}
+	public void loadPeople(String inputFile) {
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		FileReader fileReader = null;
+		String currentPath = "";
+		String line = null;
+		try {
+			currentPath = new java.io.File(".").getCanonicalPath();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Unable to find path.");
+			System.exit(2);
+		}
+		currentPath = currentPath + File.separatorChar;
+		try {
+			fileReader = new FileReader(currentPath + inputFile);
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Unable to load file: " + currentPath + inputFile);
+			System.exit(1);
+		}
+		Scanner in = new Scanner(fileReader);
+		while (in.hasNext()) {
+			line = in.nextLine().trim();
+			deck.add(new Card(CardType.PERSON, line));
+			// TODO I'm not quite sure how to load players for the human player, so I just made them 
+			// all soul less automations 
+			players.add(new ComputerPlayer(line));
+			System.out.println(line);
+		}
+		System.out.println("-----------");
+		deck.addAll(playerCards);
 	}
 
     // getters and setters
