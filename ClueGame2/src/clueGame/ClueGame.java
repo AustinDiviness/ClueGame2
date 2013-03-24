@@ -19,11 +19,11 @@ public class ClueGame {
 	}
 
 	public void deal() {
-		
+		// TODO deal cards to all players. Tests currently think that deal() function is non destructive
 	}
 	
 	public void loadConfigFiles() throws FileNotFoundException {
-		
+		// TODO load config files for game board, rooms, players, and weapons
 	}
 	
 	public void selectAnswer() {
@@ -35,27 +35,24 @@ public class ClueGame {
 	}
 	
 	public boolean checkAccusation(Solution solution) {
+		// TODO check solution against game solution. should this function eliminate player if accusation is incorrect, or should that
+		// be handled by a separate function? I lean towards the latter option.
 		return true;
 	}
+
+    // getters and setters
 	
-	public static void main(String[] args) {
-
-		
-	}
-
 	public ArrayList<Card> getCards() {
-		// TODO Auto-generated method stub
+		// TODO actually return the cards
 		return new ArrayList<Card>();
 	}
 
 	public ArrayList<Player> getPlayers() {
-		// TODO Auto-generated method stub
+		// TODO actually return players
 		ArrayList<Player> p = new ArrayList<Player>();
 		p.add(new ComputerPlayer("temp"));
 		return p;
 	}
-
-    // getters and setters
 
     public void setSolution(Solution solution) {
         this.solution = solution;
@@ -74,7 +71,7 @@ public class ClueGame {
     }
 
 	public ArrayList<Player> getPeople() {
-		// TODO Auto-generated method stub
+		// TODO actually get people. how should/does this function differ from getPlayers?
 		return new ArrayList<Player>();
 	}
 

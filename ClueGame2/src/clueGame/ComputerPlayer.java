@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -8,44 +9,27 @@ public class ComputerPlayer extends Player {
 	private Set<Card> seenCards;
 	
 	public ComputerPlayer(String string) {
+		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
 		name = string;
+		seenCards = new HashSet<Card>();
+		row = 0;
+		col = 0;
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
-		
+		// TODO create function. Should this be entirely random?
 	}
 	
 	public void createSuggestion() {
-		
+		// TODO create function. are we going to store previous suggestion so the computer learns somehow?
 	}
 	
 	public void updateSeen(Card seen) {
-		
-	}
-
-	public int getRow() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getCol() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void setRow(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setCol(int i) {
-		// TODO Auto-generated method stub
-		
+		seenCards.add(seen);
 	}
 
 	public void setLastRoomVisited(char c) {
-		// TODO Auto-generated method stub
-		
+		this.lastRoomVisited = c;
 	}
 	
 }
