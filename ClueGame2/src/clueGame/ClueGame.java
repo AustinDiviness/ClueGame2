@@ -12,7 +12,8 @@ public class ClueGame {
 	public Board board;
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
-		// TODO properly set variables
+		// TODO properly set variables. How should the games solution be gathered? it can't be set until after the config
+		// files are all loaded, perhaps it should be set from there?
 		solution = new Solution();
 		lastCardShown = new Card(CardType.WEAPON, "Something");
 		board = new Board(boardConfig, roomLegendConfig);
@@ -28,7 +29,7 @@ public class ClueGame {
 	}
 	
 	public void selectAnswer() {
-		
+		// TODO what is this supposed to do? is this the function that properly creates a solution for the game?
 	}
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {

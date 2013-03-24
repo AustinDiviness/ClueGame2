@@ -1,9 +1,7 @@
 package clueGame;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 /* DESCRIPTION
  * This File is for the Bad Formation on the input Files

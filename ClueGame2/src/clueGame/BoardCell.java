@@ -9,8 +9,6 @@ import java.awt.Graphics;
  */
 public abstract class BoardCell {
 	// Location of cell
-	private int row;
-	private int column;
 	// Type of Cell
 	protected char cellIdentifer;
 

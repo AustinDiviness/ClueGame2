@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Random;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.BoardCell;
@@ -126,7 +125,7 @@ public class GameActionTests {
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
@@ -148,7 +147,7 @@ public class GameActionTests {
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
         cards.add(new Card(CardType.WEAPON, tempString2));
         one.setCards(cards);
@@ -184,9 +183,9 @@ public class GameActionTests {
         players.add(two);
         players.add(three);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
-        HashSet otherCards = new HashSet();
+        HashSet<Card> otherCards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString2));
         one.setCards(cards);
         two.setCards(otherCards);
@@ -222,9 +221,9 @@ public class GameActionTests {
         players.add(two);
         players.add(three);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
-        HashSet otherCards = new HashSet();
+        HashSet<Card> otherCards = new HashSet<Card>();
         otherCards.add(new Card(CardType.WEAPON, tempString2));
         one.setCards(cards);
         two.setCards(otherCards);
@@ -255,7 +254,7 @@ public class GameActionTests {
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
@@ -340,7 +339,7 @@ public class GameActionTests {
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
@@ -364,9 +363,9 @@ public class GameActionTests {
         players.add(two);
         players.add(three);
         Solution solution = cg.getSolution();
-        HashSet cards = new HashSet();
+        HashSet<Card> cards = new HashSet<Card>();
         cards.add(new Card(CardType.WEAPON, tempString));
-        HashSet otherCards = new HashSet();
+        HashSet<Card> otherCards = new HashSet<Card>();
         otherCards.add(new Card(CardType.WEAPON, tempString2));
         one.setCards(cards);
         two.setCards(otherCards);

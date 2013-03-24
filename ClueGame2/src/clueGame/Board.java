@@ -8,7 +8,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
 
 import clueGame.RoomCell.DoorDirection;
 
@@ -171,17 +170,17 @@ public class Board {
 			visited[location] = true;
 			
 			// make an Iterator to step though the adjacency matrix
-			ListIterator it_adjMat = adjacencyList.get(location).listIterator();
+			ListIterator<?> it_adjMat = adjacencyList.get(location).listIterator();
 		
 			while(it_adjMat.hasNext())
 			{
 				int next = (Integer) it_adjMat.next();
-				// checvk to see if we visited the location before
+				// check to see if we visited the location before
 				if(!visited[next])
 					startTargets(next, steps -1, false);
 			}
 		}
-		// reset visted to false
+		// reset visited to false
 		visited[location] = false;
 	}
  
