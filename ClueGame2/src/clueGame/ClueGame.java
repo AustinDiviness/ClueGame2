@@ -1,8 +1,11 @@
 package clueGame;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Scanner;
 
 public class ClueGame {
 
@@ -10,6 +13,10 @@ public class ClueGame {
     private ArrayList<Player> players;
     private Card lastCardShown = null;
 	public Board board;
+	private ArrayList<Card> deck;
+	private String peopleConfig;
+	private String weaponsConfig;
+	
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		// TODO properly set variables. How should the games solution be gathered? it can't be set until after the config
@@ -17,6 +24,9 @@ public class ClueGame {
 		solution = new Solution();
 		lastCardShown = new Card(CardType.WEAPON, "Something");
 		board = new Board(boardConfig, roomLegendConfig);
+		deck = new ArrayList<Card>();
+		this.peopleConfig = peopleConfig;
+		this.weaponsConfig = weaponsConfig;
 	}
 
 	public void deal() {
@@ -26,6 +36,7 @@ public class ClueGame {
 	public void loadConfigFiles() throws FileNotFoundException {
 		// TODO load config files for game board, rooms, players, and weapons
 		board.loadConfigFiles();
+		loadWeapons(weaponsConfig);
 	}
 	
 	public void selectAnswer() {
@@ -41,12 +52,42 @@ public class ClueGame {
 		// be handled by a separate function? I lean towards the latter option.
 		return true;
 	}
+	
+	public void loadWeapons(String inputFile) {
+		ArrayList<Card> weaponCards = new ArrayList<Card>();
+		FileReader fileReader = null;
+		String currentPath = "";
+		String line = null;
+		try {
+			currentPath = new java.io.File(".").getCanonicalPath();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Unable to find path.");
+			System.exit(2);
+		}
+		currentPath = currentPath + File.separatorChar;
+		try {
+			fileReader = new FileReader(currentPath + inputFile);
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Unable to load file: " + currentPath + inputFile);
+			System.exit(1);
+		}
+		Scanner in = new Scanner(fileReader);
+		while (in.hasNext()) {
+			line = in.nextLine().trim();
+			deck.add(new Card(CardType.WEAPON, line));
+			System.out.println(line);
+		}
+		System.out.println("-----------");
+	}
 
     // getters and setters
 	
 	public ArrayList<Card> getCards() {
 		// TODO actually return the cards
-		return new ArrayList<Card>();
+		return deck;
 	}
 
 	public ArrayList<Player> getPlayers() {

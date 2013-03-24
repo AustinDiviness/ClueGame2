@@ -30,7 +30,7 @@ public class GameActionTests {
 	@Before
 	public void setup() {
         // create and load Clue Game with default config files
-		cg = new ClueGame("person.csv","weaponCards.csv","boardConfig.csv", "legendConfig.txt");
+		cg = new ClueGame("person.csv","testWeaponCards.csv","boardConfig.csv", "legendConfig.txt");
 		try {
 			cg.loadConfigFiles();
 		} catch (FileNotFoundException e) {
@@ -43,10 +43,10 @@ public class GameActionTests {
         // test that cards were properly created from config files
 		ArrayList<Card> deck = cg.getCards();
 		assertEquals(TOTALCARDS, deck.size());
-		assertTrue(deck.contains("Pipe")); // tests weapon cards
+		assertTrue(deck.contains("Lead Pipe")); // tests weapon cards
 		assertTrue(deck.contains("Colonel Mustard")); // tests people cards
 		assertTrue(deck.contains("Animal Room")); // tests room cards
-		assertTrue(deck.get(10).type == CardType.ROOM);
+		assertTrue(deck.get(10).getType() == CardType.ROOM);
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class GameActionTests {
 		
 		i = cg.getCards().size();
 		for (Card c : cg.getCards()) {
-			assertTrue(testDeck.contains(c.name));
+			assertTrue(testDeck.contains(c.getName()));
 			i--;
 		}
 		
@@ -154,9 +154,9 @@ public class GameActionTests {
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
             cg.handleSuggestion(solution.person, solution.room, tempString, two);
-            if (cg.getLastCardShown().name.equals(tempString)) {
+            if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
-            } else if (cg.getLastCardShown().name.equals(tempString2)) {
+            } else if (cg.getLastCardShown().getName().equals(tempString2)) {
                 ++card2;
             }
             else {
@@ -192,10 +192,10 @@ public class GameActionTests {
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
             cg.handleSuggestion(solution.person, solution.room, tempString, three);
-            if (cg.getLastCardShown().name.equals(tempString)) {
+            if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
-            else if (cg.getLastCardShown().name.equals(tempString2)) {
+            else if (cg.getLastCardShown().getName().equals(tempString2)) {
                 ++card2;
             }
             else {
@@ -230,10 +230,10 @@ public class GameActionTests {
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
             cg.handleSuggestion(solution.person, solution.room, tempString, three);
-            if (cg.getLastCardShown().name.equals(tempString)) {
+            if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
-            else if (cg.getLastCardShown().name.equals(tempString2)) {
+            else if (cg.getLastCardShown().getName().equals(tempString2)) {
                 ++card2;
             }
             else {
@@ -344,7 +344,7 @@ public class GameActionTests {
         one.setCards(cards);
         cg.setPlayers(players);
         cg.handleSuggestion(solution.person, solution.room, solution.weapon, two);
-        assertTrue(cg.getLastCardShown().name == "");
+        assertTrue(cg.getLastCardShown().getName() == "");
 	}
 	
 	@Test
@@ -377,10 +377,10 @@ public class GameActionTests {
             else {
                 cg.handleSuggestion(solution.person, solution.room, tempString2, three);
             }
-            if (cg.getLastCardShown().name.equals(tempString)) {
+            if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
-            else if (cg.getLastCardShown().name.equals(tempString2)) {
+            else if (cg.getLastCardShown().getName().equals(tempString2)) {
                 ++card2;
             }
             else {
