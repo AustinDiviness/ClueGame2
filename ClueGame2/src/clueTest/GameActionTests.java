@@ -88,7 +88,7 @@ public class GameActionTests {
 	public void testCheckingAndAccusationTrue() {
         // test that a correct accusation can be made
         Solution answer = cg.getSolution();
-        assertTrue(!cg.checkAccusation(answer)); // TODO remove ! once we write the function
+        assertTrue(cg.checkAccusation(answer));
 	}
 
 	@Test
@@ -272,9 +272,7 @@ public class GameActionTests {
         ComputerPlayer player = new ComputerPlayer("player one");
         player.setRow(9);
         player.setCol(3);
-        // Below commented out because the board does not load anything currently
-        // however it should work once we write the code that this test tests.
-        /*cg.board.calcTargets(player.getRow(), player.getCol(), distance);
+        cg.board.calcTargets(player.getRow(), player.getCol(), distance);
         HashSet<BoardCell> targets = (HashSet<BoardCell>) cg.board.getTargets();
         
         boolean doorwayFlag = false;
@@ -284,7 +282,7 @@ public class GameActionTests {
                 break;
             }
         }
-        assertTrue(doorwayFlag);*/
+        assertTrue(doorwayFlag);
         assertTrue(false);
 	}
 
@@ -296,9 +294,6 @@ public class GameActionTests {
         ComputerPlayer player = new ComputerPlayer("player one");
         player.setRow(9);
         player.setCol(3);
-        // Below commented out because the board does not load anything currently
-        // however it should work once we write the code that this test tests.
-        /*  
         cg.board.calcTargets(player.getRow(), player.getCol(), distance);
         HashSet<BoardCell> targets = (HashSet<BoardCell>) cg.board.getTargets();
         boolean doorwayFlag = false;
@@ -308,7 +303,7 @@ public class GameActionTests {
                 break;
             }
         }
-        assertFalse(doorwayFlag);*/
+        assertFalse(doorwayFlag);
         assertTrue(false);
 	}
 	
@@ -322,9 +317,6 @@ public class GameActionTests {
         player.setRow(9);
         player.setCol(4);
         player.setLastRoomVisited('C');
-        // Below commented out because the board does not load anything currently
-        // however it should work once we write the code that this test tests.
-        /*
         cg.board.calcTargets(player.getRow(), player.getCol(), distance);
         HashSet<BoardCell> targets = (HashSet<BoardCell>) cg.board.getTargets();
         boolean doorwayFlag = false;
@@ -336,8 +328,6 @@ public class GameActionTests {
             }
         }
         assertFalse(doorwayFlag);
-        */
-        assertTrue(false);
 	}
 
 	@Test
