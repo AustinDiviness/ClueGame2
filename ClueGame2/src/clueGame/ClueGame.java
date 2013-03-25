@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ClueGame {
@@ -54,7 +55,31 @@ public class ClueGame {
 	}
 	
 	public void selectAnswer() {
-		// TODO what is this supposed to do? is this the function that properly creates a solution for the game?
+		// selects 3 cards from the decks to be the solution to the game, removes said cards from the deck after
+		ArrayList<Card> personCards = new ArrayList<Card>();
+		ArrayList<Card> weaponCards = new ArrayList<Card>();
+		ArrayList<Card> roomCards = new ArrayList<Card>();
+		for (Card card: deck) {
+			switch(card.getType()) {
+				case PERSON:
+					personCards.add(card);
+				case WEAPON:
+					weaponCards.add(card);
+				case ROOM:
+					roomCards.add(card);
+			}
+		}
+		Random rand = new Random();
+		solution.setPerson(personCards.get(rand.nextInt() % personCards.size()).toString());
+		solution.setWeapon(weaponCards.get(rand.nextInt() % personCards.size()).toString());
+		solution.setRoom(weaponCards.get(rand.nextInt() % personCards.size()).toString());
+		// remove cards that were chosen from deck
+		for (int i = deck.size(); i >= 0; --i) {
+			String tempString = deck.get(i).toString();
+			if (tempString.equals(solution.getPerson()) || tempString.equals(solution.getWeapon()) || tempString.equals(solution.getRoom())) {
+				deck.remove(i);
+			}
+		}
 	}
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {

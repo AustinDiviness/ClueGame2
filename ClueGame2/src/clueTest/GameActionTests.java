@@ -138,7 +138,7 @@ public class GameActionTests {
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
-        cg.handleSuggestion(solution.person, solution.room, tempString, two);
+        cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
         assertEquals(tempString, cg.getLastCardShown());
 	}
 	
@@ -162,7 +162,7 @@ public class GameActionTests {
         one.setCards(cards);
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
-            cg.handleSuggestion(solution.person, solution.room, tempString, two);
+            cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             } else if (cg.getLastCardShown().getName().equals(tempString2)) {
@@ -200,7 +200,7 @@ public class GameActionTests {
         two.setCards(otherCards);
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
-            cg.handleSuggestion(solution.person, solution.room, tempString, three);
+            cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, three);
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
@@ -238,7 +238,7 @@ public class GameActionTests {
         two.setCards(otherCards);
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
-            cg.handleSuggestion(solution.person, solution.room, tempString, three);
+            cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, three);
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
@@ -267,7 +267,7 @@ public class GameActionTests {
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
-        cg.handleSuggestion(solution.person, solution.room, solution.weapon, two);
+        cg.handleSuggestion(solution.getPerson(), solution.getRoom(), solution.getWeapon(), two);
         assertTrue(cg.getLastCardShown() == null);
 	}
 
@@ -352,7 +352,7 @@ public class GameActionTests {
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
-        cg.handleSuggestion(solution.person, solution.room, solution.weapon, two);
+        cg.handleSuggestion(solution.getPerson(), solution.getRoom(), solution.getWeapon(), two);
         assertTrue(cg.getLastCardShown().getName() == "");
 	}
 	
@@ -381,10 +381,10 @@ public class GameActionTests {
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
             if (rand.nextInt(2) == 1) { 
-                cg.handleSuggestion(solution.person, solution.room, tempString, three);
+                cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, three);
             }
             else {
-                cg.handleSuggestion(solution.person, solution.room, tempString2, three);
+                cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString2, three);
             }
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
