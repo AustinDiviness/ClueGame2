@@ -25,7 +25,7 @@ public abstract class Player {
 	// getters and setters
 	public Set<Card> getCards() {
 		// TODO actually return cards
-		return new HashSet<Card>();
+		return myCards;
 	}
 
     public void setCards(Set<Card> cards) {

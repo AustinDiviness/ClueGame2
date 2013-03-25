@@ -72,6 +72,7 @@ public class GameActionTests {
 	public void testDealTest() {
         // test that all cards were properly dealt and that players have about
         // the same number of cards
+		System.out.println(cg.getDeck().size());
 		cg.deal();
 		assertEquals(0, cg.getDeck().size());
 		ArrayList<Player> p = cg.getPlayers();
@@ -79,6 +80,7 @@ public class GameActionTests {
 		ArrayList<Card> testDeck = new ArrayList<Card>();
 		
 		for (Player o : p) {
+			System.out.println("hand: " + o.getCards().size());
 			assertFalse(Math.abs(o.getCards().size()-i)>1);
 			testDeck.addAll(o.getCards());
 		}

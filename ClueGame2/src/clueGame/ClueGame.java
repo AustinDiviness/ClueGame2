@@ -63,6 +63,7 @@ public class ClueGame {
 		ArrayList<Card> weaponCards = new ArrayList<Card>();
 		ArrayList<Card> roomCards = new ArrayList<Card>();
 		for (Card card: deck) {
+			//System.out.println("number of players: " + players.size());
 			switch(card.getType()) {
 				case PERSON:
 					personCards.add(card);
@@ -89,19 +90,18 @@ public class ClueGame {
 	    // TODO make sure that lastCardShown is set	
 		ArrayList<Card> disproveCards = new ArrayList<Card>();
 		//System.out.println(players.size());
-		System.out.println("# of players :"+ players.size());
+		//System.out.println("# of players :"+ players.size());
 		Card card;
 		for (Player player: players) {
-			System.out.println("Player has " + player.getCards().size() + " cards");
-			/*
+			//System.out.println("Player has " + player.getCards().size() + " cards");
 			for (Object c: player.getCards().toArray()) {
 				card = (Card) c;
-				System.out.println("x");
+				//System.out.println("x");
 				if (card.toString().equals(person) || card.toString().equals(weapon) || card.toString().equals(room)) {
 					disproveCards.add(card);
-					System.out.println(card.toString());
+					//System.out.println(card.toString());
 				}
-			}*/
+			}
 		}
 		
 		if (disproveCards.size() > 0) {
@@ -231,4 +231,15 @@ public class ClueGame {
 		return players;
 	}
 
+	public static void main(String[] args) {
+		ClueGame game = new ClueGame("testPeople.csv","testWeaponCards.csv","boardConfig.csv", "legendConfig.txt");
+		try {
+			game.loadConfigFiles();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println("game loaded");
+		game.deal();
+		
+	}
 }
