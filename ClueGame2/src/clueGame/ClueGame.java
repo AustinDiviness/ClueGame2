@@ -59,6 +59,7 @@ public class ClueGame {
 	}
 	
 	public void loadWeapons(String inputFile) {
+		// loads weapons from config file into card deck
 		ArrayList<Card> weaponCards = new ArrayList<Card>();
 		FileReader fileReader = null;
 		String currentPath = "";
@@ -89,6 +90,7 @@ public class ClueGame {
 		deck.addAll(weaponCards);
 	}
 	public void loadPeople(String inputFile) {
+		// loads people from config file into card deck and as Player objects to players list
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		FileReader fileReader = null;
 		String currentPath = "";
@@ -122,6 +124,7 @@ public class ClueGame {
 		deck.addAll(playerCards);
 	}
 	public void loadRoomCards() {
+		// loads room cards to card deck
 		for (Entry<Character, String> item: board.getRooms().entrySet()) {
 			deck.add(new Card(CardType.ROOM, item.getValue()));
 			System.out.println(item.getValue());
@@ -132,15 +135,11 @@ public class ClueGame {
     // getters and setters
 	
 	public ArrayList<Card> getCards() {
-		// TODO actually return the cards
 		return deck;
 	}
 
 	public ArrayList<Player> getPlayers() {
-		// TODO actually return players
-		ArrayList<Player> p = new ArrayList<Player>();
-		p.add(new ComputerPlayer("temp"));
-		return p;
+		return players;
 	}
 
     public void setSolution(Solution solution) {
