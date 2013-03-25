@@ -12,6 +12,7 @@ public class ComputerPlayer extends Player {
 		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
 		name = string;
 		seenCards = new HashSet<Card>();
+		myCards = new HashSet<Card>();
 		row = 0;
 		col = 0;
 	}

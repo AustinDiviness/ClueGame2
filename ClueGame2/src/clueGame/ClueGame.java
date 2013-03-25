@@ -15,6 +15,7 @@ public class ClueGame {
     private Card lastCardShown = null;
 	public Board board;
 	private ArrayList<Card> deck;
+	private ArrayList<Card> allCards;
 	private String peopleConfig;
 	private String weaponsConfig;
 	
@@ -32,8 +33,15 @@ public class ClueGame {
 	}
 
 	public void deal() {
-		// TODO deal cards to all players. Tests currently think that deal() function is non destructive if I remember right,
+		// deal cards to all players. Tests currently think that deal() function is non destructive if I remember right,
 		// however testDealTest expects the deck to be empty after dealing, so we need to decide if it's destructive or not.
+		// was solved by having a destructive deck of cards, and a separate ArrayList that stores all the cards in the game.
+		int cardCount = 0;
+		for (Card card: deck) {
+			players.get(cardCount % players.size()).giveCard(card);
+			++cardCount;
+		}
+		deck = new ArrayList<Card>();
 	}
 	
 	public void loadConfigFiles() throws FileNotFoundException {
@@ -42,6 +50,7 @@ public class ClueGame {
 		loadWeapons(weaponsConfig);
 		loadPeople(peopleConfig);
 		loadRoomCards();
+		allCards = deck; // should store all cards that exist in game into a separate ArrayList
 	}
 	
 	public void selectAnswer() {
@@ -136,6 +145,10 @@ public class ClueGame {
 	
 	public ArrayList<Card> getCards() {
 		return deck;
+	}
+	
+	public ArrayList<Card> getAllCards() {
+		return allCards;
 	}
 
 	public ArrayList<Player> getPlayers() {

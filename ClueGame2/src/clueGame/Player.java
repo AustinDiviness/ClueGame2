@@ -57,4 +57,8 @@ public abstract class Player {
 		this.col = col;
 	}
 	
+	public void giveCard(Card card) {
+		this.myCards.add(card);
+	}
+	
 }

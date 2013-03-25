@@ -75,7 +75,7 @@ public class GameActionTests {
 		cg.deal();
 		assertEquals(0, cg.getCards().size());
 		ArrayList<Player> p = cg.getPlayers();
-		int i = 3;//p.get(0).getCards().size();
+		int i = p.get(0).getCards().size();
 		ArrayList<Card> testDeck = new ArrayList<Card>();
 		
 		for (Player o : p) {
