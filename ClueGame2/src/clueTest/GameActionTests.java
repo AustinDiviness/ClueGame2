@@ -44,7 +44,7 @@ public class GameActionTests {
 		ArrayList<Card> allCards = cg.getCards();
 		ArrayList<String> cardNames = new ArrayList<String>();
 		for (Card card: allCards) {
-			System.out.println(card + " is in deck");
+			//System.out.println(card + " is in deck");
 			cardNames.add(card.toString());
 		}
 		assertEquals(TOTALCARDS, allCards.size());
@@ -137,15 +137,17 @@ public class GameActionTests {
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
         ArrayList<Player> players = new ArrayList<Player>();
-        players.add(one);
-        players.add(two);
         Solution solution = cg.getSolution();
         HashSet<Card> cards = new HashSet<Card>();
-        cards.add(new Card(CardType.WEAPON, tempString));
-        one.setCards(cards);
+        Card tempCard = new Card(CardType.WEAPON, tempString);
+        cards.add(tempCard);
+        //one.setCards(cards);
+        one.giveCard(tempCard);
+        players.add(one);
+        players.add(two);
         cg.setPlayers(players);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
-        assertEquals(tempString, cg.getLastCardShown());
+        assertEquals(tempString, cg.getLastCardShown().getName());
 	}
 	
 	@Test

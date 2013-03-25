@@ -9,4 +9,10 @@ public class HumanPlayer extends Player {
 		myCards = new HashSet<Card>();
 	}
 
+	@Override
+	public void showCard(Card card) {
+		// TODO add method
+		
+	}
+
 }

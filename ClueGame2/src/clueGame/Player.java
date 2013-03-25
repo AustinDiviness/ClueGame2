@@ -61,4 +61,6 @@ public abstract class Player {
 		this.myCards.add(card);
 	}
 	
+	abstract public void showCard(Card card);
+	
 }

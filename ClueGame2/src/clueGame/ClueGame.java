@@ -13,7 +13,7 @@ public class ClueGame {
 
     private Solution solution;
     private ArrayList<Player> players;
-    private Card lastCardShown = null;
+    private Card lastCardShown;
 	public Board board;
 	private ArrayList<Card> deck;
 	private ArrayList<Card> allCards;
@@ -30,6 +30,7 @@ public class ClueGame {
 		deck = new ArrayList<Card>();
 		allCards = new ArrayList<Card>();
 		players = new ArrayList<Player>();
+		lastCardShown = new Card(CardType.ROOM, "");
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
 	}
@@ -86,6 +87,26 @@ public class ClueGame {
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
 	    // TODO make sure that lastCardShown is set	
+		ArrayList<Card> disproveCards = new ArrayList<Card>();
+		System.out.println(players.size());
+		for (Player player: players) {
+			System.out.println("cards" + player.getCards().size());
+			for (Card card: player.getCards()) {
+				System.out.println("x");
+				if (card.toString().equals(person) || card.toString().equals(weapon) || card.toString().equals(room)) {
+					disproveCards.add(card);
+					System.out.println(card.toString());
+				}
+			}
+		}
+		if (disproveCards.size() > 0) {
+			Random rand = new Random();
+			lastCardShown = disproveCards.get(rand.nextInt(disproveCards.size()));
+			accusingPerson.showCard(lastCardShown);
+		}
+		else {
+			lastCardShown = new Card(CardType.ROOM, "");
+		}
 	}
 	
 	public boolean checkAccusation(Solution solution) {
