@@ -84,9 +84,9 @@ public class ClueGame {
 		while (in.hasNext()) {
 			line = in.nextLine().trim();
 			deck.add(new Card(CardType.WEAPON, line));
-			System.out.println(line);
+			//System.out.println(line); // test code to print out weapons that were loaded
 		}
-		System.out.println("-----------");
+		//System.out.println("-----------"); // test code
 		deck.addAll(weaponCards);
 	}
 	public void loadPeople(String inputFile) {
@@ -118,18 +118,18 @@ public class ClueGame {
 			// TODO I'm not quite sure how to load players for the human player, so I just made them 
 			// all soul less automations 
 			players.add(new ComputerPlayer(line));
-			System.out.println(line);
+			//System.out.println(line); // test code to print out players that were loaded
 		}
-		System.out.println("-----------");
+		//System.out.println("-----------"); // test code
 		deck.addAll(playerCards);
 	}
 	public void loadRoomCards() {
 		// loads room cards to card deck
 		for (Entry<Character, String> item: board.getRooms().entrySet()) {
 			deck.add(new Card(CardType.ROOM, item.getValue()));
-			System.out.println(item.getValue());
+			//System.out.println(item.getValue()); // test code to print out rooms that were turned into cards
 		}
-		System.out.println("-----------");
+		//System.out.println("-----------"); // test code
 	}
 
     // getters and setters

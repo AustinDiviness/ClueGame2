@@ -24,7 +24,7 @@ import clueGame.Solution;
 
 public class GameActionTests {
 	ClueGame cg;
-	private final int TOTALCARDS = 5;
+	private final int TOTALCARDS = 16;
 	private final int TOTALPEOPLE = 3;
 	
 	@Before
@@ -42,13 +42,15 @@ public class GameActionTests {
 	public void testCardsFromFile() {
         // test that cards were properly created from config files
 		ArrayList<Card> deck = cg.getCards();
+		ArrayList<String> cardNames = new ArrayList<String>();
 		for (Card card: deck) {
-			System.out.println(card + " is in deck");
+			//System.out.println(card + " is in deck");
+			cardNames.add(card.toString());
 		}
 		assertEquals(TOTALCARDS, deck.size());
-		assertTrue(deck.contains("Lead Pipe")); // tests weapon cards
-		assertTrue(deck.contains("Colonel Mustard")); // tests people cards
-		assertTrue(deck.contains("Animal Room")); // tests room cards
+		assertTrue(cardNames.contains("Lead Pipe")); // tests weapon cards
+		assertTrue(cardNames.contains("Colonel Mustard")); // tests people cards
+		assertTrue(cardNames.contains("Animal Room")); // tests room cards
 		assertTrue(deck.get(10).getType() == CardType.ROOM);
 	}
 
@@ -56,10 +58,14 @@ public class GameActionTests {
 	public void testPeopleFromFile() {
         // test that players were properly created from config file
 		ArrayList<Player> crowd =  cg.getPeople();
+		ArrayList<String> playerNames = new ArrayList<String>();
+		for (Player player: crowd) {
+			playerNames.add(player.getName());
+		}
 		assertEquals(TOTALPEOPLE, crowd.size());
-		assertTrue(crowd.contains("Professor Plum"));
-		assertTrue(crowd.contains("Colonel Mustard"));
-		assertTrue(crowd.contains("Mrs. White"));
+		assertTrue(playerNames.contains("Professor Plum"));
+		assertTrue(playerNames.contains("Colonel Mustard"));
+		assertTrue(playerNames.contains("Mrs. White"));
 	}
 
 	@Test
