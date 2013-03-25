@@ -28,6 +28,7 @@ public class ClueGame {
 		lastCardShown = new Card(CardType.WEAPON, "Something");
 		board = new Board(boardConfig, roomLegendConfig);
 		deck = new ArrayList<Card>();
+		allCards = new ArrayList<Card>();
 		players = new ArrayList<Player>();
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
@@ -51,7 +52,8 @@ public class ClueGame {
 		loadWeapons(weaponsConfig);
 		loadPeople(peopleConfig);
 		loadRoomCards();
-		allCards = deck; // should store all cards that exist in game into a separate ArrayList
+		allCards.addAll(deck); // should store all cards that exist in game into a separate ArrayList
+		selectAnswer(); // select answer to game
 	}
 	
 	public void selectAnswer() {
@@ -70,11 +72,11 @@ public class ClueGame {
 			}
 		}
 		Random rand = new Random();
-		solution.setPerson(personCards.get(rand.nextInt() % personCards.size()).toString());
-		solution.setWeapon(weaponCards.get(rand.nextInt() % personCards.size()).toString());
-		solution.setRoom(weaponCards.get(rand.nextInt() % personCards.size()).toString());
+		solution.setPerson(personCards.get(rand.nextInt(personCards.size())).toString());
+		solution.setWeapon(weaponCards.get(rand.nextInt(personCards.size())).toString());
+		solution.setRoom(weaponCards.get(rand.nextInt(personCards.size())).toString());
 		// remove cards that were chosen from deck
-		for (int i = deck.size(); i >= 0; --i) {
+		for (int i = deck.size() - 1; i >= 0; --i) {
 			String tempString = deck.get(i).toString();
 			if (tempString.equals(solution.getPerson()) || tempString.equals(solution.getWeapon()) || tempString.equals(solution.getRoom())) {
 				deck.remove(i);
@@ -89,7 +91,9 @@ public class ClueGame {
 	public boolean checkAccusation(Solution solution) {
 		// TODO check solution against game solution. should this function eliminate player if accusation is incorrect, or should that
 		// be handled by a separate function? I lean towards the latter option.
-		return true;
+		return (this.solution.getPerson().equals(solution.getPerson()) &&
+				this.solution.getWeapon().equals(solution.getWeapon()) &&
+				this.solution.getRoom().equals(solution.getRoom()));
 	}
 	
 	public void loadWeapons(String inputFile) {
@@ -169,11 +173,11 @@ public class ClueGame {
     // getters and setters
 	
 	public ArrayList<Card> getCards() {
-		return deck;
+		return allCards;
 	}
 	
-	public ArrayList<Card> getAllCards() {
-		return allCards;
+	public ArrayList<Card> getDeck() {
+		return deck;
 	}
 
 	public ArrayList<Player> getPlayers() {

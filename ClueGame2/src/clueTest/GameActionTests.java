@@ -41,17 +41,17 @@ public class GameActionTests {
 	@Test
 	public void testCardsFromFile() {
         // test that cards were properly created from config files
-		ArrayList<Card> deck = cg.getCards();
+		ArrayList<Card> allCards = cg.getCards();
 		ArrayList<String> cardNames = new ArrayList<String>();
-		for (Card card: deck) {
-			//System.out.println(card + " is in deck");
+		for (Card card: allCards) {
+			System.out.println(card + " is in deck");
 			cardNames.add(card.toString());
 		}
-		assertEquals(TOTALCARDS, deck.size());
+		assertEquals(TOTALCARDS, allCards.size());
 		assertTrue(cardNames.contains("Lead Pipe")); // tests weapon cards
 		assertTrue(cardNames.contains("Colonel Mustard")); // tests people cards
 		assertTrue(cardNames.contains("Animal Room")); // tests room cards
-		assertTrue(deck.get(10).getType() == CardType.ROOM);
+		assertTrue(allCards.get(10).getType() == CardType.ROOM);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class GameActionTests {
         // test that all cards were properly dealt and that players have about
         // the same number of cards
 		cg.deal();
-		assertEquals(0, cg.getCards().size());
+		assertEquals(0, cg.getDeck().size());
 		ArrayList<Player> p = cg.getPlayers();
 		int i = p.get(0).getCards().size();
 		ArrayList<Card> testDeck = new ArrayList<Card>();
@@ -83,8 +83,8 @@ public class GameActionTests {
 			testDeck.addAll(o.getCards());
 		}
 		
-		i = cg.getCards().size();
-		for (Card c : cg.getCards()) {
+		i = cg.getDeck().size();
+		for (Card c : cg.getDeck()) {
 			assertTrue(testDeck.contains(c.getName()));
 			i--;
 		}
@@ -98,7 +98,7 @@ public class GameActionTests {
         Solution answer = cg.getSolution();
         assertTrue(cg.checkAccusation(answer));
 	}
-
+	
 	@Test
 	public void testCheckingAndAccusationWrongPerson() {
         // test an accusation with a wrong person
