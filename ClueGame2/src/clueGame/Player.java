@@ -16,6 +16,11 @@ public abstract class Player {
 		// should this take a solution object as a single argument instead of us having to divide the solution into 3 strings?
 		return new Card(CardType.ROOM, "b");
 	}
+	
+	@Override 
+	public String toString() {
+		return name;
+	}
 
 	// getters and setters
 	public Set<Card> getCards() {

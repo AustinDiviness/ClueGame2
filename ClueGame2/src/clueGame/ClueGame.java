@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class ClueGame {
@@ -31,7 +32,8 @@ public class ClueGame {
 	}
 
 	public void deal() {
-		// TODO deal cards to all players. Tests currently think that deal() function is non destructive
+		// TODO deal cards to all players. Tests currently think that deal() function is non destructive if I remember right,
+		// however testDealTest expects the deck to be empty after dealing, so we need to decide if it's destructive or not.
 	}
 	
 	public void loadConfigFiles() throws FileNotFoundException {
@@ -39,6 +41,7 @@ public class ClueGame {
 		board.loadConfigFiles();
 		loadWeapons(weaponsConfig);
 		loadPeople(peopleConfig);
+		loadRoomCards();
 	}
 	
 	public void selectAnswer() {
@@ -118,6 +121,13 @@ public class ClueGame {
 		System.out.println("-----------");
 		deck.addAll(playerCards);
 	}
+	public void loadRoomCards() {
+		for (Entry<Character, String> item: board.getRooms().entrySet()) {
+			deck.add(new Card(CardType.ROOM, item.getValue()));
+			System.out.println(item.getValue());
+		}
+		System.out.println("-----------");
+	}
 
     // getters and setters
 	
@@ -150,8 +160,8 @@ public class ClueGame {
     }
 
 	public ArrayList<Player> getPeople() {
-		// TODO actually get people. how should/does this function differ from getPlayers?
-		return new ArrayList<Player>();
+		// TODO how should/does this function differ from getPlayers?
+		return players;
 	}
 
 }
