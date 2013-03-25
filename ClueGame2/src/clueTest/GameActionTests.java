@@ -102,24 +102,30 @@ public class GameActionTests {
 	@Test
 	public void testCheckingAndAccusationWrongPerson() {
         // test an accusation with a wrong person
-        Solution wrongPerson = cg.getSolution();
+        Solution wrongPerson = new Solution();
         wrongPerson.setPerson("President Bush");
+        wrongPerson.setWeapon(cg.getSolution().getWeapon());
+        wrongPerson.setRoom(cg.getSolution().getRoom());
         assertFalse(cg.checkAccusation(wrongPerson)); 
 	}
 
 	@Test
 	public void testCheckingAndAccusationWrongWeapon() {
         // test an accusation with a wrong weapon
-        Solution wrongWeapon = cg.getSolution();
+        Solution wrongWeapon = new Solution();
         wrongWeapon.setWeapon("Military");
+        wrongWeapon.setPerson(cg.getSolution().getPerson());
+        wrongWeapon.setRoom(cg.getSolution().getRoom());
         assertFalse(cg.checkAccusation(wrongWeapon));
 	}
 	
 	@Test
 	public void testCheckingAndAccusationWrongRoom() {
         // test and accusation with a wrong room
-        Solution wrongRoom = cg.getSolution();
+        Solution wrongRoom = new Solution();
         wrongRoom.setRoom("Iraq");
+        wrongRoom.setPerson(cg.getSolution().getPerson());
+        wrongRoom.setWeapon(cg.getSolution().getWeapon());
         assertFalse(cg.checkAccusation(wrongRoom));
 	}
 

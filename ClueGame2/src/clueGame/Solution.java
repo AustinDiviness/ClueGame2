@@ -5,6 +5,10 @@ public class Solution {
 	private String weapon;
 	private String room;
 	
+	public Solution() {
+		
+	}
+	
 	public void setRoom(String room) {
 		this.room = room;
 	}
