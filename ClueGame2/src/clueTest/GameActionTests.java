@@ -133,21 +133,26 @@ public class GameActionTests {
 	public void test1Player1Card() {
         // test that suggestions are handled properly. One player
         // with one card version
+		System.out.println("test1Player1Card");
         String tempString = "Bobby Pin";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
         ArrayList<Player> players = new ArrayList<Player>();
         Solution solution = cg.getSolution();
-        HashSet<Card> cards = new HashSet<Card>();
+        //HashSet<Card> cards = new HashSet<Card>();
         Card tempCard = new Card(CardType.WEAPON, tempString);
-        cards.add(tempCard);
+        //cards.add(tempCard);
         //one.setCards(cards);
+        System.out.println("one = " + one.getCards().size());
         one.giveCard(tempCard);
+        System.out.println("one = " + one.getCards().size());
         players.add(one);
         players.add(two);
         cg.setPlayers(players);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
+        System.out.println("end test1Player1Card");
         assertEquals(tempString, cg.getLastCardShown().getName());
+        
 	}
 	
 	@Test

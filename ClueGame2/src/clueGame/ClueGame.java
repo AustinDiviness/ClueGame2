@@ -88,17 +88,22 @@ public class ClueGame {
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
 	    // TODO make sure that lastCardShown is set	
 		ArrayList<Card> disproveCards = new ArrayList<Card>();
-		System.out.println(players.size());
+		//System.out.println(players.size());
+		System.out.println("# of players :"+ players.size());
+		Card card;
 		for (Player player: players) {
-			System.out.println("cards" + player.getCards().size());
-			for (Card card: player.getCards()) {
+			System.out.println("Player has " + player.getCards().size() + " cards");
+			/*
+			for (Object c: player.getCards().toArray()) {
+				card = (Card) c;
 				System.out.println("x");
 				if (card.toString().equals(person) || card.toString().equals(weapon) || card.toString().equals(room)) {
 					disproveCards.add(card);
 					System.out.println(card.toString());
 				}
-			}
+			}*/
 		}
+		
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			lastCardShown = disproveCards.get(rand.nextInt(disproveCards.size()));
