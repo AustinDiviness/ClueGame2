@@ -19,6 +19,21 @@ public class RoomCell extends BoardCell {
 		__init__(roomName, DoorDirection.NONE);
 	}
 	
+	public RoomCell(char roomName, int row, int col)
+	{
+		__init__(roomName, DoorDirection.NONE);
+		this.row = row;
+		this.col = col;
+	}
+
+	public RoomCell(char roomName, DoorDirection direction, int row, int col)
+	{
+		__init__(roomName, direction);
+		this.row = row;
+		this.col = col;
+	}
+
+	
 	public RoomCell(char roomName, DoorDirection direction)
 	{
 		__init__(roomName, direction);
@@ -29,6 +44,7 @@ public class RoomCell extends BoardCell {
 		cellIdentifer = roomName;
 		doorDirection = direction;
 	}
+	
 	@Override
 	public boolean isRoom() {
 		return true;

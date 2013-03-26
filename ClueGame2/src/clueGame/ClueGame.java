@@ -107,7 +107,6 @@ public class ClueGame {
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			lastCardShown = disproveCards.get(rand.nextInt(disproveCards.size()));
-			System.out.println(lastCardShown.getName());
 			accusingPerson.showCard(lastCardShown);
 		}
 		else {
@@ -149,9 +148,7 @@ public class ClueGame {
 		while (in.hasNext()) {
 			line = in.nextLine().trim();
 			deck.add(new Card(CardType.WEAPON, line));
-			//System.out.println(line); // test code to print out weapons that were loaded
 		}
-		//System.out.println("-----------"); // test code
 		deck.addAll(weaponCards);
 	}
 	public void loadPeople(String inputFile) {

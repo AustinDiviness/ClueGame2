@@ -193,11 +193,11 @@ public class BoardFactory {
 			{ 
 				switch(cellType.charAt(0))
 				{
-				case 'W': return new WalkwayCell(cellType.charAt(0));
+				case 'W': return new WalkwayCell(cellType.charAt(0), currentRow, currentColumn);
 				default: 
 				{
 					CharactersSeen.add(cellType.charAt(0)); 
-					return new RoomCell(cellType.charAt(0));
+					return new RoomCell(cellType.charAt(0), currentRow, currentColumn);
 				}
 				}
 			}

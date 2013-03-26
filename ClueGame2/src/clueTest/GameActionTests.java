@@ -44,7 +44,6 @@ public class GameActionTests {
 		ArrayList<Card> allCards = cg.getCards();
 		ArrayList<String> cardNames = new ArrayList<String>();
 		for (Card card: allCards) {
-			//System.out.println(card + " is in deck");
 			cardNames.add(card.toString());
 		}
 		assertEquals(TOTALCARDS, allCards.size());
@@ -72,7 +71,6 @@ public class GameActionTests {
 	public void testDealTest() {
         // test that all cards were properly dealt and that players have about
         // the same number of cards
-		System.out.println(cg.getDeck().size());
 		cg.deal();
 		assertEquals(0, cg.getDeck().size());
 		ArrayList<Player> p = cg.getPlayers();
@@ -80,7 +78,6 @@ public class GameActionTests {
 		ArrayList<Card> testDeck = new ArrayList<Card>();
 		
 		for (Player o : p) {
-			System.out.println("hand: " + o.getCards().size());
 			assertFalse(Math.abs(o.getCards().size()-i)>1);
 			testDeck.addAll(o.getCards());
 		}
@@ -135,7 +132,6 @@ public class GameActionTests {
 	public void test1Player1Card() {
         // test that suggestions are handled properly. One player
         // with one card version
-		System.out.println("test1Player1Card");
         String tempString = "Bobby Pin";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
@@ -145,14 +141,11 @@ public class GameActionTests {
         Card tempCard = new Card(CardType.WEAPON, tempString);
         //cards.add(tempCard);
         //one.setCards(cards);
-        System.out.println("one = " + one.getCards().size());
         one.giveCard(tempCard);
-        System.out.println("one = " + one.getCards().size());
         players.add(one);
         players.add(two);
         cg.setPlayers(players);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
-        System.out.println("end test1Player1Card");
         assertEquals(tempString, cg.getLastCardShown().getName());
         
 	}
@@ -314,7 +307,7 @@ public class GameActionTests {
 	public void testTargetComputerPlayerIncludesNoRoom() {
         // test when a computer player can move with no rooms available
         // row: 9 col: 3 distance 2
-        int distance = 3;
+        int distance = 2;
         ComputerPlayer player = new ComputerPlayer("player one");
         player.setRow(9);
         player.setCol(3);
@@ -340,17 +333,15 @@ public class GameActionTests {
         player.setRow(9);
         player.setCol(4);
         player.setLastRoomVisited('C');
+
         cg.board.calcTargets(player.getRow(), player.getCol(), distance);
         HashSet<BoardCell> targets = (HashSet<BoardCell>) cg.board.getTargets();
-        boolean doorwayFlag = false;
-
-        for (BoardCell cell: targets) {
-            if (cell.isDoorway()) {
-                doorwayFlag = true;
-                break;
-            }
+        
+        for (int i = 1; i < 100; i++) {
+        	player.pickLocation(targets);
+        	assertTrue(player.getCol() != 11 && player.getRow() != 4);
         }
-        assertFalse(doorwayFlag);
+
 	}
 
 	@Test

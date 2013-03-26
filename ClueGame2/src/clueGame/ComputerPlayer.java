@@ -1,6 +1,8 @@
 package clueGame;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 
@@ -18,7 +20,24 @@ public class ComputerPlayer extends Player {
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
-		// TODO create function. Should this be entirely random?
+		Random rand = new Random();
+		
+		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);
+		/*
+		for (Object bc : targets.toArray()) {
+			setArray.add((BoardCell) bc);
+		}
+		*/
+		
+		BoardCell pick = setArray.get(rand.nextInt(setArray.size()));
+		while (pick.getCellCharacter() == (lastRoomVisited)) {
+			pick = setArray.get(rand.nextInt(setArray.size()));
+		}
+	
+		row = pick.getRow();
+		col = pick.getCol();
+		//System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx:" + pick.toString());
+		
 	}
 	
 	public void createSuggestion() {
