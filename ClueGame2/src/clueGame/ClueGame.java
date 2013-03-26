@@ -107,6 +107,7 @@ public class ClueGame {
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			lastCardShown = disproveCards.get(rand.nextInt(disproveCards.size()));
+			System.out.println(lastCardShown.getName());
 			accusingPerson.showCard(lastCardShown);
 		}
 		else {

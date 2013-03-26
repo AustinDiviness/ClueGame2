@@ -164,20 +164,22 @@ public class GameActionTests {
         int card1 = 0;
         int card2 = 0;
         String tempString = "Bobby Pin";
-        String tempString2 = "Piano Wire";
+        String tempString2 = "The White House";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet<Card> cards = new HashSet<Card>();
-        cards.add(new Card(CardType.WEAPON, tempString));
-        cards.add(new Card(CardType.WEAPON, tempString2));
-        one.setCards(cards);
+        //HashSet<Card> cards = new HashSet<Card>();
+        //cards.add(new Card(CardType.WEAPON, tempString));
+        //cards.add(new Card(CardType.WEAPON, tempString2));
+        //one.setCards(cards);
+        one.giveCard(new Card(CardType.WEAPON, tempString));
+        one.giveCard(new Card(CardType.ROOM, tempString2));
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
-            cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
+            cg.handleSuggestion(solution.getPerson(), tempString2, tempString, two);
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             } else if (cg.getLastCardShown().getName().equals(tempString2)) {
@@ -198,7 +200,7 @@ public class GameActionTests {
         int card1 = 0;
         int card2 = 0;
         String tempString = "Bobby Pin";
-        String tempString2 = "Piano Wire";
+        String tempString2 = "Detroit";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
         ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
@@ -207,15 +209,15 @@ public class GameActionTests {
         players.add(two);
         players.add(three);
         Solution solution = cg.getSolution();
-        HashSet<Card> cards = new HashSet<Card>();
-        cards.add(new Card(CardType.WEAPON, tempString));
-        HashSet<Card> otherCards = new HashSet<Card>();
-        cards.add(new Card(CardType.WEAPON, tempString2));
-        one.setCards(cards);
-        two.setCards(otherCards);
+        //HashSet<Card> cards = new HashSet<Card>();
+        //cards.add(new Card(CardType.WEAPON, tempString));
+        //HashSet<Card> otherCards = new HashSet<Card>();
+        //cards.add(new Card(CardType.WEAPON, tempString2));
+        one.giveCard(new Card(CardType.WEAPON, tempString));
+        two.giveCard(new Card(CardType.ROOM, tempString2));
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
-            cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, three);
+            cg.handleSuggestion(solution.getPerson(), tempString2, tempString, three);
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
@@ -236,7 +238,7 @@ public class GameActionTests {
         int card1 = 0;
         int card2 = 0;
         String tempString = "Bobby Pin";
-        String tempString2 = "Piano Wire";
+        String tempString2 = "International Space Station";
         ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
         HumanPlayer two = new HumanPlayer("HumanPlayer two");
         ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
@@ -245,15 +247,15 @@ public class GameActionTests {
         players.add(two);
         players.add(three);
         Solution solution = cg.getSolution();
-        HashSet<Card> cards = new HashSet<Card>();
-        cards.add(new Card(CardType.WEAPON, tempString));
-        HashSet<Card> otherCards = new HashSet<Card>();
-        otherCards.add(new Card(CardType.WEAPON, tempString2));
-        one.setCards(cards);
-        two.setCards(otherCards);
+        //HashSet<Card> cards = new HashSet<Card>();
+        //cards.add(new Card(CardType.WEAPON, tempString));
+        //HashSet<Card> otherCards = new HashSet<Card>();
+        //otherCards.add(new Card(CardType.WEAPON, tempString2));
+        one.giveCard(new Card(CardType.WEAPON, tempString));
+        two.giveCard(new Card(CardType.ROOM, tempString2));
         cg.setPlayers(players);
         for (int i = 0; i < 100; ++i) {
-            cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, three);
+            cg.handleSuggestion(solution.getPerson(), tempString2, tempString, three);
             if (cg.getLastCardShown().getName().equals(tempString)) {
                 ++card1;
             }
@@ -278,12 +280,12 @@ public class GameActionTests {
         players.add(one);
         players.add(two);
         Solution solution = cg.getSolution();
-        HashSet<Card> cards = new HashSet<Card>();
-        cards.add(new Card(CardType.WEAPON, tempString));
-        one.setCards(cards);
+        //HashSet<Card> cards = new HashSet<Card>();
+        //cards.add(new Card(CardType.WEAPON, tempString));
+        one.giveCard(new Card(CardType.WEAPON, tempString));
         cg.setPlayers(players);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), solution.getWeapon(), two);
-        assertTrue(cg.getLastCardShown() == null);
+        assertTrue(cg.getLastCardShown().getName() == "");
 	}
 
 
@@ -306,7 +308,6 @@ public class GameActionTests {
             }
         }
         assertTrue(doorwayFlag);
-        assertTrue(false);
 	}
 
 	@Test
@@ -327,7 +328,6 @@ public class GameActionTests {
             }
         }
         assertFalse(doorwayFlag);
-        assertTrue(false);
 	}
 	
 	@Test
