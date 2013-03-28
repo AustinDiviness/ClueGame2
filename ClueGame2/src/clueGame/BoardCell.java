@@ -12,6 +12,8 @@ public abstract class BoardCell {
 	// Type of Cell
 	protected int row, col;
 	protected char cellIdentifer;
+	protected static int height = 20;
+	protected static int width = 20;
 	
 	public int getRow() {
 		return row;
@@ -45,7 +47,7 @@ public abstract class BoardCell {
 
 	// Drawing the Cells
 
-	public abstract void draw(Graphics g);
+	public abstract void draw(Graphics g, Board board);
 	
 	// FOR TESTING
 	public char getCellCharacter()

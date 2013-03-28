@@ -192,7 +192,11 @@ public class Board extends JPanel {
 
 	  @Override
 	  public void paintComponent(Graphics g) {
-		  // TODO create draw function
+		  for (BoardCell cell: cells) {
+			  cell.draw(g, this);
+		  }
 	  }
+	  
+
 
 }

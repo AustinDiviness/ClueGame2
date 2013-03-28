@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -193,6 +194,11 @@ public class ClueGame extends JFrame {
 		}
 		//System.out.println("-----------"); // test code
 	}
+	
+	public void paintBoard(Graphics g) {
+
+		board.paintComponent(g);
+	}
 
     // getters and setters
 	
@@ -228,16 +234,18 @@ public class ClueGame extends JFrame {
 		// TODO how should/does this function differ from getPlayers?
 		return players;
 	}
+	  public static void main(String[] args) {
+		  ClueGame game = new ClueGame("testPeople.csv", "testWeaponCards.csv", "boardConfig.csv", "legendConfig.txt");
+		  try {
+			  game.loadConfigFiles();
+		  }
+		  catch (Exception e) {
+			  e.printStackTrace();
+		  }
+		  game.setContentPane(game.board);
+		  game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		  game.setSize(500, 500);
+		  game.setVisible(true);
+	  }
 
-	public static void main(String[] args) {
-		ClueGame game = new ClueGame("testPeople.csv","testWeaponCards.csv","boardConfig.csv", "legendConfig.txt");
-		try {
-			game.loadConfigFiles();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		System.out.println("game loaded");
-		game.deal();
-		
-	}
 }
