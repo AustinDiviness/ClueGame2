@@ -27,7 +27,7 @@ import clueGame.RoomCell.DoorDirection;
 
 public class Board extends JPanel {
 	private ArrayList<BoardCell> cells;
-	public ArrayList<Player> players;
+	private ArrayList<Player> players;
 	private Map<Character, String> rooms;
 	private Map<Integer, LinkedList<Integer>> adjacencyList;
 	private Set<BoardCell> targets;
@@ -117,6 +117,14 @@ public class Board extends JPanel {
 	public int getNumColumns()
 	{
 		return numColumns;
+	}
+	
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+	
+	public ArrayList<Player> getPlayers() {
+		return players;
 	}
 	
 	public RoomCell getRoomCellAt(int row, int column) 
