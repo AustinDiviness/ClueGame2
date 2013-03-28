@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JPanel;
 
 import clueGame.RoomCell.DoorDirection;
 
@@ -21,7 +23,7 @@ import clueGame.RoomCell.DoorDirection;
  * and handles any error that are thrown by the InitializeBoard class
  */
 
-public class Board {
+public class Board extends JPanel {
 	private ArrayList<BoardCell> cells;
 	private Map<Character, String> rooms;
 	private Map<Integer, LinkedList<Integer>> adjacencyList;
@@ -184,7 +186,13 @@ public class Board {
 		visited[location] = false;
 	}
  
-  public Set<BoardCell> getTargets() {
-		return targets;
-	}
+	  public Set<BoardCell> getTargets() {
+		  return targets;
+	  }
+
+	  @Override
+	  public void paintComponent(Graphics g) {
+		  // TODO create draw function
+	  }
+
 }

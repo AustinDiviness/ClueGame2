@@ -9,7 +9,11 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ClueGame {
+import javax.swing.JFrame;
+
+public class ClueGame extends JFrame {
+	// TODO add an instance of Board to BoardLayout.CENTER
+	// TODO add a file menu 
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -22,8 +26,6 @@ public class ClueGame {
 	
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
-		// TODO properly set variables. How should the games solution be gathered? it can't be set until after the config
-		// files are all loaded, perhaps it should be set from there?
 		solution = new Solution();
 		lastCardShown = new Card(CardType.WEAPON, "Something");
 		board = new Board(boardConfig, roomLegendConfig);
@@ -48,7 +50,6 @@ public class ClueGame {
 	}
 	
 	public void loadConfigFiles() throws FileNotFoundException {
-		// TODO load config files for game board, rooms, players, and weapons
 		board.loadConfigFiles();
 		loadWeapons(weaponsConfig);
 		loadPeople(peopleConfig);
@@ -87,7 +88,6 @@ public class ClueGame {
 	}
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
-	    // TODO make sure that lastCardShown is set	
 		ArrayList<Card> disproveCards = new ArrayList<Card>();
 		//System.out.println(players.size());
 		//System.out.println("# of players :"+ players.size());
@@ -115,7 +115,7 @@ public class ClueGame {
 	}
 	
 	public boolean checkAccusation(Solution solution) {
-		// TODO check solution against game solution. should this function eliminate player if accusation is incorrect, or should that
+		// should this function eliminate player if accusation is incorrect, or should that
 		// be handled by a separate function? I lean towards the latter option.
 		return (this.solution.getPerson().equals(solution.getPerson()) &&
 				this.solution.getWeapon().equals(solution.getWeapon()) &&

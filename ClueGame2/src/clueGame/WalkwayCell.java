@@ -1,5 +1,7 @@
 package clueGame;
 
+import java.awt.Graphics;
+
 /* DESCRIPTION
  * Cell that is a walkway
  */
@@ -16,6 +18,11 @@ public class WalkwayCell extends BoardCell {
 		this.row = row;
 		this.col = col;
 		cellIdentifer = type;
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		// TODO implement function
 	}
 	
 	

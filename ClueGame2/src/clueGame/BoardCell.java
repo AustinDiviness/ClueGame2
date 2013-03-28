@@ -11,6 +11,7 @@ public abstract class BoardCell {
 	// Location of cell
 	// Type of Cell
 	protected int row, col;
+	protected char cellIdentifer;
 	
 	public int getRow() {
 		return row;
@@ -28,7 +29,6 @@ public abstract class BoardCell {
 		this.col = col;
 	}
 
-	protected char cellIdentifer;
 
 	// main Functions
 	public boolean isWalkway() {
@@ -44,9 +44,8 @@ public abstract class BoardCell {
 	}
 
 	// Drawing the Cells
-	public void draw(Graphics g) {
 
-	}
+	public abstract void draw(Graphics g);
 	
 	// FOR TESTING
 	public char getCellCharacter()
