@@ -57,6 +57,7 @@ public class ClueGame extends JFrame {
 		loadRoomCards();
 		allCards.addAll(deck); // should store all cards that exist in game into a separate ArrayList
 		selectAnswer(); // select answer to game
+		board.players.addAll(players);
 	}
 	
 	public void selectAnswer() {
@@ -197,8 +198,6 @@ public class ClueGame extends JFrame {
 	
 	public void paintBoard(Graphics g) {
 		board.paintComponent(g);
-		drawPlayers(g);
-		System.out.println("just printed players");
 	}
 	
 
@@ -228,12 +227,6 @@ public class ClueGame extends JFrame {
         this.players = players;
     }
     
-    public void drawPlayers(Graphics g){
-    	for(Player p: players){
-    		p.draw(g);
-    		System.out.println("player");
-    	}
-    }
 
     public Card getLastCardShown() {
         return lastCardShown;
@@ -253,7 +246,7 @@ public class ClueGame extends JFrame {
 		  }
 		  game.setContentPane(game.board);
 		  game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  game.setSize(500, 500);
+		  game.setSize(25 * BoardCell.width, 25 * BoardCell.height);
 		  game.setVisible(true);
 	  }
 

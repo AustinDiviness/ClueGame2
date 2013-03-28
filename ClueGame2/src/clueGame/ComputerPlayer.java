@@ -15,8 +15,8 @@ public class ComputerPlayer extends Player {
 		name = string;
 		seenCards = new HashSet<Card>();
 		myCards = new HashSet<Card>();
-		row = 0;
-		col = 0;
+		row = 10;
+		col = 10;
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
