@@ -245,7 +245,9 @@ public class Board extends JPanel {
 				  drawn.put(cell.getCellCharacter(), true);
 			  }
 		  }
+		  
 	  }
+	  
 	  
 
 

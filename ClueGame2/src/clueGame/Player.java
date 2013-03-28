@@ -71,9 +71,9 @@ public abstract class Player {
 //		gr = rand.nextFloat();
 //		bl = rand.nextFloat();
 		
-		r = 200; 
-		gr = 200; 
-		bl = 200;
+		r = 256; 
+		gr = 256; 
+		bl = 256;
 		
 		Color randomColor = new Color(r, gr, bl);
 		
@@ -95,7 +95,8 @@ public abstract class Player {
 		
 		g.setColor(color);
 		
-		g.fillOval(getRow()*height + (height/2), getCol()*width + (width/2), width, height);
+		
+		g.drawOval(getRow()*height + (height/2), getCol()*width + (width/2), width, height);
 		
 		
 		

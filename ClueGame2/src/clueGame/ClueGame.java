@@ -197,7 +197,6 @@ public class ClueGame extends JFrame {
 	
 	public void paintBoard(Graphics g) {
 		board.paintComponent(g);
-		drawPlayers(g);
 		System.out.println("just printed players");
 	}
 	
@@ -228,12 +227,6 @@ public class ClueGame extends JFrame {
         this.players = players;
     }
     
-    public void drawPlayers(Graphics g){
-    	for(Player p: players){
-    		p.draw(g);
-    		System.out.println("player");
-    	}
-    }
 
     public Card getLastCardShown() {
         return lastCardShown;
