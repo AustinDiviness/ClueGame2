@@ -2,10 +2,10 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import javax.swing.JPanel;
 
 
 public abstract class Player {
@@ -23,7 +23,7 @@ public abstract class Player {
 		return new Card(CardType.ROOM, "b");
 	}
 	
-	@Override 
+	@Override
 	public String toString() {
 		return name;
 	}
@@ -67,17 +67,13 @@ public abstract class Player {
 		Random rand = new Random();
 		float r, gr, bl;
 		
-//		r = rand.nextFloat();
-//		gr = rand.nextFloat();
-//		bl = rand.nextFloat();
+		r = rand.nextFloat();
+		gr = rand.nextFloat();
+		bl = rand.nextFloat();
 		
-		r = 256; 
-		gr = 256; 
-		bl = 256;
+		Color randomColor = new Color(r,gr,bl);
 		
-		Color randomColor = new Color(r, gr, bl);
-		
-		this.color = color;
+		color = randomColor;
 	}
 	
 	public void giveCard(Card card) {
@@ -96,7 +92,7 @@ public abstract class Player {
 		g.setColor(color);
 		
 		
-		g.drawOval(getRow()*height + (height/2), getCol()*width + (width/2), width, height);
+		g.fillOval(getRow()*height, getCol()*width, width, height);
 		
 		
 		

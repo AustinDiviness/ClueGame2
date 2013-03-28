@@ -12,7 +12,7 @@ public abstract class BoardCell {
 	// Type of Cell
 	protected int row, col;
 	protected char cellIdentifer;
-	public static final int height = 20;
+	public static final int height = 25;
 	public static final int width = height;
 	
 	public int getRow() {

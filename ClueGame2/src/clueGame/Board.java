@@ -27,6 +27,7 @@ import clueGame.RoomCell.DoorDirection;
 
 public class Board extends JPanel {
 	private ArrayList<BoardCell> cells;
+	public ArrayList<Player> players;
 	private Map<Character, String> rooms;
 	private Map<Integer, LinkedList<Integer>> adjacencyList;
 	private Set<BoardCell> targets;
@@ -56,6 +57,7 @@ public class Board extends JPanel {
 	{
 		boardConfigFile = boardFileName;
 		legendConfigFile = legendFileName;
+		players = new ArrayList<Player>();
 	}
 	
 	
@@ -207,6 +209,10 @@ public class Board extends JPanel {
 			  if (cell.isDoorway()) {
 				  doorCells.add((RoomCell) cell);
 			  }
+		  }
+		  // draw players
+		  for (Player player: players) {
+			  player.draw(g);
 		  }
 		  // draw room names
 		  int x = 0;
