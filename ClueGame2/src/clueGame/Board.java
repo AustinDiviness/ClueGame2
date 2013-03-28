@@ -221,6 +221,28 @@ public class Board extends JPanel {
 				  y = (cell.getRow() + yOffset) * BoardCell.height;
 				  roomName = rooms.get(cell.getCellCharacter());
 				  g.drawString(roomName, x, y);
+				  drawn.put(cell.getCellCharacter(), true);
+			  }
+			  if (cell.getDoorDirection() == DoorDirection.DOWN && drawn.get(cell.getCellCharacter()) == false) {
+				  x = (cell.getCol() - xOffset) * BoardCell.width;
+				  y = (cell.getRow() - yOffset) * BoardCell.height;
+				  roomName = rooms.get(cell.getCellCharacter());
+				  g.drawString(roomName, x, y);
+				  drawn.put(cell.getCellCharacter(), true);
+			  }
+			  if (cell.getDoorDirection() == DoorDirection.LEFT && drawn.get(cell.getCellCharacter()) == false) {
+				  x = (cell.getCol() + xOffset) * BoardCell.width;
+				  y = (cell.getRow() + 1) * BoardCell.height;
+				  roomName = rooms.get(cell.getCellCharacter());
+				  g.drawString(roomName, x, y);
+				  drawn.put(cell.getCellCharacter(), true);
+			  }
+			  if (cell.getDoorDirection() == DoorDirection.RIGHT && drawn.get(cell.getCellCharacter()) == false) {
+				  x = (cell.getCol() - xOffset) * BoardCell.width;
+				  y = (cell.getRow() + 1) * BoardCell.height;
+				  roomName = rooms.get(cell.getCellCharacter());
+				  g.drawString(roomName, x, y);
+				  drawn.put(cell.getCellCharacter(), true);
 			  }
 		  }
 	  }
