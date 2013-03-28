@@ -13,6 +13,8 @@ public class RoomCell extends BoardCell {
 		UP, DOWN, LEFT, RIGHT, NONE
 	}
 	public static final Color color = Color.gray;
+	public static final Color doorColor = Color.cyan;
+	public static final int doorWidth = 5;
 	private DoorDirection doorDirection;
 
 	public RoomCell(char roomName)
@@ -65,6 +67,21 @@ public class RoomCell extends BoardCell {
 		int y = row * height;
 		g.setColor(color);
 		g.fillRect(x, y, width, height);
+		g.setColor(doorColor);
+		switch(doorDirection) {
+			case UP:
+				g.fillRect(x, y, width, doorWidth);
+				break;
+			case DOWN:
+				g.fillRect(x, y+height-doorWidth, width, doorWidth);
+				break;
+			case LEFT:
+				g.fillRect(x, y, doorWidth, height);
+				break;
+			case RIGHT:
+				g.fillRect(x+width-doorWidth, y, doorWidth, height);
+				break;
+		}
 	}
 	
 	// FOR TESTING PURPOSES ONLY
