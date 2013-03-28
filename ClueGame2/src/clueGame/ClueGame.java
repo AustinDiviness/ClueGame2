@@ -57,7 +57,7 @@ public class ClueGame extends JFrame {
 		loadRoomCards();
 		allCards.addAll(deck); // should store all cards that exist in game into a separate ArrayList
 		selectAnswer(); // select answer to game
-		board.players.addAll(players);
+		board.setPlayers(players);
 	}
 	
 	public void selectAnswer() {
