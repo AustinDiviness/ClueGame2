@@ -1,8 +1,10 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -32,7 +34,7 @@ public class Board extends JPanel {
 	private int numRows;
 	private int numColumns;
 	private int numberOfRooms;
-
+	public static final Color textColor = Color.BLUE;
 	private String boardConfigFile;
 	private String legendConfigFile;
 
@@ -192,8 +194,34 @@ public class Board extends JPanel {
 
 	  @Override
 	  public void paintComponent(Graphics g) {
+		  ArrayList<RoomCell> doorCells = new ArrayList<RoomCell>();
+		  HashMap<Character, Boolean> drawn = new HashMap<Character, Boolean>();
+		  // load HashMap with all the rooms that need to be drawn and false
+		  ArrayList<Character> roomInitials = new ArrayList<Character>(rooms.keySet());
+		  for (Character ch: roomInitials) {
+			  drawn.put(ch, false);
+		  }
+		  // grab add room cells that are a door
 		  for (BoardCell cell: cells) {
-			  cell.draw(g, this);
+			  cell.draw(g);
+			  if (cell.isDoorway()) {
+				  doorCells.add((RoomCell) cell);
+			  }
+		  }
+		  // draw room names
+		  int x = 0;
+		  int y = 0;
+		  int yOffset = 2;
+		  int xOffset = 1;
+		  String roomName;
+		  g.setColor(textColor);
+		  for (RoomCell cell: doorCells) {
+			  if (cell.getDoorDirection() == DoorDirection.UP && drawn.get(cell.getCellCharacter()) == false) {
+				  x = (cell.getCol() - xOffset) * BoardCell.width;
+				  y = (cell.getRow() + yOffset) * BoardCell.height;
+				  roomName = rooms.get(cell.getCellCharacter());
+				  g.drawString(roomName, x, y);
+			  }
 		  }
 	  }
 	  

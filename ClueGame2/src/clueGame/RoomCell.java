@@ -62,7 +62,7 @@ public class RoomCell extends BoardCell {
 	}
 	
 	@Override
-	public void draw(Graphics g, Board board) {
+	public void draw(Graphics g) {
 		int x = col * width;
 		int y = row * height;
 		g.setColor(color);
