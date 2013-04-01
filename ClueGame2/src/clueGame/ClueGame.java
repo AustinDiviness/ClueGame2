@@ -2,7 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -80,13 +81,25 @@ public class ClueGame extends JFrame {
 		JMenuItem detectiveNotes = new JMenuItem("Show Detective Notes");
 		JMenuItem exitAction = new JMenuItem("Exit");
 
-		//Add actions to menu
+		//Adding Actions to menuItems
+		exitAction.addActionListener(
+				new ActionListener(){
+					@Override
+					public void actionPerformed(ActionEvent e){
+						System.exit(0);
+					}
+				});
+		
+		//Add different menuItems to menu
 		fileMenu.add(detectiveNotes);
 		fileMenu.add(exitAction);
+		
 		
 		//setting menuBar on JFrame
 		setJMenuBar(menuBar);
 	}
+	
+	
 	
 	
 	public void movePlayersToStartingSpots() {
