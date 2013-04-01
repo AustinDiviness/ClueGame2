@@ -105,13 +105,25 @@ public class ClueGame extends JFrame {
 			}
 		});
 
-		//Add actions to menu
+		//Adding Actions to menuItems
+		exitAction.addActionListener(
+				new ActionListener(){
+					@Override
+					public void actionPerformed(ActionEvent e){
+						System.exit(0);
+					}
+				});
+		
+		//Add different menuItems to menu
 		fileMenu.add(detectiveNotes);
 		fileMenu.add(exitAction);
+		
 		
 		//setting menuBar on JFrame
 		setJMenuBar(menuBar);
 	}
+	
+	
 	
 	
 	public void movePlayersToStartingSpots() {
