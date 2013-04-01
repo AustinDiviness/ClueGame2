@@ -17,8 +17,8 @@ public class ComputerPlayer extends Player {
 		this.color = color;
 		seenCards = new HashSet<Card>();
 		myCards = new HashSet<Card>();
-		row = 10;
-		col = 10;
+		row = 0;
+		col = 0;
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
@@ -38,7 +38,6 @@ public class ComputerPlayer extends Player {
 	
 		row = pick.getRow();
 		col = pick.getCol();
-		//System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx:" + pick.toString());
 		
 	}
 	

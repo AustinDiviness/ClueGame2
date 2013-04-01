@@ -58,7 +58,20 @@ public class ClueGame extends JFrame {
 		loadRoomCards();
 		allCards.addAll(deck); // should store all cards that exist in game into a separate ArrayList
 		selectAnswer(); // select answer to game
+		movePlayersToStartingSpots();
 		board.setPlayers(players);
+	}
+	
+	public void movePlayersToStartingSpots() {
+		int[] startRow = {1, 2,  3, 4, 5, 6, 7, 8};
+		int[] startCol = {8, 17, 23, 22, 17,  8,  2, 5};
+		for (int i = 0; i < players.size(); ++i) {
+//			players.get(i).setRow(startRow[i]);
+//			players.get(i).setCol(startCol[i]);
+			players.get(i).setRow(startRow[i]);
+			players.get(i).setCol(5);
+		}
+		
 	}
 	
 	public void selectAnswer() {
@@ -259,7 +272,7 @@ public class ClueGame extends JFrame {
 		return players;
 	}
 	  public static void main(String[] args) {
-		  ClueGame game = new ClueGame("testPeople.csv", "testWeaponCards.csv", "boardConfig.csv", "legendConfig.txt");
+		  ClueGame game = new ClueGame("people.csv", "testWeaponCards.csv", "boardConfig.csv", "legendConfig.txt");
 		  try {
 			  game.loadConfigFiles();
 		  }

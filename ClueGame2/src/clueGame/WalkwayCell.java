@@ -10,7 +10,7 @@ import java.awt.Graphics;
 public class WalkwayCell extends BoardCell {
 
 	public static final Color backgroundColor = Color.black;
-	public static final Color color = Color.white;
+	public static final Color color = Color.DARK_GRAY;
 	public WalkwayCell(char type)
 	{
 		cellIdentifer = type;

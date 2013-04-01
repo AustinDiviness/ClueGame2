@@ -35,7 +35,7 @@ public class Board extends JPanel {
 	private int numRows;
 	private int numColumns;
 	private int numberOfRooms;
-	public static final Color textColor = Color.BLUE;
+	public static final Color textColor = Color.ORANGE;
 	private String boardConfigFile;
 	private String legendConfigFile;
 

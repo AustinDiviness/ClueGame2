@@ -63,18 +63,6 @@ public abstract class Player {
 		this.col = col;
 	}
 	
-	public void setColor() {
-		Random rand = new Random();
-		float r, gr, bl;
-		
-		r = rand.nextFloat();
-		gr = rand.nextFloat();
-		bl = rand.nextFloat();
-		
-		Color randomColor = new Color(r,gr,bl);
-		
-		color = randomColor;
-	}
 	
 	public void giveCard(Card card) {
 		this.myCards.add(card);
@@ -84,12 +72,11 @@ public abstract class Player {
 	abstract public void showCard(Card card);
 	
 	public void draw(Graphics g){
-		setColor();
 		
 		width = BoardCell.width;
 		height = BoardCell.height;
 		
-		g.setColor(color);
+		g.setColor(this.color);
 		
 		
 		g.fillOval(getRow()*height, getCol()*width, width, height);
