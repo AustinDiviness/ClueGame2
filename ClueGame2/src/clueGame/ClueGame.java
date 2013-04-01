@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -156,6 +157,7 @@ public class ClueGame extends JFrame {
 	public void loadPeople(String inputFile) {
 		// loads people from config file into card deck and as Player objects to players list
 		ArrayList<Card> playerCards = new ArrayList<Card>();
+		String[] splitLine = null;
 		FileReader fileReader = null;
 		String currentPath = "";
 		String line = null;
@@ -178,10 +180,30 @@ public class ClueGame extends JFrame {
 		Scanner in = new Scanner(fileReader);
 		while (in.hasNext()) {
 			line = in.nextLine().trim();
-			deck.add(new Card(CardType.PERSON, line));
+			splitLine = line.split(",");
+			deck.add(new Card(CardType.PERSON, splitLine[0]));
 			// TODO I'm not quite sure how to load players for the human player, so I just made them 
 			// all soul less automations 
-			players.add(new ComputerPlayer(line));
+			Color color = null;
+			if (splitLine[1].equalsIgnoreCase("red")) {
+				color = Color.RED;
+			}
+			else if (splitLine[1].equalsIgnoreCase("yellow")) {
+				color = Color.YELLOW;
+			}
+			else if (splitLine[1].equalsIgnoreCase("white")) {
+				color = Color.WHITE;
+			}
+			else if (splitLine[1].equalsIgnoreCase("green")) {
+				color = Color.GREEN;
+			}
+			else if (splitLine[1].equalsIgnoreCase("blue")) {
+				color = Color.BLUE;
+			}
+			else if (splitLine[1].equalsIgnoreCase("purple")) {
+				color = new Color(159, 0, 197);
+			}
+			players.add(new ComputerPlayer(splitLine[0], color));
 			//System.out.println(line); // test code to print out players that were loaded
 		}
 		//System.out.println("-----------"); // test code

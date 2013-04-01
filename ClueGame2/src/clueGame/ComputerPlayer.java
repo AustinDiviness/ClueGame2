@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -10,9 +11,10 @@ public class ComputerPlayer extends Player {
 	private char lastRoomVisited;
 	private Set<Card> seenCards;
 	
-	public ComputerPlayer(String string) {
+	public ComputerPlayer(String string, Color color) {
 		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
 		name = string;
+		this.color = color;
 		seenCards = new HashSet<Card>();
 		myCards = new HashSet<Card>();
 		row = 10;

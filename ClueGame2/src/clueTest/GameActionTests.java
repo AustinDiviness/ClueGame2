@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ public class GameActionTests {
 	ClueGame cg;
 	private final int TOTALCARDS = 16;
 	private final int TOTALPEOPLE = 3;
+	private Color color = Color.BLUE;
 	
 	@Before
 	public void setup() {
@@ -133,8 +135,8 @@ public class GameActionTests {
         // test that suggestions are handled properly. One player
         // with one card version
         String tempString = "Bobby Pin";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
-        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two", color);
         ArrayList<Player> players = new ArrayList<Player>();
         Solution solution = cg.getSolution();
         //HashSet<Card> cards = new HashSet<Card>();
@@ -158,8 +160,8 @@ public class GameActionTests {
         int card2 = 0;
         String tempString = "Bobby Pin";
         String tempString2 = "The White House";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
-        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two", color);
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
@@ -194,9 +196,9 @@ public class GameActionTests {
         int card2 = 0;
         String tempString = "Bobby Pin";
         String tempString2 = "Detroit";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
-        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
-        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two", color);
+        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three", color);
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
@@ -232,9 +234,9 @@ public class GameActionTests {
         int card2 = 0;
         String tempString = "Bobby Pin";
         String tempString2 = "International Space Station";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
         HumanPlayer two = new HumanPlayer("HumanPlayer two");
-        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
+        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three", color);
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
@@ -267,8 +269,8 @@ public class GameActionTests {
 	public void testNoCard() {
         // test for when there is no card to reveal from suggestion
         String tempString = "Bobby Pin";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
-        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two", color);
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
@@ -287,7 +289,7 @@ public class GameActionTests {
         // test that a computer player can potentially move to a room
         // row: 9 col: 3 distance 3
         int distance = 3;
-        ComputerPlayer player = new ComputerPlayer("player one");
+        ComputerPlayer player = new ComputerPlayer("player one", color);
         player.setRow(9);
         player.setCol(3);
         cg.board.calcTargets(player.getRow(), player.getCol(), distance);
@@ -308,7 +310,7 @@ public class GameActionTests {
         // test when a computer player can move with no rooms available
         // row: 9 col: 3 distance 2
         int distance = 2;
-        ComputerPlayer player = new ComputerPlayer("player one");
+        ComputerPlayer player = new ComputerPlayer("player one", color);
         player.setRow(9);
         player.setCol(3);
         cg.board.calcTargets(player.getRow(), player.getCol(), distance);
@@ -329,7 +331,7 @@ public class GameActionTests {
         // computer player
         // row: 9 col: 4 distance 2
         int distance = 2;
-        ComputerPlayer player = new ComputerPlayer("player one");
+        ComputerPlayer player = new ComputerPlayer("player one", color);
         player.setRow(9);
         player.setCol(4);
         player.setLastRoomVisited('C');
@@ -348,8 +350,8 @@ public class GameActionTests {
 	public void testCorrectSuggestion() {
         // test that the suggestion was correct on all accounts
         String tempString = "Bobby Pin";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
-        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
+        ComputerPlayer two = new ComputerPlayer("ComputerPlayer two", color);
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
@@ -370,9 +372,9 @@ public class GameActionTests {
         int card2 = 0;
         String tempString = "Bobby Pin";
         String tempString2 = "Piano Wire";
-        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one");
+        ComputerPlayer one = new ComputerPlayer("ComputerPlayer one", color);
         HumanPlayer two = new HumanPlayer("HumanPlayer two");
-        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three");
+        ComputerPlayer three = new ComputerPlayer("ComputerPlayer three", color);
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(one);
         players.add(two);
