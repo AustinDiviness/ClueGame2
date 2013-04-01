@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class ClueGame extends JFrame {
 	// TODO add an instance of Board to BoardLayout.CENTER
@@ -31,7 +32,7 @@ public class ClueGame extends JFrame {
 	private String peopleConfig;
 	private String weaponsConfig;
 	public static final String gameTitle = "Clue!";
-	
+	private HumanPlayer human = null;
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		solution = new Solution();
@@ -66,6 +67,12 @@ public class ClueGame extends JFrame {
 		selectAnswer(); // select answer to game
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
+	}
+	
+	public void loadSplashScreen() {
+		//Create JFrame 
+		JFrame splashScreen = new JFrame();
+		JOptionPane.showMessageDialog(splashScreen, "You are "+human.getName()+ ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void loadMenu(){
@@ -122,6 +129,7 @@ public class ClueGame extends JFrame {
 		
 		//setting menuBar on JFrame
 		setJMenuBar(menuBar);
+		
 	}
 	
 	
@@ -284,6 +292,7 @@ public class ClueGame extends JFrame {
 			splitLine = playerInputStrings.get(i).split(",");
 			if (i == humanPlayerIndex) {
 				player = new HumanPlayer(splitLine[0]);
+				human = (HumanPlayer) player;
 				System.out.println(splitLine[0]);
 			}
 			else {
@@ -378,6 +387,10 @@ public class ClueGame extends JFrame {
 		game.setTitle(gameTitle);
 		game.loadMenu();
 		game.setVisible(true);
+		//loading the splash screen
+		game.loadSplashScreen();
 	}
+
+	
 
 }
