@@ -25,6 +25,7 @@ public class ClueGame extends JFrame {
 	private ArrayList<Card> allCards;
 	private String peopleConfig;
 	private String weaponsConfig;
+	public static final String gameTitle = "Clue!";
 	
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
@@ -65,8 +66,8 @@ public class ClueGame extends JFrame {
 	public void movePlayersToStartingSpots() {
 		Random rand = new Random();
 		int i;
-		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5};
-		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1};
+		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5, 10};
+		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1, 10};
 		ArrayList<Integer> usedLocations = new ArrayList<Integer>();
 		for (Player player: players) {
 			while (true) {
@@ -295,6 +296,7 @@ public class ClueGame extends JFrame {
 		  game.setContentPane(game.board);
 		  game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  game.setSize(25 * BoardCell.width, 25 * BoardCell.height);
+		  game.setTitle(gameTitle);
 		  game.setVisible(true);
 	  }
 
