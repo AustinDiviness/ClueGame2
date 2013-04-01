@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.MenuBar;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,6 +13,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class ClueGame extends JFrame {
 	// TODO add an instance of Board to BoardLayout.CENTER
@@ -62,6 +66,28 @@ public class ClueGame extends JFrame {
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
 	}
+	
+	public void loadMenu(){
+		
+		//Create menubar
+		JMenuBar menuBar = new JMenuBar();
+
+		//File Menu
+		JMenu fileMenu = new JMenu("File");
+		menuBar.add(fileMenu);
+
+		//Create Detective Notes and exit
+		JMenuItem detectiveNotes = new JMenuItem("Show Detective Notes");
+		JMenuItem exitAction = new JMenuItem("Exit");
+
+		//Add actions to menu
+		fileMenu.add(detectiveNotes);
+		fileMenu.add(exitAction);
+		
+		//setting menuBar on JFrame
+		setJMenuBar(menuBar);
+	}
+	
 	
 	public void movePlayersToStartingSpots() {
 		Random rand = new Random();
@@ -297,6 +323,7 @@ public class ClueGame extends JFrame {
 		  game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  game.setSize(25 * BoardCell.width, 25 * BoardCell.height);
 		  game.setTitle(gameTitle);
+		  game.loadMenu();
 		  game.setVisible(true);
 	  }
 
