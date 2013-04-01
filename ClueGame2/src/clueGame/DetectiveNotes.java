@@ -38,9 +38,11 @@ public class DetectiveNotes extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 2));
 		panel.add(createCheckBoxes("People", people));
-		//add(createComboBox("Person Guess", people));
+		panel.add(createComboBox("Person Guess", people));
 		panel.add(createCheckBoxes("Rooms", rooms));
+		panel.add(createComboBox("Room Guess", rooms));
 		panel.add(createCheckBoxes("Weapons", weapons));
+		panel.add(createComboBox("Weapon Guess", weapons));
 		add(panel);
 	}
 	
