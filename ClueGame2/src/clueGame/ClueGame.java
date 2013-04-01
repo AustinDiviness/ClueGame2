@@ -12,6 +12,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 
 public class ClueGame extends JFrame {
 	// TODO add an instance of Board to BoardLayout.CENTER
@@ -285,19 +287,20 @@ public class ClueGame extends JFrame {
 		// TODO how should/does this function differ from getPlayers?
 		return players;
 	}
-	  public static void main(String[] args) {
-		  ClueGame game = new ClueGame("people.csv", "testWeaponCards.csv", "boardConfig.csv", "legendConfig.txt");
-		  try {
-			  game.loadConfigFiles();
-		  }
-		  catch (Exception e) {
-			  e.printStackTrace();
-		  }
-		  game.setContentPane(game.board);
-		  game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  game.setSize(25 * BoardCell.width, 25 * BoardCell.height);
-		  game.setTitle(gameTitle);
-		  game.setVisible(true);
-	  }
+	
+	public static void main(String[] args) {
+		ClueGame game = new ClueGame("people.csv", "testWeaponCards.csv",
+				"boardConfig.csv", "legendConfig.txt");
+		try {
+			game.loadConfigFiles();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		game.setContentPane(game.board);
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setSize(25 * BoardCell.width, 25 * BoardCell.height);
+		game.setTitle(gameTitle);
+		game.setVisible(true);
+	}
 
 }
