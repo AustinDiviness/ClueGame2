@@ -79,7 +79,7 @@ public abstract class Player {
 		g.setColor(this.color);
 		
 		
-		g.fillOval(getRow()*height, getCol()*width, width, height);
+		g.fillOval(getCol()*width, getRow()*height, width, height);
 		
 		
 		

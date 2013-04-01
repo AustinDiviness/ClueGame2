@@ -63,13 +63,11 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void movePlayersToStartingSpots() {
-		int[] startRow = {1, 2,  3, 4, 5, 6, 7, 8};
-		int[] startCol = {8, 17, 23, 22, 17,  8,  2, 5};
+		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5};
+		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1};
 		for (int i = 0; i < players.size(); ++i) {
-//			players.get(i).setRow(startRow[i]);
-//			players.get(i).setCol(startCol[i]);
 			players.get(i).setRow(startRow[i]);
-			players.get(i).setCol(5);
+			players.get(i).setCol(startCol[i]);
 		}
 		
 	}
