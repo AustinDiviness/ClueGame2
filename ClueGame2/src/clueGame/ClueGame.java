@@ -63,11 +63,26 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void movePlayersToStartingSpots() {
+		Random rand = new Random();
+		int i;
 		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5};
 		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1};
-		for (int i = 0; i < players.size(); ++i) {
-			players.get(i).setRow(startRow[i]);
-			players.get(i).setCol(startCol[i]);
+		ArrayList<Integer> usedLocations = new ArrayList<Integer>();
+		for (Player player: players) {
+			while (true) {
+				// if the locations are all used up, we throw an exception so as to not get 
+				// stuck in an infinite loop
+				if (usedLocations.size() >= startRow.length) {
+					throw new RuntimeException();
+				}
+				i = rand.nextInt(startRow.length);
+				if (usedLocations.contains(i) == false) {
+					usedLocations.add(i);
+					break;
+				}
+			}
+			player.setRow(startRow[i]);
+			player.setCol(startCol[i]);
 		}
 		
 	}
