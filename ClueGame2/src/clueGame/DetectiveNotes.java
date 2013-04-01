@@ -45,7 +45,13 @@ public class DetectiveNotes extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent we) {
 				for (JComponent c: panels) {
-					System.out.println(c);
+					if (c instanceof JPanel) {
+						System.out.println("jpanel");
+					}
+					else if (c instanceof JComboBox) {
+						JComboBox box = (JComboBox) c;
+						System.out.println("combo box: " + box.getSelectedItem().toString());
+					}
 				}
 			}
 		});
