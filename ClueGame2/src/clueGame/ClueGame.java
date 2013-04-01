@@ -103,8 +103,6 @@ public class ClueGame extends JFrame {
 					}
 				}
 				DetectiveNotes notes = new DetectiveNotes(playerNames, rooms, weapons);
-				notes.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				notes.setVisible(true);
 			}
 		});
 
@@ -250,6 +248,7 @@ public class ClueGame extends JFrame {
 	public void loadPeople(String inputFile) {
 		// loads people from config file into card deck and as Player objects to players list
 		ArrayList<Card> playerCards = new ArrayList<Card>();
+		ArrayList<String> playerInputStrings = new ArrayList<String>();
 		String[] splitLine = null;
 		FileReader fileReader = null;
 		String currentPath = "";
@@ -273,11 +272,25 @@ public class ClueGame extends JFrame {
 		Scanner in = new Scanner(fileReader);
 		while (in.hasNext()) {
 			line = in.nextLine().trim();
+			playerInputStrings.add(line);
 			splitLine = line.split(",");
 			deck.add(new Card(CardType.PERSON, splitLine[0]));
-			// TODO I'm not quite sure how to load players for the human player, so I just made them 
-			// all soul less automations 
-			Color color = null;
+			//deck.addAll(playerCards);
+		}
+		int humanPlayerIndex = new Random().nextInt(playerInputStrings.size());
+		Player player = null;
+		Color color = null;
+		for (int i = 0; i < playerInputStrings.size(); ++i) {
+			splitLine = playerInputStrings.get(i).split(",");
+			if (i == humanPlayerIndex) {
+				player = new HumanPlayer(splitLine[0]);
+				System.out.println(splitLine[0]);
+			}
+			else {
+				player = new ComputerPlayer(splitLine[0]);
+			}
+			
+			// determine which color is needed
 			if (splitLine[1].equalsIgnoreCase("red")) {
 				color = Color.RED;
 			}
@@ -296,11 +309,10 @@ public class ClueGame extends JFrame {
 			else if (splitLine[1].equalsIgnoreCase("purple")) {
 				color = new Color(159, 0, 197);
 			}
-			players.add(new ComputerPlayer(splitLine[0], color));
-			//System.out.println(line); // test code to print out players that were loaded
+			player.setColor(color);
+			players.add(player);
 		}
-		//System.out.println("-----------"); // test code
-		deck.addAll(playerCards);
+
 	}
 	public void loadRoomCards() {
 		// loads room cards to card deck

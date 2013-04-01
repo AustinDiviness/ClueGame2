@@ -1,12 +1,16 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -20,17 +24,33 @@ public class DetectiveNotes extends JFrame {
 	private ArrayList<String> people;
 	private ArrayList<String> rooms;
 	private ArrayList<String> weapons;
+	private ArrayList<JComponent> panels;
 	
 	public DetectiveNotes(ArrayList<String> people, ArrayList<String> rooms, ArrayList<String> weapons) {
 		this.people = new ArrayList<String>();
 		this.rooms = new ArrayList<String>();
 		this.weapons = new ArrayList<String>();
+		this.panels = new ArrayList<JComponent>();
 		this.people.addAll(people);
 		this.rooms.addAll(rooms);
 		this.weapons.addAll(weapons);
-		createSections();
 		setTitle(title);
 		setSize(WIDTH, HEIGHT);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent we) {
+				createSections();
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent we) {
+				for (JComponent c: panels) {
+					System.out.println(c);
+				}
+			}
+		});
+		//setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setVisible(true);
 
 	}
 	
@@ -57,6 +77,7 @@ public class DetectiveNotes extends JFrame {
 			JCheckBox checkBox = new JCheckBox(option);
 			panel.add(checkBox);
 		}
+		panels.add(panel);
 		return panel;
 	}
 	
@@ -72,6 +93,9 @@ public class DetectiveNotes extends JFrame {
 		TitledBorder border = new TitledBorder(new LineBorder(Color.BLACK, THICKNESS), name);
 		panel.setBorder(border);
 		panel.setSelectedIndex(0);
+		panels.add(panel);
 		return panel;
 	}
 }
+	
+

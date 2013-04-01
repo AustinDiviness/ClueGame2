@@ -11,6 +11,16 @@ public class ComputerPlayer extends Player {
 	private char lastRoomVisited;
 	private Set<Card> seenCards;
 	
+	public ComputerPlayer(String string) {
+		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
+		name = string;
+		this.color = null;
+		seenCards = new HashSet<Card>();
+		myCards = new HashSet<Card>();
+		row = 0;
+		col = 0;
+	}
+	
 	public ComputerPlayer(String string, Color color) {
 		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
 		name = string;
