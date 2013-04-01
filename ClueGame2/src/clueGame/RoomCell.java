@@ -19,19 +19,19 @@ public class RoomCell extends BoardCell {
 
 	public RoomCell(char roomName)
 	{
-		__init__(roomName, DoorDirection.NONE);
+		init(roomName, DoorDirection.NONE);
 	}
 	
 	public RoomCell(char roomName, int row, int col)
 	{
-		__init__(roomName, DoorDirection.NONE);
+		init(roomName, DoorDirection.NONE);
 		this.row = row;
 		this.col = col;
 	}
 
 	public RoomCell(char roomName, DoorDirection direction, int row, int col)
 	{
-		__init__(roomName, direction);
+		init(roomName, direction);
 		this.row = row;
 		this.col = col;
 	}
@@ -39,10 +39,10 @@ public class RoomCell extends BoardCell {
 	
 	public RoomCell(char roomName, DoorDirection direction)
 	{
-		__init__(roomName, direction);
+		init(roomName, direction);
 	}
 	
-	private void __init__(char roomName, DoorDirection direction)
+	private void init(char roomName, DoorDirection direction)
 	{
 		cellIdentifer = roomName;
 		doorDirection = direction;

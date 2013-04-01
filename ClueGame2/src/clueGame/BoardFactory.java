@@ -43,19 +43,19 @@ public class BoardFactory {
 	private Set<Character> CharactersSeen; // For testing Purposes
 	
 	// Constructors
-	// All constructors must call "__init__" to initialize private variables
+	// All constructors must call "init" to initialize private variables
 	public BoardFactory()
 	{
-		__init__("boardConfig.csv", "legendConfig.txt");
+		init("boardConfig.csv", "legendConfig.txt");
 	}
 	
 	public BoardFactory(String boardFile, String legendFile)
 	{
-		__init__(boardFile, legendFile);
+		init(boardFile, legendFile);
 	}
 	
 	// initializes all the attributes of the class;
-	private void __init__(String boardConfigFile, String legendConfigFile)
+	private void init(String boardConfigFile, String legendConfigFile)
 	{
 		boardFileName = boardConfigFile;
 		legendFileName = legendConfigFile;

@@ -41,19 +41,19 @@ public class Board extends JPanel {
 
 	public Board()
 	{
-		__init__("boardConfig.csv", "legendConfig.txt");
+		init("boardConfig.csv", "legendConfig.txt");
 	}
 	
 	public Board(String boardFileName)
 	{
-		__init__(boardFileName, "legendConfig.txt");
+		init(boardFileName, "legendConfig.txt");
 	}
 	public Board(String boardFileName, String logFileName)
 	{
-		__init__(boardFileName, logFileName);
+		init(boardFileName, logFileName);
 	}
 	
-	public void __init__(String boardFileName, String legendFileName)
+	public void init(String boardFileName, String legendFileName)
 	{
 		boardConfigFile = boardFileName;
 		legendConfigFile = legendFileName;
