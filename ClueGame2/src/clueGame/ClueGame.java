@@ -2,7 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -79,6 +80,30 @@ public class ClueGame extends JFrame {
 		//Create Detective Notes and exit
 		JMenuItem detectiveNotes = new JMenuItem("Show Detective Notes");
 		JMenuItem exitAction = new JMenuItem("Exit");
+		
+		detectiveNotes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<String> playerNames = new ArrayList<String>();
+				ArrayList<String> rooms = new ArrayList<String>();
+				ArrayList<String> weapons = new ArrayList<String>();
+
+				// get names of all weapons
+				for (Card card: allCards) {
+					switch(card.getType()) {
+					case PERSON:
+						playerNames.add(card.getName());
+					case ROOM:
+						rooms.add(card.getName());
+					case WEAPON:
+						weapons.add(card.getName());
+					}
+				}
+				DetectiveNotes notes = new DetectiveNotes(playerNames, rooms, weapons);
+				notes.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				notes.setVisible(true);
+			}
+		});
 
 		//Add actions to menu
 		fileMenu.add(detectiveNotes);
