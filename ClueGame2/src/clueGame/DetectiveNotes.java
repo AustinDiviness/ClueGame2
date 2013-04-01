@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -34,7 +35,13 @@ public class DetectiveNotes extends JFrame {
 	}
 	
 	public void createSections() {
-		add(createCheckBoxes("People", people));
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(0, 2));
+		panel.add(createCheckBoxes("People", people));
+		//add(createComboBox("Person Guess", people));
+		panel.add(createCheckBoxes("Rooms", rooms));
+		panel.add(createCheckBoxes("Weapons", weapons));
+		add(panel);
 	}
 	
 	public JPanel createCheckBoxes(String name, ArrayList<String> options) {
@@ -48,6 +55,21 @@ public class DetectiveNotes extends JFrame {
 			JCheckBox checkBox = new JCheckBox(option);
 			panel.add(checkBox);
 		}
+		return panel;
+	}
+	
+	public JComboBox createComboBox(String name, ArrayList<String> options) {
+		// create string array from options
+		String[] stringArray = new String[options.size() + 1];
+		stringArray[0] = "None";
+		for (int i = 1; i < stringArray.length; ++i) {
+			stringArray[i] = options.get(i - 1);
+		}
+		JComboBox panel = new JComboBox(stringArray);
+		panel.setLayout(null);
+		TitledBorder border = new TitledBorder(new LineBorder(Color.BLACK, THICKNESS), name);
+		panel.setBorder(border);
+		panel.setSelectedIndex(0);
 		return panel;
 	}
 }

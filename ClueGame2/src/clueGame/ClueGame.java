@@ -93,10 +93,13 @@ public class ClueGame extends JFrame {
 					switch(card.getType()) {
 					case PERSON:
 						playerNames.add(card.getName());
+						break;
 					case ROOM:
 						rooms.add(card.getName());
+						break;
 					case WEAPON:
 						weapons.add(card.getName());
+						break;
 					}
 				}
 				DetectiveNotes notes = new DetectiveNotes(playerNames, rooms, weapons);
