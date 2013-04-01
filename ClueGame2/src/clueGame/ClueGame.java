@@ -132,8 +132,8 @@ public class ClueGame extends JFrame {
 	public void movePlayersToStartingSpots() {
 		Random rand = new Random();
 		int i;
-		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5, 10};
-		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1, 10};
+		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5, 10,  8, 15};
+		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1, 10, 13, 15};
 		ArrayList<Integer> usedLocations = new ArrayList<Integer>();
 		for (Player player: players) {
 			while (true) {
