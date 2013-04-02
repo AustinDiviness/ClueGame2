@@ -383,7 +383,7 @@ public class ClueGame extends JFrame {
 		}
 		game.setContentPane(game.board);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.setSize(25 * BoardCell.width, 25 * BoardCell.height);
+		game.setSize(26 * BoardCell.width, 26 * BoardCell.height);
 		game.setTitle(gameTitle);
 		game.loadMenu();
 		game.setVisible(true);

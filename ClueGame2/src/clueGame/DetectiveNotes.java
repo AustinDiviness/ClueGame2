@@ -25,6 +25,7 @@ public class DetectiveNotes extends JFrame {
 	private ArrayList<String> rooms;
 	private ArrayList<String> weapons;
 	private ArrayList<JComponent> panels;
+	private boolean visible;
 	
 	public DetectiveNotes(ArrayList<String> people, ArrayList<String> rooms, ArrayList<String> weapons) {
 		this.people = new ArrayList<String>();
@@ -34,12 +35,16 @@ public class DetectiveNotes extends JFrame {
 		this.people.addAll(people);
 		this.rooms.addAll(rooms);
 		this.weapons.addAll(weapons);
+		this.visible = false;
 		setTitle(title);
 		setSize(WIDTH, HEIGHT);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent we) {
 				createSections();
+				for (JComponent c: panels) {
+					c.repaint();
+				}
 			}
 			
 			@Override
@@ -47,6 +52,14 @@ public class DetectiveNotes extends JFrame {
 				for (JComponent c: panels) {
 					if (c instanceof JPanel) {
 						System.out.println("jpanel");
+						JPanel panel = (JPanel) c;
+						for (Component item: panel.getComponents()) {
+							JCheckBox checkbox = (JCheckBox) item;
+							System.out.println("checkbox " + checkbox.getText() + ": " + checkbox.isSelected());
+							//System.out.println(checkbox.toString());
+						}
+						
+						
 					}
 					else if (c instanceof JComboBox) {
 						JComboBox box = (JComboBox) c;
@@ -54,6 +67,7 @@ public class DetectiveNotes extends JFrame {
 					}
 				}
 			}
+
 		});
 		//setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setVisible(true);
