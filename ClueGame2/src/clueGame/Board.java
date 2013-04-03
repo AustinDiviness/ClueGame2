@@ -218,6 +218,12 @@ public class Board extends JPanel {
 				  doorCells.add((RoomCell) cell);
 			  }
 		  }
+		  // highlight squares that can be moved to
+		  highlightMovableLocations(g);
+		  // redraw doors
+		  for (RoomCell cell: doorCells) {
+			  cell.drawDoor(g);
+		  }
 		  // draw players
 		  for (Player player: players) {
 			  player.draw(g);
@@ -260,6 +266,17 @@ public class Board extends JPanel {
 			  }
 		  }
 		  
+	  }
+	  
+	  public void highlightMovableLocations(Graphics g) {
+		  ClueGame game = ClueGame.instance;
+		  int row = game.getActivePlayer().getRow();
+		  int col = game.getActivePlayer().getCol();
+		  calcTargets(row, col, game.getDieRoll());
+		  Set<BoardCell> cells = getTargets();
+		  for (BoardCell cell: cells) {
+			  cell.highlight(g);
+		  }
 	  }
 	  
 	  

@@ -40,8 +40,11 @@ public class ClueGame extends JFrame {
 	private String peopleConfig;
 	private String weaponsConfig;
 	public static final String gameTitle = "Clue!";
-	private HumanPlayer human = null;
+	public HumanPlayer human = null;
 	private JDialog notes = null;
+	private Player activePlayer = null;
+	public static ClueGame instance = null;
+	private int dieRoll;
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		solution = new Solution();
@@ -53,6 +56,7 @@ public class ClueGame extends JFrame {
 		lastCardShown = new Card(CardType.ROOM, "");
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
+		instance = this;
 	}
 
 	public void deal() {
@@ -468,6 +472,22 @@ public class ClueGame extends JFrame {
 		return players;
 	}
 	
+	public void setActivePlayer(Player player) {
+		activePlayer = player;
+	}
+	
+	public Player getActivePlayer() {
+		return activePlayer;
+	}
+	
+	public void setDieRoll(int roll) {
+		dieRoll = roll;
+	}
+	
+	public int getDieRoll() {
+		return dieRoll;
+	}
+	
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame("people.csv", "testWeaponCards.csv",
 				"boardConfig.csv", "legendConfig.txt");
@@ -484,6 +504,8 @@ public class ClueGame extends JFrame {
 		game.loadMenu();
 		game.createGameControls();
 		game.createHumanCards();
+		game.setActivePlayer(game.human);
+		game.setDieRoll(4);
 		game.setVisible(true);
 		//loading the splash screen
 		game.loadSplashScreen();

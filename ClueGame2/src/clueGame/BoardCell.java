@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /* DESCRIPTION
@@ -14,6 +15,7 @@ public abstract class BoardCell {
 	protected char cellIdentifer;
 	public static final int height = 25;
 	public static final int width = height;
+	public static final Color highlightColor = new Color(255, 246, 143);
 	
 	public int getRow() {
 		return row;
@@ -49,6 +51,12 @@ public abstract class BoardCell {
 
 	public abstract void draw(Graphics g);
 	
+	public void highlight(Graphics g) {
+		int x = col * width;
+		int y = row * height;
+		g.setColor(highlightColor);
+		g.fillRect(x, y, width, height);
+	}
 	// FOR TESTING
 	public char getCellCharacter()
 	{
