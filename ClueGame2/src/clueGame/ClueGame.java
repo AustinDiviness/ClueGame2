@@ -154,13 +154,18 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void createGameControls() {
-		int width = 200;
-		int height = 20;
+		//size of panels
+		int widthPanel = 520;
+		int heightPanel = 75;
+		//size of stuff in panels
+		int width = 100;
+		int height = 30;
 		//create gui pieces
-
 		JPanel total = new JPanel(new BorderLayout());
 		JPanel top = new JPanel();
+		top.setPreferredSize(new Dimension(widthPanel, heightPanel));
 		JPanel bottom = new JPanel();
+		bottom.setPreferredSize(new Dimension(widthPanel, heightPanel));
 		JTextField whoseTurn = new JTextField();
 		JLabel whoseTurnLabel = new JLabel();
 		JButton nextPlayer = new JButton();
