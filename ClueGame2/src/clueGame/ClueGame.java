@@ -1,6 +1,8 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +15,16 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class ClueGame extends JFrame {
 	// TODO add an instance of Board to BoardLayout.CENTER
@@ -101,7 +107,6 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void loadMenu(){
-		
 		//Create menu bar
 		JMenuBar menuBar = new JMenuBar();
 
@@ -140,7 +145,61 @@ public class ClueGame extends JFrame {
 		
 	}
 	
-	
+	public void createGameControls() {
+		int width = 200;
+		int height = 20;
+		//create gui pieces
+		JPanel top = new JPanel();
+		JPanel bottom = new JPanel();
+		JTextField whoseTurn = new JTextField();
+		JLabel whoseTurnLabel = new JLabel();
+		JButton nextPlayer = new JButton();
+		JButton makeAccusation = new JButton();
+		JTextField dieRoll = new JTextField();
+		JLabel dieRollLabel = new JLabel();
+		JTextField guess = new JTextField();
+		JLabel guessLabel = new JLabel();
+		JTextField guessResult = new JTextField();
+		JLabel guessResultLabel = new JLabel();
+		
+		// set editable state for text fields
+		dieRoll.setEditable(false);
+		guess.setEditable(false);
+		guessResult.setEditable(false);
+		// set preferred size for text fields
+		Dimension dim = new Dimension(width, height);
+		whoseTurn.setPreferredSize(dim);
+		dieRoll.setPreferredSize(new Dimension(30, 20));
+		guess.setPreferredSize(dim);
+		guessResult.setPreferredSize(dim);
+		// set starting text
+		whoseTurnLabel.setText("Whose turn?");
+		nextPlayer.setText("Next Player");
+		makeAccusation.setText("Make an Accusation");
+		dieRollLabel.setText("DieRoll");
+		guessLabel.setText("Guess");
+		guessResultLabel.setText("Guess Result");
+		// add text items to their respective labels
+		whoseTurnLabel.add(whoseTurn);
+		dieRollLabel.add(dieRoll);
+		guessLabel.add(guess);
+		guessResultLabel.add(guessResult);
+		// add items to bottom panel
+		bottom.add(dieRollLabel, BorderLayout.WEST);
+		bottom.add(dieRoll, BorderLayout.WEST);
+		bottom.add(guessLabel, BorderLayout.NORTH);
+		bottom.add(guess, BorderLayout.NORTH);
+		bottom.add(guessResultLabel, BorderLayout.EAST);
+		bottom.add(guessResult, BorderLayout.EAST);
+		// add items to top panel
+		top.add(whoseTurnLabel, BorderLayout.WEST);
+		top.add(whoseTurn, BorderLayout.WEST);
+		top.add(nextPlayer, BorderLayout.NORTH);
+		top.add(makeAccusation, BorderLayout.NORTH);
+		top.add(bottom, BorderLayout.SOUTH);
+		// add top to game
+		this.add(top, BorderLayout.SOUTH);
+	}
 	
 	
 	public void movePlayersToStartingSpots() {
@@ -388,11 +447,13 @@ public class ClueGame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		game.setContentPane(game.board);
+		//game.setContentPane(game.board);
+		game.add(game.board, BorderLayout.CENTER);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setSize(26 * BoardCell.width, 26 * BoardCell.height);
 		game.setTitle(gameTitle);
 		game.loadMenu();
+		game.createGameControls();
 		game.setVisible(true);
 		//loading the splash screen
 		game.loadSplashScreen();
