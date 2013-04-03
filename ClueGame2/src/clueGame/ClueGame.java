@@ -40,7 +40,21 @@ public class ClueGame extends JFrame {
 	public static final String gameTitle = "Clue!";
 	private HumanPlayer human = null;
 	private JDialog notes = null;
+	
+	//used to make sure the board has a fixed minimum size
+	//so everything displays
+	private static final int EXTRA_WIDTH = 25;
+	private static final int EXTRA_HEIGHT = 100;
+	
+	//running the main game 
+	private int humanPlayerIndex;
+	private int currentIndex; //for current player
+	
 
+	public ClueGame(){
+		
+	}
+	
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		solution = new Solution();
 		lastCardShown = new Card(CardType.WEAPON, "Something");
@@ -144,7 +158,8 @@ public class ClueGame extends JFrame {
 		
 	}
 	
-	public void createGameControls() {
+	public void createAndUpdateGameControls() {
+		///////////////////////Creation
 		//size of panels
 		int widthPanel = 520;
 		int heightPanel = 75;
@@ -210,9 +225,68 @@ public class ClueGame extends JFrame {
 		total.add(bottom, BorderLayout.SOUTH);
 		total.setVisible(true);
 		this.add(total, BorderLayout.SOUTH);
+		
+		//////////////////Updates when running the game
+		//will handle all updates here
+		
+		//handles button presses
+		//nextPlayer will also update the whoseTurn and die
+		nextPlayer.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nextPlayer();
+				//something to change whose turn
+				//something to change die number
+			}	
+		});
+		//
+		makeAccusation.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makingAccusation();
+				//Something here will take the accusation info
+				//in a seperate frame, to input accusation
+				//info and handle it.
+			}	
+		});
+		
+		//handles text inputs
+		//guess will handle checking and returning guesses
+		guess.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//something to input the text from the 
+				//guess field
+				
+				//something to return the guess result into 
+				//the guessResultField
+			}
+		});
+	}
+	/////////////////////CONTROL PANEL UPDATER HELPER FUNCTIONS
+	
+	//buttons
+	public void nextPlayer(){
+		//determine next player with currentIndex
+		//update display
+		//player move- makeMove function
+		//roll die and update number
+		//determine target and highlight- should be in the board class
 	}
 	
-	
+	public void makingAccusation(){
+		
+	}
+//	//text boxes
+//	public ActionListener guess(){
+//		return null;
+//		
+//	}
+//	
+
+	//////////////////////////////////////////
 	public void movePlayersToStartingSpots() {
 		Random rand = new Random();
 		int i;
@@ -363,7 +437,7 @@ public class ClueGame extends JFrame {
 			deck.add(new Card(CardType.PERSON, splitLine[0]));
 			//deck.addAll(playerCards);
 		}
-		int humanPlayerIndex = new Random().nextInt(playerInputStrings.size());
+		humanPlayerIndex = new Random().nextInt(playerInputStrings.size());
 		Player player = null;
 		Color color = null;
 		for (int i = 0; i < playerInputStrings.size(); ++i) {
@@ -450,6 +524,15 @@ public class ClueGame extends JFrame {
 		return players;
 	}
 	
+	public void setCurrentPlayer(int index){
+		currentIndex = index;
+	}
+	
+	public int getCurrentPlayer(){
+		return currentIndex;
+	}
+	
+	
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame("people.csv", "testWeaponCards.csv",
 				"boardConfig.csv", "legendConfig.txt");
@@ -461,15 +544,19 @@ public class ClueGame extends JFrame {
 		//game.setContentPane(game.board);
 		game.add(game.board, BorderLayout.CENTER);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.setSize(26 * BoardCell.width, 26 * BoardCell.height);
-		game.setMinimumSize(new Dimension(26 * BoardCell.width, 26 * BoardCell.height));
-		game.setSize(26 * BoardCell.width, 26 * BoardCell.height + 200);
+		game.setMinimumSize(new Dimension((26 * BoardCell.width) + EXTRA_WIDTH, (26 * BoardCell.height) +EXTRA_HEIGHT));
 		game.setTitle(gameTitle);
 		game.loadMenu();
-		game.createGameControls();
+		game.createAndUpdateGameControls();
 		game.setVisible(true);
 		//loading the splash screen
 		game.loadSplashScreen();
+		
+		//Running the game, looping through until finished
+		game.setCurrentPlayer(game.humanPlayerIndex);
+		game.createAndUpdateGameControls();
+			
+		
 	}
 
 	
