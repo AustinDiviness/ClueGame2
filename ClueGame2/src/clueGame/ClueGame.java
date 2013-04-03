@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -27,8 +28,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ClueGame extends JFrame {
-	// TODO add an instance of Board to BoardLayout.CENTER
-	// TODO add a file menu 
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -149,6 +148,8 @@ public class ClueGame extends JFrame {
 		int width = 200;
 		int height = 20;
 		//create gui pieces
+
+		JPanel total = new JPanel(new BorderLayout());
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		JTextField whoseTurn = new JTextField();
@@ -166,6 +167,7 @@ public class ClueGame extends JFrame {
 		dieRoll.setEditable(false);
 		guess.setEditable(false);
 		guessResult.setEditable(false);
+		whoseTurn.setEditable(false);
 		// set preferred size for text fields
 		Dimension dim = new Dimension(width, height);
 		whoseTurn.setPreferredSize(dim);
@@ -191,14 +193,18 @@ public class ClueGame extends JFrame {
 		bottom.add(guess, BorderLayout.NORTH);
 		bottom.add(guessResultLabel, BorderLayout.EAST);
 		bottom.add(guessResult, BorderLayout.EAST);
+		bottom.setVisible(true);
 		// add items to top panel
 		top.add(whoseTurnLabel, BorderLayout.WEST);
 		top.add(whoseTurn, BorderLayout.WEST);
 		top.add(nextPlayer, BorderLayout.NORTH);
 		top.add(makeAccusation, BorderLayout.NORTH);
-		top.add(bottom, BorderLayout.SOUTH);
-		// add top to game
-		this.add(top, BorderLayout.SOUTH);
+		top.setVisible(true);
+		// add total to game
+		total.add(top, BorderLayout.NORTH);
+		total.add(bottom, BorderLayout.SOUTH);
+		total.setVisible(true);
+		this.add(total, BorderLayout.SOUTH);
 	}
 	
 	
@@ -450,7 +456,7 @@ public class ClueGame extends JFrame {
 		//game.setContentPane(game.board);
 		game.add(game.board, BorderLayout.CENTER);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.setSize(26 * BoardCell.width, 26 * BoardCell.height);
+		game.setSize(26 * BoardCell.width, 26 * BoardCell.height + 200);
 		game.setTitle(gameTitle);
 		game.loadMenu();
 		game.createGameControls();
