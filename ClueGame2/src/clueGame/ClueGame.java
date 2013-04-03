@@ -146,11 +146,18 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void createGameControls() {
-		int width = 200;
-		int height = 20;
+		//size of panels
+		int widthPanel = 520;
+		int heightPanel = 75;
+		//size of stuff in panels
+		int width = 100;
+		int height = 30;
 		//create gui pieces
+		JPanel full = new JPanel(new BorderLayout());
 		JPanel top = new JPanel();
+		top.setPreferredSize(new Dimension(widthPanel, heightPanel));
 		JPanel bottom = new JPanel();
+		bottom.setPreferredSize(new Dimension(widthPanel, heightPanel));
 		JTextField whoseTurn = new JTextField();
 		JLabel whoseTurnLabel = new JLabel();
 		JButton nextPlayer = new JButton();
@@ -196,9 +203,12 @@ public class ClueGame extends JFrame {
 		top.add(whoseTurn, BorderLayout.WEST);
 		top.add(nextPlayer, BorderLayout.NORTH);
 		top.add(makeAccusation, BorderLayout.NORTH);
-		top.add(bottom, BorderLayout.SOUTH);
+		//top.add(bottom, BorderLayout.SOUTH);
+		full.add(top, BorderLayout.NORTH);
+		full.add(bottom, BorderLayout.AFTER_LAST_LINE);
 		// add top to game
-		this.add(top, BorderLayout.SOUTH);
+		this.add(full, BorderLayout.SOUTH);
+		full.setVisible(true);
 	}
 	
 	
@@ -451,6 +461,7 @@ public class ClueGame extends JFrame {
 		game.add(game.board, BorderLayout.CENTER);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setSize(26 * BoardCell.width, 26 * BoardCell.height);
+		game.setMinimumSize(new Dimension(26 * BoardCell.width, 26 * BoardCell.height));
 		game.setTitle(gameTitle);
 		game.loadMenu();
 		game.createGameControls();
