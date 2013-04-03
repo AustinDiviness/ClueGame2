@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,7 +16,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -26,6 +26,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
 
@@ -38,7 +40,7 @@ public class ClueGame extends JFrame {
 	private String peopleConfig;
 	private String weaponsConfig;
 	public static final String gameTitle = "Clue!";
-	private HumanPlayer human = null;
+	public HumanPlayer human = null;
 	private JDialog notes = null;
 	
 	//used to make sure the board has a fixed minimum size
@@ -48,8 +50,9 @@ public class ClueGame extends JFrame {
 	
 	//running the main game 
 	private int humanPlayerIndex;
-	private int currentIndex; //for current player
-	
+	private Player activePlayer = null;
+	public static ClueGame instance = null;
+	private int dieRoll;
 
 	public ClueGame(){
 		
@@ -65,6 +68,7 @@ public class ClueGame extends JFrame {
 		lastCardShown = new Card(CardType.ROOM, "");
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
+		instance = this;
 	}
 
 	public void deal() {
@@ -72,8 +76,10 @@ public class ClueGame extends JFrame {
 		// however testDealTest expects the deck to be empty after dealing, so we need to decide if it's destructive or not.
 		// was solved by having a destructive deck of cards, and a separate ArrayList that stores all the cards in the game.
 		int cardCount = 0;
+		Player tempPlayer = null;
 		for (Card card: deck) {
-			players.get(cardCount % players.size()).giveCard(card);
+			tempPlayer = players.get(cardCount % players.size());
+			tempPlayer.giveCard(card);
 			++cardCount;
 		}
 		deck = new ArrayList<Card>();
@@ -88,6 +94,7 @@ public class ClueGame extends JFrame {
 		selectAnswer(); // select answer to game
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
+		deal();
 		createDetectiveNotes();
 	}
 	
@@ -237,6 +244,9 @@ public class ClueGame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				nextPlayer();
 				//something to change whose turn
+				//also should check if current player is human,
+				//and if so, keeps from moving on until 
+				//human is finished
 				//something to change die number
 			}	
 		});
@@ -266,7 +276,7 @@ public class ClueGame extends JFrame {
 		});
 	}
 	/////////////////////CONTROL PANEL UPDATER HELPER FUNCTIONS
-	
+
 	//buttons
 	public void nextPlayer(){
 		//determine next player with currentIndex
@@ -274,6 +284,7 @@ public class ClueGame extends JFrame {
 		//player move- makeMove function
 		//roll die and update number
 		//determine target and highlight- should be in the board class
+	
 	}
 	
 	public void makingAccusation(){
@@ -287,6 +298,25 @@ public class ClueGame extends JFrame {
 //	
 
 	//////////////////////////////////////////
+	//creating Human Cards
+	public void createHumanCards() {
+		int THICKNESS = 2;
+		JTextField tempField = null;
+		JPanel textFields = new JPanel(new GridLayout(0, 1)); 
+		TitledBorder border = new TitledBorder(new LineBorder(Color.BLACK, THICKNESS), "My Cards");
+		textFields.setBorder(border);
+		textFields.setPreferredSize(new Dimension(200, 200));
+		for (Card card: human.getCards()) {
+			tempField = new JTextField(card.getName(), 30);
+			tempField.setEditable(false);
+			textFields.add(tempField);
+			System.out.println(card.getName());
+		}
+		//JPanel panel = new JPanel(new BoxLayout(textFields, BoxLayout.Y_AXIS));
+		textFields.setVisible(true);
+		this.add(textFields, BorderLayout.EAST);
+	}
+	//starting spots
 	public void movePlayersToStartingSpots() {
 		Random rand = new Random();
 		int i;
@@ -445,6 +475,7 @@ public class ClueGame extends JFrame {
 			if (i == humanPlayerIndex) {
 				player = new HumanPlayer(splitLine[0]);
 				human = (HumanPlayer) player;
+				// TODO remove line later
 				System.out.println(splitLine[0]);
 			}
 			else {
@@ -524,14 +555,21 @@ public class ClueGame extends JFrame {
 		return players;
 	}
 	
-	public void setCurrentPlayer(int index){
-		currentIndex = index;
+	public void setActivePlayer(Player player) {
+		activePlayer = player;
 	}
 	
-	public int getCurrentPlayer(){
-		return currentIndex;
+	public Player getActivePlayer() {
+		return activePlayer;
 	}
 	
+	public void setDieRoll(int roll) {
+		dieRoll = roll;
+	}
+	
+	public int getDieRoll() {
+		return dieRoll;
+	}
 	
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame("people.csv", "testWeaponCards.csv",
@@ -548,12 +586,18 @@ public class ClueGame extends JFrame {
 		game.setTitle(gameTitle);
 		game.loadMenu();
 		game.createAndUpdateGameControls();
+		game.setSize(26 * BoardCell.width + 200, 26 * BoardCell.height + 200);
+		game.setTitle(gameTitle);
+		game.loadMenu();
+		game.createAndUpdateGameControls();
+		game.createHumanCards();
+		game.setActivePlayer(game.human);
+		game.setDieRoll(4);
 		game.setVisible(true);
 		//loading the splash screen
 		game.loadSplashScreen();
 		
 		//Running the game, looping through until finished
-		game.setCurrentPlayer(game.humanPlayerIndex);
 		game.createAndUpdateGameControls();
 			
 		
