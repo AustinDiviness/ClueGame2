@@ -31,7 +31,6 @@ public class CRBoardInitTests {
 		try {
 			board.loadConfigFiles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e)
 		{

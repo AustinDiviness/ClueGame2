@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -33,6 +34,7 @@ public class ClueGame extends JFrame {
 	private String weaponsConfig;
 	public static final String gameTitle = "Clue!";
 	private HumanPlayer human = null;
+	private JDialog notes = null;
 
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		solution = new Solution();
@@ -67,6 +69,29 @@ public class ClueGame extends JFrame {
 		selectAnswer(); // select answer to game
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
+		createDetectiveNotes();
+	}
+	
+	public void createDetectiveNotes() {
+			ArrayList<String> playerNames = new ArrayList<String>();
+			ArrayList<String> rooms = new ArrayList<String>();
+			ArrayList<String> weapons = new ArrayList<String>();
+		
+			// get names of all weapons
+			for (Card card: allCards) {
+				switch(card.getType()) {
+				case PERSON:
+					playerNames.add(card.getName());
+					break;
+				case ROOM:
+					rooms.add(card.getName());
+					break;
+				case WEAPON:
+					weapons.add(card.getName());
+					break;
+				}
+			}
+			notes = new DetectiveNotes(playerNames, rooms, weapons);
 	}
 	
 	public void loadSplashScreen() {
@@ -77,7 +102,7 @@ public class ClueGame extends JFrame {
 	
 	public void loadMenu(){
 		
-		//Create menubar
+		//Create menu bar
 		JMenuBar menuBar = new JMenuBar();
 
 		//File Menu
@@ -91,25 +116,8 @@ public class ClueGame extends JFrame {
 		detectiveNotes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<String> playerNames = new ArrayList<String>();
-				ArrayList<String> rooms = new ArrayList<String>();
-				ArrayList<String> weapons = new ArrayList<String>();
-
-				// get names of all weapons
-				for (Card card: allCards) {
-					switch(card.getType()) {
-					case PERSON:
-						playerNames.add(card.getName());
-						break;
-					case ROOM:
-						rooms.add(card.getName());
-						break;
-					case WEAPON:
-						weapons.add(card.getName());
-						break;
-					}
-				}
-				DetectiveNotes notes = new DetectiveNotes(playerNames, rooms, weapons);
+				// set detective notes to visible
+				notes.setVisible(true);
 			}
 		});
 
@@ -369,7 +377,6 @@ public class ClueGame extends JFrame {
     }
 
 	public ArrayList<Player> getPeople() {
-		// TODO how should/does this function differ from getPlayers?
 		return players;
 	}
 	

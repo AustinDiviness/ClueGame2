@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class DetectiveNotes extends JFrame {
+public class DetectiveNotes extends JDialog {
 	public static final int WIDTH = 580;
 	public static final int HEIGHT = 660;
 	public static final int THICKNESS = 2;
@@ -24,53 +24,17 @@ public class DetectiveNotes extends JFrame {
 	private ArrayList<String> people;
 	private ArrayList<String> rooms;
 	private ArrayList<String> weapons;
-	private ArrayList<JComponent> panels;
-	private boolean visible;
 	
 	public DetectiveNotes(ArrayList<String> people, ArrayList<String> rooms, ArrayList<String> weapons) {
 		this.people = new ArrayList<String>();
 		this.rooms = new ArrayList<String>();
 		this.weapons = new ArrayList<String>();
-		this.panels = new ArrayList<JComponent>();
 		this.people.addAll(people);
 		this.rooms.addAll(rooms);
 		this.weapons.addAll(weapons);
-		this.visible = false;
 		setTitle(title);
 		setSize(WIDTH, HEIGHT);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent we) {
-				createSections();
-				for (JComponent c: panels) {
-					c.repaint();
-				}
-			}
-			
-			@Override
-			public void windowClosing(WindowEvent we) {
-				for (JComponent c: panels) {
-					if (c instanceof JPanel) {
-						System.out.println("jpanel");
-						JPanel panel = (JPanel) c;
-						for (Component item: panel.getComponents()) {
-							JCheckBox checkbox = (JCheckBox) item;
-							System.out.println("checkbox " + checkbox.getText() + ": " + checkbox.isSelected());
-							//System.out.println(checkbox.toString());
-						}
-						
-						
-					}
-					else if (c instanceof JComboBox) {
-						JComboBox box = (JComboBox) c;
-						System.out.println("combo box: " + box.getSelectedItem().toString());
-					}
-				}
-			}
-
-		});
-		//setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setVisible(true);
+		createSections();
 
 	}
 	
@@ -97,7 +61,6 @@ public class DetectiveNotes extends JFrame {
 			JCheckBox checkBox = new JCheckBox(option);
 			panel.add(checkBox);
 		}
-		panels.add(panel);
 		return panel;
 	}
 	
@@ -113,7 +76,6 @@ public class DetectiveNotes extends JFrame {
 		TitledBorder border = new TitledBorder(new LineBorder(Color.BLACK, THICKNESS), name);
 		panel.setBorder(border);
 		panel.setSelectedIndex(0);
-		panels.add(panel);
 		return panel;
 	}
 }

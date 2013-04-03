@@ -30,7 +30,6 @@ public abstract class Player {
 
 	// getters and setters
 	public Set<Card> getCards() {
-		// TODO actually return cards
 		return myCards;
 	}
 

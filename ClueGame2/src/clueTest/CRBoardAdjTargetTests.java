@@ -19,7 +19,6 @@ public class CRBoardAdjTargetTests {
 		try {
 			board.loadConfigFiles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

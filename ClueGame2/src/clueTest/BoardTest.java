@@ -46,7 +46,6 @@ public class BoardTest {
 		try {
 			board.loadConfigFiles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e)
 		{
@@ -139,7 +138,6 @@ public class BoardTest {
 		try {
 			board.loadConfigFiles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -147,7 +145,6 @@ public class BoardTest {
 		try {
 			board.loadConfigFiles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
