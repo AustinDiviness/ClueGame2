@@ -15,7 +15,7 @@ public abstract class BoardCell {
 	protected char cellIdentifer;
 	public static final int height = 25;
 	public static final int width = height;
-	public static final Color highlightColor = new Color(255, 246, 143);
+	public static final Color highlightColor = new Color(224, 27, 221);
 	
 	public int getRow() {
 		return row;

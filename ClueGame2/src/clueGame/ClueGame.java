@@ -30,6 +30,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
+	// TODO somehow the the game board is 1 indexed instead of zero indexed, causing issues with the rest of the code that is zero indexed.
+	// this is leading to issues with the calcTargets and must be fixed.
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -45,11 +47,12 @@ public class ClueGame extends JFrame {
 	
 	//used to make sure the board has a fixed minimum size
 	//so everything displays
-	private static final int EXTRA_WIDTH = 25;
+	private static final int EXTRA_WIDTH = 200;
 	private static final int EXTRA_HEIGHT = 100;
 	
 	//running the main game 
 	private int humanPlayerIndex;
+	private int turnCount;
 	private Player activePlayer = null;
 	public static ClueGame instance = null;
 	private int die;
@@ -64,16 +67,15 @@ public class ClueGame extends JFrame {
 
 	
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
-		solution = new Solution();
-		lastCardShown = new Card(CardType.WEAPON, "Something");
-		board = new Board(boardConfig, roomLegendConfig);
-		deck = new ArrayList<Card>();
-		allCards = new ArrayList<Card>();
-		players = new ArrayList<Player>();
-		lastCardShown = new Card(CardType.ROOM, "");
+		this.solution = new Solution();
+		this.lastCardShown = new Card(CardType.WEAPON, "Something");
+		this.board = new Board(boardConfig, roomLegendConfig);
+		this.deck = new ArrayList<Card>();
+		this.allCards = new ArrayList<Card>();
+		this.players = new ArrayList<Player>();
+		this.lastCardShown = new Card(CardType.ROOM, "");
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
-		instance = this;
 		this.canGoToNextPlayer = false;
 		this.whoseTurn = new JTextField();
 		this.dieRoll = new JTextField();
@@ -81,6 +83,8 @@ public class ClueGame extends JFrame {
 		this.guessResult = new JTextField();
 		this.nextPlayer = new JButton();
 		this.makeAccusation = new JButton();
+		this.turnCount = 0;
+		instance = this;
 	}
 
 	public void deal() {
@@ -178,11 +182,9 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void createGameControls() {
-		//size of panels
-		int widthPanel = 520;
-		int heightPanel = 75;
+
 		//size of stuff in panels
-		int width = 100;
+		int width = 200;
 		int height = 30;
 		//create gui pieces
 		JPanel total = new JPanel(new BorderLayout());
@@ -203,7 +205,7 @@ public class ClueGame extends JFrame {
 		// set preferred size for text fields
 		Dimension dim = new Dimension(width, height);
 		whoseTurn.setPreferredSize(dim);
-		dieRoll.setPreferredSize(new Dimension(30, 20));
+		dieRoll.setPreferredSize(new Dimension(30, height));
 		guess.setPreferredSize(dim);
 		guessResult.setPreferredSize(dim);
 		// set starting text
@@ -213,6 +215,10 @@ public class ClueGame extends JFrame {
 		dieRollLabel.setText("DieRoll");
 		guessLabel.setText("Guess");
 		guessResultLabel.setText("Guess Result");
+		whoseTurn.setText(human.getName());
+		dieRoll.setText("" + die);
+		guess.setText("None");
+		guessResult.setText("None");
 		// add text items to their respective labels
 		whoseTurnLabel.add(whoseTurn);
 		dieRollLabel.add(dieRoll);
@@ -238,7 +244,14 @@ public class ClueGame extends JFrame {
 		total.setVisible(true);
 		this.add(total, BorderLayout.SOUTH);
 	}
-//		
+
+	public void nextPlayer() {
+		// TODO implement function
+		rollDie();
+		++turnCount;
+		activePlayer = players.get((humanPlayerIndex + turnCount) % players.size());
+	}
+	
 //		//////////////////Updates when running the game
 //		//will handle all updates here
 //		
@@ -324,8 +337,8 @@ public class ClueGame extends JFrame {
 		// moves players to random predefined starting positions on the board
 		Random rand = new Random();
 		int i;
-		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5, 10,  8, 15};
-		int[] startCol = {9, 17, 23, 23, 17,  8,  1, 1, 10, 13, 15};
+		int[] startRow = {0, 0, 6, 15, 21, 21, 15, 4, 9, 7, 14};
+		int[] startCol = {8, 16, 22, 22, 16, 7, 0, 0, 9, 12, 14};
 		ArrayList<Integer> usedLocations = new ArrayList<Integer>();
 		for (Player player: players) {
 			while (true) {
@@ -521,8 +534,12 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void loop() {
-		rollDie();
-		canGoToNextPlayer = false;
+		nextPlayer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				
+			}
+		});
 	}
 
     // getters and setters
@@ -587,23 +604,18 @@ public class ClueGame extends JFrame {
 		//game.setContentPane(game.board);
 		game.add(game.board, BorderLayout.CENTER);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.setMinimumSize(new Dimension((26 * BoardCell.width) + EXTRA_WIDTH, (26 * BoardCell.height) +EXTRA_HEIGHT));
+		game.setMinimumSize(new Dimension((26 * BoardCell.width) + EXTRA_WIDTH, (26 * BoardCell.height) + EXTRA_HEIGHT));
 		game.setTitle(gameTitle);
 		game.loadMenu();
-		game.createGameControls();
-		game.setSize(26 * BoardCell.width + 200, 26 * BoardCell.height + 200);
-		game.setTitle(gameTitle);
-		game.loadMenu();
-		game.createGameControls();
 		game.createHumanCards();
 		game.setActivePlayer(game.human);
-		game.setDie(4);
+		game.setDie(4); // for testing only
+		game.createGameControls();
 		game.setVisible(true);
 		//loading the splash screen
 		game.loadSplashScreen();
 		
 		//Running the game, looping through until finished
-		game.createGameControls();
 		game.loop();
 			
 		

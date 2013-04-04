@@ -193,15 +193,14 @@ public class BoardFactory {
 			{ 
 				switch(cellType.charAt(0))
 				{
-				case 'W': return new WalkwayCell(cellType.charAt(0), currentRow, currentColumn);
+				case 'W': return new WalkwayCell(cellType.charAt(0), currentRow - 1, currentColumn - 1);
 				default: 
 				{
 					CharactersSeen.add(cellType.charAt(0)); 
-					return new RoomCell(cellType.charAt(0), currentRow, currentColumn);
+					return new RoomCell(cellType.charAt(0), currentRow - 1, currentColumn - 1);
 				}
 				}
 			}
-			else // char is not recognized
 				throw new BadConfigFormatException("Cell " + currentRow + ", " + currentColumn +" is not contained in legend");
 		}
 		// For door rooms
@@ -212,10 +211,10 @@ public class BoardFactory {
 				CharactersSeen.add(cellType.charAt(0)); // for testing
 				switch(cellType.charAt(1)) // direction of door
 				{
-				case 'U': return new RoomCell(cellType.charAt(0), DoorDirection.UP, currentRow, currentColumn);
-				case 'D': return new RoomCell(cellType.charAt(0), DoorDirection.DOWN, currentRow, currentColumn);
-				case 'R': return new RoomCell(cellType.charAt(0), DoorDirection.RIGHT, currentRow, currentColumn);
-				case 'L': return new RoomCell(cellType.charAt(0), DoorDirection.LEFT, currentRow, currentColumn);
+				case 'U': return new RoomCell(cellType.charAt(0), DoorDirection.UP, currentRow - 1, currentColumn - 1);
+				case 'D': return new RoomCell(cellType.charAt(0), DoorDirection.DOWN, currentRow - 1, currentColumn - 1);
+				case 'R': return new RoomCell(cellType.charAt(0), DoorDirection.RIGHT, currentRow - 1, currentColumn - 1);
+				case 'L': return new RoomCell(cellType.charAt(0), DoorDirection.LEFT, currentRow - 1, currentColumn - 1);
 				case 'N': return new RoomCell(cellType.charAt(0));
 				default: throw new BadConfigFormatException("Door direction in row " + currentRow + ", column " + currentColumn +" is not valid");
 				}
