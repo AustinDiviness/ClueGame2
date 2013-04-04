@@ -30,8 +30,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
-	// TODO somehow the the game board is 1 indexed instead of zero indexed, causing issues with the rest of the code that is zero indexed.
-	// this is leading to issues with the calcTargets and must be fixed.
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -250,6 +248,8 @@ public class ClueGame extends JFrame {
 		rollDie();
 		++turnCount;
 		activePlayer = players.get((humanPlayerIndex + turnCount) % players.size());
+		whoseTurn.setText(activePlayer.getName());
+		dieRoll.setText("" + die);
 	}
 	
 //		//////////////////Updates when running the game
@@ -537,7 +537,7 @@ public class ClueGame extends JFrame {
 		nextPlayer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				
+				nextPlayer();
 			}
 		});
 	}
