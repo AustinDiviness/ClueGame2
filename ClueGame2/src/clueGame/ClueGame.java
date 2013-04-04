@@ -459,7 +459,8 @@ public class ClueGame extends JFrame {
 	
 	public void rollDie() {
 		Random rand = new Random();
-		die = rand.nextInt(5) + 1;
+		// add one because nextInt(x) returns value in the range [0, x)
+		die = rand.nextInt(6) + 1;
 	}
 	
 	public void nextPlayer() {
@@ -486,8 +487,8 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void runAccusation() {
-		// TODO check accusation, remove player from game if they get it wrong. should probably have some popup dialogs about whats
-		// happening too
+		// TODO check accusation, remove player from game if they get it wrong. should probably 
+		// have some popup dialogs about what's happening too
 	}
 	
 	public void addEvents() {
@@ -634,7 +635,7 @@ public class ClueGame extends JFrame {
 		game.loadMenu();
 		game.createHumanCards();
 		game.setActivePlayer(game.human);
-		game.setDie(4); // for testing only
+		game.rollDie();
 		game.createGameControls();
 		game.setVisible(true);
 		//loading the splash screen
