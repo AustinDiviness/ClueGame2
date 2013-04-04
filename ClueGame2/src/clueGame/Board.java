@@ -218,8 +218,11 @@ public class Board extends JPanel {
 				  doorCells.add((RoomCell) cell);
 			  }
 		  }
-		  // highlight squares that can be moved to
-		  highlightMovableLocations(g);
+		  if (ClueGame.instance.getCanGoToNextPlayer() == false) {
+			  // highlight squares that can be moved to
+			  highlightMovableLocations(g);
+		  }
+
 		  // redraw doors
 		  for (RoomCell cell: doorCells) {
 			  cell.drawDoor(g);

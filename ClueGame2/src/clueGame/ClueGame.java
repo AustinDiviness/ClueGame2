@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -246,6 +247,7 @@ public class ClueGame extends JFrame {
 	}
 
 	public void nextPlayer() {
+		canGoToNextPlayer = false;
 		rollDie();
 		++turnCount;
 		activePlayer = players.get((humanPlayerIndex + turnCount) % players.size());
@@ -479,7 +481,14 @@ public class ClueGame extends JFrame {
 		nextPlayer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				nextPlayer();
+				if (canGoToNextPlayer) {
+					nextPlayer();
+					board.repaint();
+				}
+				else {
+					// TODO add dialogue that tells player that they need to move first, perhaps?
+					return;
+				}
 			}
 		});
 		
@@ -493,7 +502,16 @@ public class ClueGame extends JFrame {
 		board.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent) {
-				
+				int col = mouseEvent.getX() / BoardCell.width;
+				int row = mouseEvent.getY() / BoardCell.height;
+				board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
+				Set<BoardCell> targets = board.getTargets();
+				if (canGoToNextPlayer == false && targets.contains(board.getCellAt(board.calcIndex(row, col)))) {
+					canGoToNextPlayer = true;
+					activePlayer.setRow(row);
+					activePlayer.setCol(col);
+				}
+				board.repaint();
 			}
 			
 			@Override
@@ -572,6 +590,14 @@ public class ClueGame extends JFrame {
 	
 	public int getDie() {
 		return die;
+	}
+	
+	public void setCanGoToNextPlayer(boolean value) {
+		this.canGoToNextPlayer = value;
+	}
+	
+	public boolean getCanGoToNextPlayer() {
+		return this.canGoToNextPlayer;
 	}
 	
 	public static void main(String[] args) {
