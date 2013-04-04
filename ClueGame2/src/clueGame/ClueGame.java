@@ -319,6 +319,15 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
+		// move player that was suggested to location
+		for (Player player: players) {
+			if (player.getName().equals(person)) {
+				player.setRow(activePlayer.getRow());
+				player.setCol(activePlayer.getCol());
+				board.repaint();
+			}
+		}
+		// get cards that can disprove the suggestion
 		ArrayList<Card> disproveCards = new ArrayList<Card>();
 		Card card;
 		for (Player player: players) {
