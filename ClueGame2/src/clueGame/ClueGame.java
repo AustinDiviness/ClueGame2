@@ -138,9 +138,7 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void loadSplashScreen() {
-		//Create JFrame 
-		JFrame splashScreen = new JFrame();
-		JOptionPane.showMessageDialog(splashScreen, "You are " + human.getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "You are " + human.getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void loadMenu(){
@@ -486,7 +484,7 @@ public class ClueGame extends JFrame {
 					board.repaint();
 				}
 				else {
-					// TODO add dialogue that tells player that they need to move first, perhaps?
+					JOptionPane.showMessageDialog(ClueGame.instance, "You need to move first!", "Can't Finish Turn", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
 			}
