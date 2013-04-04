@@ -38,6 +38,7 @@ public class Board extends JPanel {
 	public static final Color textColor = Color.ORANGE;
 	private String boardConfigFile;
 	private String legendConfigFile;
+	private ArrayList<RoomCell> doorCells;
 
 	public Board()
 	{
@@ -58,6 +59,7 @@ public class Board extends JPanel {
 		boardConfigFile = boardFileName;
 		legendConfigFile = legendFileName;
 		players = new ArrayList<Player>();
+		doorCells = new ArrayList<RoomCell>();
 	}
 	
 	
@@ -75,6 +77,12 @@ public class Board extends JPanel {
 		for(int i = 0; i < numRows * numColumns; i++)
 		{
 			visited[i] = false;
+		}
+		// grab add room cells that are a door
+		for (BoardCell cell: cells) {
+			if (cell.isDoorway()) {
+				doorCells.add((RoomCell) cell);
+			}
 		}
 	}
 	public int calcIndex(int row, int column) {
@@ -204,28 +212,21 @@ public class Board extends JPanel {
 
 	  @Override
 	  public void paintComponent(Graphics g) {
-		  ArrayList<RoomCell> doorCells = new ArrayList<RoomCell>();
+		  super.paintComponent(g);
 		  HashMap<Character, Boolean> drawn = new HashMap<Character, Boolean>();
 		  // load HashMap with all the rooms that need to be drawn and false
 		  ArrayList<Character> roomInitials = new ArrayList<Character>(rooms.keySet());
 		  for (Character ch: roomInitials) {
 			  drawn.put(ch, false);
 		  }
-		  // grab add room cells that are a door
+		  // draw board cells
 		  for (BoardCell cell: cells) {
 			  cell.draw(g);
-			  if (cell.isDoorway()) {
-				  doorCells.add((RoomCell) cell);
-			  }
 		  }
+
 		  if (ClueGame.instance.getCanGoToNextPlayer() == false) {
 			  // highlight squares that can be moved to
 			  highlightMovableLocations(g);
-		  }
-
-		  // redraw doors
-		  for (RoomCell cell: doorCells) {
-			  cell.drawDoor(g);
 		  }
 		  // draw players
 		  drawPlayers(g);
@@ -236,6 +237,7 @@ public class Board extends JPanel {
 		  int xOffset = 1;
 		  String roomName;
 		  g.setColor(textColor);
+		  
 		  for (RoomCell cell: doorCells) {
 			  if (cell.getDoorDirection() == DoorDirection.UP && drawn.get(cell.getCellCharacter()) == false) {
 				  x = (cell.getCol() - xOffset) * BoardCell.width;

@@ -534,6 +534,9 @@ public class ClueGame extends JFrame {
 					activePlayer.setCol(col);
 					board.repaint();
 				}
+				else if (canGoToNextPlayer == true) {
+					JOptionPane.showMessageDialog(ClueGame.instance, "You've already moved this turn!", "Can't Move Again", JOptionPane.INFORMATION_MESSAGE);
+				}
 				else {
 					JOptionPane.showMessageDialog(ClueGame.instance, "Please select one of the highlighted squares.", "Can't Move There", JOptionPane.INFORMATION_MESSAGE);
 				}

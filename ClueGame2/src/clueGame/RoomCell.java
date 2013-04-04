@@ -67,7 +67,9 @@ public class RoomCell extends BoardCell {
 		int y = row * height;
 		g.setColor(color);
 		g.fillRect(x, y, width, height);
-
+		if (isDoorway()) {
+			drawDoor(g);
+		}
 	}
 	
 	public void drawDoor(Graphics g) {
