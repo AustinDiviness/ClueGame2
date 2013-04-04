@@ -2,8 +2,11 @@ package clueGame;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -46,6 +49,8 @@ public class SuggestionDialog extends JDialog {
         panel.add(createComboBox(playerNames));
         panel.add(weaponText);
         panel.add(createComboBox(weaponNames));
+        panel.add(createCancelButton());
+        panel.add(createSubmitButton());
         this.add(panel);
 	}
 
@@ -57,6 +62,28 @@ public class SuggestionDialog extends JDialog {
         JComboBox box = new JComboBox(stringArray);
         box.setSelectedIndex(0);
         return box;
+    }
+    
+    public JButton createCancelButton() {
+    	JButton button = new JButton("Cancel");
+    	button.addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent actionEvent) {
+    			setVisible(false);
+    		}
+    	});
+    	return button;
+    }
+    
+    public JButton createSubmitButton() {
+    	JButton button = new JButton("Submit");
+    	button.addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent actionEvent) {
+    			
+    		}
+    	});
+    	return button;
     }
 	
 }
