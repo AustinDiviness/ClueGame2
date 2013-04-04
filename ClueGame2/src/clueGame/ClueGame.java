@@ -338,14 +338,16 @@ public class ClueGame extends JFrame {
 				}
 			}
 		}
-		
+		// pick card to show, if one exists
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			lastCardShown = disproveCards.get(rand.nextInt(disproveCards.size()));
 			accusingPerson.showCard(lastCardShown);
+			guessResult.setText(lastCardShown.getName());
 		}
 		else {
 			lastCardShown = new Card(CardType.ROOM, "");
+			guessResult.setText("None");
 		}
 	}
 	
