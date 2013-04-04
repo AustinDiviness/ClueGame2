@@ -237,7 +237,7 @@ public class Board extends JPanel {
 		  int xOffset = 1;
 		  String roomName;
 		  g.setColor(textColor);
-		  
+		  // draw room name according to the direction of the door
 		  for (RoomCell cell: doorCells) {
 			  if (cell.getDoorDirection() == DoorDirection.UP && drawn.get(cell.getCellCharacter()) == false) {
 				  x = (cell.getCol() - xOffset) * BoardCell.width;
