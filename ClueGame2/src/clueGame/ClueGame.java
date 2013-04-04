@@ -244,14 +244,6 @@ public class ClueGame extends JFrame {
 		this.add(total, BorderLayout.SOUTH);
 	}
 
-	public void nextPlayer() {
-		canGoToNextPlayer = false;
-		rollDie();
-		++turnCount;
-		activePlayer = players.get((humanPlayerIndex + turnCount) % players.size());
-		whoseTurn.setText(activePlayer.getName());
-		dieRoll.setText("" + die);
-	}
 
 	public void createHumanCards() {
 		int THICKNESS = 2;
@@ -470,6 +462,29 @@ public class ClueGame extends JFrame {
 		die = rand.nextInt(5) + 1;
 	}
 	
+	public void nextPlayer() {
+		canGoToNextPlayer = false;
+		rollDie();
+		++turnCount;
+		activePlayer = players.get((humanPlayerIndex + turnCount) % players.size());
+		whoseTurn.setText(activePlayer.getName());
+		dieRoll.setText("" + die);
+		if (activePlayer instanceof ComputerPlayer) {
+			runAI();
+		}
+	}
+	
+	public void runAI() {
+		board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
+		ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
+		Random rand = new Random();
+		int index = rand.nextInt(targets.size() - 1);
+		BoardCell tempCell = targets.get(index);
+		activePlayer.setRow(tempCell.getRow());
+		activePlayer.setCol(tempCell.getCol());
+		canGoToNextPlayer = true;
+	}
+	
 	public void runAccusation() {
 		// TODO check accusation, remove player from game if they get it wrong. should probably have some popup dialogs about whats
 		// happening too
@@ -512,6 +527,8 @@ public class ClueGame extends JFrame {
 				board.repaint();
 			}
 			
+			// insofar as I can tell, we don't need these. but they're required to be there
+			// to fully implement the MouseListener interface
 			@Override
 			public void mouseEntered(MouseEvent mouseEvent) {
 				
