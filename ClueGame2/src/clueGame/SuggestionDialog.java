@@ -19,6 +19,15 @@ public class SuggestionDialog extends JDialog {
 	private ArrayList<String> playerNames;
 	private ArrayList<String> weaponNames;
 	private String title = "Make a Suggestion";
+	private JTextField roomText;
+	private JTextField playerText;
+	private JTextField weaponText;
+	private JComboBox roomCombo;
+	private JComboBox playerCombo;
+	private JComboBox weaponCombo;
+	private JButton cancelButton;
+	private JButton submitButton;
+	private boolean submitted;
 
 	public SuggestionDialog(String roomName, ArrayList<String> playerNames, ArrayList<String> weaponNames) {
 		this.roomName = roomName;
@@ -27,17 +36,22 @@ public class SuggestionDialog extends JDialog {
 		setTitle(title);
 		setModal(true);
 		setSize(WIDTH, HEIGHT);
+		this.submitted = false;
+		String[] roomArray = {roomName};
+		this.roomText = new JTextField("Room");
+        this.playerText = new JTextField("Player");
+        this.weaponText = new JTextField("Weapon");
+		this.roomCombo = new JComboBox(roomArray);
+		this.playerCombo = createComboBox(playerNames);
+		this.weaponCombo = createComboBox(weaponNames);
+		this.cancelButton = createCancelButton();
+		this.submitButton = createSubmitButton();
 		createSections();
+		setVisible(true);
 	}
 	
 	public void createSections() {
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(290, 220));
-		JTextField roomText = new JTextField("Room");
-        JTextField playerText = new JTextField("Player");
-        JTextField weaponText = new JTextField("Weapon");
-        String[] roomArray = {roomName};
-        JComboBox roomCombo = new JComboBox(roomArray);
 		panel.setLayout(new GridLayout(0, 2));
 		roomText.setEditable(false);
 		playerText.setEditable(false);
@@ -46,11 +60,11 @@ public class SuggestionDialog extends JDialog {
         panel.add(roomText);
         panel.add(roomCombo);
         panel.add(playerText);
-        panel.add(createComboBox(playerNames));
+        panel.add(playerCombo);
         panel.add(weaponText);
-        panel.add(createComboBox(weaponNames));
-        panel.add(createCancelButton());
-        panel.add(createSubmitButton());
+        panel.add(weaponCombo);
+        panel.add(cancelButton);
+        panel.add(submitButton);
         this.add(panel);
 	}
 
@@ -80,10 +94,28 @@ public class SuggestionDialog extends JDialog {
     	button.addActionListener(new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent actionEvent) {
-    			
+    			submitted = true;
+    			setVisible(false);
     		}
     	});
     	return button;
     }
+    
+    public boolean wasSubmitted() {
+    	return this.submitted;
+    }
+    
+    // getters and setters
+    
+    public String getRoom() {
+    	return (String) roomCombo.getSelectedItem();
+    }
 	
+    public String getPlayer() {
+    	return (String) playerCombo.getSelectedItem();
+    }
+    
+    public String getWeapon() {
+    	return (String) weaponCombo.getSelectedItem();
+    }
 }

@@ -550,8 +550,11 @@ public class ClueGame extends JFrame {
 								break;
 							}
 						}
-						SuggestionDialog temp = new SuggestionDialog(roomName, playerNames, weaponNames);
-						temp.setVisible(true);
+						SuggestionDialog suggestionDialog = new SuggestionDialog(roomName, playerNames, weaponNames);
+						// get information
+						if (suggestionDialog.wasSubmitted()) {
+							handleSuggestion(suggestionDialog.getPlayer(), suggestionDialog.getRoom(), suggestionDialog.getWeapon(), activePlayer);
+						}
 					}
 				}
 				// player has already moved this turn
