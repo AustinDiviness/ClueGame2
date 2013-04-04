@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -9,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class SuggestionDialog extends JDialog {
+	public final int WIDTH = 400;
+	public final int HEIGHT = 300;
 	private String roomName;
 	private ArrayList<String> playerNames;
 	private ArrayList<String> weaponNames;
@@ -20,11 +23,13 @@ public class SuggestionDialog extends JDialog {
 		this.weaponNames = weaponNames;
 		setTitle(title);
 		setModal(true);
+		setSize(WIDTH, HEIGHT);
 		createSections();
 	}
 	
 	public void createSections() {
 		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(290, 220));
 		JTextField roomText = new JTextField("Room");
         JTextField playerText = new JTextField("Player");
         JTextField weaponText = new JTextField("Weapon");
@@ -32,6 +37,8 @@ public class SuggestionDialog extends JDialog {
         JComboBox roomCombo = new JComboBox(roomArray);
 		panel.setLayout(new GridLayout(0, 2));
 		roomText.setEditable(false);
+		playerText.setEditable(false);
+		weaponText.setEditable(false);
         roomCombo.setEnabled(false);
         panel.add(roomText);
         panel.add(roomCombo);
@@ -39,6 +46,7 @@ public class SuggestionDialog extends JDialog {
         panel.add(createComboBox(playerNames));
         panel.add(weaponText);
         panel.add(createComboBox(weaponNames));
+        this.add(panel);
 	}
 
     public JComboBox createComboBox(ArrayList<String> options) {
