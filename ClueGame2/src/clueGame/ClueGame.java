@@ -268,6 +268,8 @@ public class ClueGame extends JFrame {
 		int i;
 		int[] startRow = {0, 0, 6, 15, 21, 21, 15, 4, 9, 7, 14};
 		int[] startCol = {8, 16, 22, 22, 16, 7, 0, 0, 9, 12, 14};
+//		int[] startRow = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
+//		int[] startCol = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
 		ArrayList<Integer> usedLocations = new ArrayList<Integer>();
 		for (Player player: players) {
 			while (true) {
@@ -479,7 +481,13 @@ public class ClueGame extends JFrame {
 		board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
 		ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
 		Random rand = new Random();
-		int index = rand.nextInt(targets.size() - 1);
+		int index;
+		if (targets.size() > 1) {
+			index = rand.nextInt(targets.size() - 1);
+		}
+		else {
+			index = 0;
+		}
 		BoardCell tempCell = targets.get(index);
 		activePlayer.setRow(tempCell.getRow());
 		activePlayer.setCol(tempCell.getCol());
