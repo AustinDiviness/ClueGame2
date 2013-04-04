@@ -217,7 +217,7 @@ public class ClueGame extends JFrame {
 		whoseTurn.setText(human.getName());
 		dieRoll.setText("" + die);
 		guess.setText("None");
-		guessResult.setText("None");
+		guessResult.setText("No New Clue");
 		// add text items to their respective labels
 		whoseTurnLabel.add(whoseTurn);
 		dieRollLabel.add(dieRoll);
@@ -349,7 +349,7 @@ public class ClueGame extends JFrame {
 		}
 		else {
 			lastCardShown = new Card(CardType.ROOM, "");
-			guessResult.setText("None");
+			guessResult.setText("No New Clue");
 		}
 	}
 	
