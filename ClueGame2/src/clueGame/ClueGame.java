@@ -523,8 +523,11 @@ public class ClueGame extends JFrame {
 					canGoToNextPlayer = true;
 					activePlayer.setRow(row);
 					activePlayer.setCol(col);
+					board.repaint();
 				}
-				board.repaint();
+				else {
+					JOptionPane.showMessageDialog(ClueGame.instance, "Please select one of the highlighted squares.", "Can't Move There", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			
 			// insofar as I can tell, we don't need these. but they're required to be there
