@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -244,77 +246,12 @@ public class ClueGame extends JFrame {
 	}
 
 	public void nextPlayer() {
-		// TODO implement function
 		rollDie();
 		++turnCount;
 		activePlayer = players.get((humanPlayerIndex + turnCount) % players.size());
 		whoseTurn.setText(activePlayer.getName());
 		dieRoll.setText("" + die);
 	}
-	
-//		//////////////////Updates when running the game
-//		//will handle all updates here
-//		
-//		//handles button presses
-//		//nextPlayer will also update the whoseTurn and die
-//		nextPlayer.addActionListener(new ActionListener(){
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				nextPlayer();
-//				//something to change whose turn
-//				//also should check if current player is human,
-//				//and if so, keeps from moving on until 
-//				//human is finished
-//				//something to change die number
-//			}	
-//		});
-//		//
-//		makeAccusation.addActionListener(new ActionListener(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				makingAccusation();
-//				//Something here will take the accusation info
-//				//in a seperate frame, to input accusation
-//				//info and handle it.
-//			}	
-//		});
-//		
-//		//handles text inputs
-//		//guess will handle checking and returning guesses
-//		guess.addActionListener(new ActionListener(){
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				//something to input the text from the 
-//				//guess field
-//				
-//				//something to return the guess result into 
-//				//the guessResultField
-//			}
-//		});
-//}
-//	/////////////////////CONTROL PANEL UPDATER HELPER FUNCTIONS
-//
-//	//buttons
-//	public void nextPlayer(){
-//		//determine next player with currentIndex
-//		//update display
-//		//player move- makeMove function
-//		//roll die and update number
-//		//determine target and highlight- should be in the board class
-//	
-//	}
-//	
-//	public void makingAccusation(){
-//		
-//	}
-////	//text boxes
-////	public ActionListener guess(){
-////		return null;
-////		
-////	}
-////	
 
 	public void createHumanCards() {
 		int THICKNESS = 2;
@@ -533,13 +470,57 @@ public class ClueGame extends JFrame {
 		die = rand.nextInt(5) + 1;
 	}
 	
-	public void loop() {
+	public void runAccusation() {
+		// TODO check accusation, remove player from game if they get it wrong. should probably have some popup dialogs about whats
+		// happening too
+	}
+	
+	public void addEvents() {
 		nextPlayer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				nextPlayer();
 			}
 		});
+		
+		makeAccusation.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				runAccusation();
+			}
+		});
+		
+		board.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent mouseEvent) {
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent mouseEvent) {
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent mouseEvent) {
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent mouseEvent) {
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent mouseEvent) {
+				
+			}
+			
+			
+			
+
+		});
+		
 	}
 
     // getters and setters
@@ -616,7 +597,7 @@ public class ClueGame extends JFrame {
 		game.loadSplashScreen();
 		
 		//Running the game, looping through until finished
-		game.loop();
+		game.addEvents();
 			
 		
 	}
