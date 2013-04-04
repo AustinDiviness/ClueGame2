@@ -205,7 +205,7 @@ public class ClueGame extends JFrame {
 		Dimension dim = new Dimension(width, height);
 		whoseTurn.setPreferredSize(dim);
 		dieRoll.setPreferredSize(new Dimension(30, height));
-		guess.setPreferredSize(dim);
+		guess.setPreferredSize(new Dimension(400, height));
 		guessResult.setPreferredSize(dim);
 		// set starting text
 		whoseTurnLabel.setText("Whose turn?");
@@ -327,6 +327,8 @@ public class ClueGame extends JFrame {
 				board.repaint();
 			}
 		}
+		// set guess text box to suggestion
+		guess.setText(person + " in the " + room + " with the " + weapon);
 		// get cards that can disprove the suggestion
 		ArrayList<Card> disproveCards = new ArrayList<Card>();
 		Card card;
