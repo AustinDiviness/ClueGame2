@@ -59,12 +59,12 @@ public class ClueGame extends JFrame {
 	private int die;
 	private boolean canGoToNextPlayer;
 	// gui controls objects
-	JTextField whoseTurn;
-	JTextField dieRoll;
-	JTextField guess;
-	JTextField guessResult;
-	JButton nextPlayer;
-	JButton makeAccusation;
+	private JTextField whoseTurn;
+	private JTextField dieRoll;
+	private JTextField guess;
+	private JTextField guessResult;
+	private JButton nextPlayer;
+	private JButton makeAccusation;
 
 	
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
@@ -552,12 +552,7 @@ public class ClueGame extends JFrame {
 			public void mouseReleased(MouseEvent mouseEvent) {
 				
 			}
-			
-			
-			
-
-		});
-		
+		});		
 	}
 
     // getters and setters
@@ -585,7 +580,6 @@ public class ClueGame extends JFrame {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-    
 
     public Card getLastCardShown() {
         return lastCardShown;
