@@ -533,10 +533,32 @@ public class ClueGame extends JFrame {
 					activePlayer.setRow(row);
 					activePlayer.setCol(col);
 					board.repaint();
+					// if room was a doorway, run the suggestionDialog
+					if (board.getCellAt(board.calcIndex(row, col)).isDoorway()) {
+						String roomName = board.getRoomNameAt(row, col);
+						ArrayList<String> playerNames = new ArrayList<String>();
+						ArrayList<String> weaponNames = new ArrayList<String>();
+						for (Card card: allCards) {
+							switch(card.getType()) {
+							case PERSON:
+								playerNames.add(card.getName());
+								break;
+							case WEAPON:
+								weaponNames.add(card.getName());
+								break;
+							default:
+								break;
+							}
+						}
+						SuggestionDialog temp = new SuggestionDialog(roomName, playerNames, weaponNames);
+						temp.setVisible(true);
+					}
 				}
+				// player has already moved this turn
 				else if (canGoToNextPlayer == true) {
 					JOptionPane.showMessageDialog(ClueGame.instance, "You've already moved this turn!", "Can't Move Again", JOptionPane.INFORMATION_MESSAGE);
 				}
+				// player clicks somewhere that they can't move to
 				else {
 					JOptionPane.showMessageDialog(ClueGame.instance, "Please select one of the highlighted squares.", "Can't Move There", JOptionPane.INFORMATION_MESSAGE);
 				}

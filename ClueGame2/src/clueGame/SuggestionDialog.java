@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -27,19 +28,20 @@ public class SuggestionDialog extends JDialog {
 		JTextField roomText = new JTextField("Room");
         JTextField playerText = new JTextField("Player");
         JTextField weaponText = new JTextField("Weapon");
-        JComboBox roomCombo = new ComboBox(new String[] = {roomName});
+        String[] roomArray = {roomName};
+        JComboBox roomCombo = new JComboBox(roomArray);
 		panel.setLayout(new GridLayout(0, 2));
 		roomText.setEditable(false);
-        roomCombo.setEnabled(false;
+        roomCombo.setEnabled(false);
         panel.add(roomText);
         panel.add(roomCombo);
         panel.add(playerText);
-        panel.add(createComboBox(playerNames)):
-        panel.add(weaponNames);
+        panel.add(createComboBox(playerNames));
+        panel.add(weaponText);
         panel.add(createComboBox(weaponNames));
 	}
 
-    public void createComboBox(ArrayList<String> options) {
+    public JComboBox createComboBox(ArrayList<String> options) {
         String[] stringArray = new String[options.size()];
         for (int i  = 0; i < stringArray.length; ++i) {
             stringArray[i] = options.get(i);
