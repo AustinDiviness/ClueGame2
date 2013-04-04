@@ -228,8 +228,40 @@ public class Board extends JPanel {
 			  cell.drawDoor(g);
 		  }
 		  // draw players
-		  for (Player player: players) {
-			  player.draw(g);
+		  int width = BoardCell.width;
+		  int height = BoardCell.height;
+		  ArrayList<Player> playersNotDrawn = ClueGame.instance.getPlayers();
+		  HashMap<Player, Boolean> playerMap = new HashMap<Player, Boolean>();
+		  // set all players notDrawn value to true, since they haven't been drawn
+		  for (Player player: playersNotDrawn) {
+			  playerMap.put(player, true);
+		  }
+		  // draw players in the ArrayList
+		  for (Player player: playersNotDrawn) {
+			  // skip over those that have already been drawn
+			  if (playerMap.get(player) == false) {
+				  continue;
+			  }
+			  else {
+					ArrayList<Player> overlaps = new ArrayList<Player>();
+					// get players on the same cell. will include this player
+					for (Player possPlayer: ClueGame.instance.getPlayers()) {
+						if (possPlayer.getRow() == player.getRow() && 
+							possPlayer.getCol() == player.getCol() && 
+							playerMap.get(possPlayer) == true) {
+								overlaps.add(possPlayer);
+						}
+					}
+					int arcLength = 360 / overlaps.size();
+					for (int i = 0; i < overlaps.size(); ++i) {
+						Player temp = overlaps.get(i);
+						int x = temp.getCol() * width;
+						int y = temp.getRow() * height;
+						g.setColor(temp.getColor());
+						g.fillArc(x, y, width, height, arcLength * i, arcLength);
+						playerMap.put(temp, false);
+					}
+			  }
 		  }
 		  // draw room names
 		  int x = 0;

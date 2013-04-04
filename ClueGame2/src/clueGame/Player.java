@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
@@ -66,6 +67,10 @@ public abstract class Player {
 		this.color = color;
 	}
 	
+	public Color getColor() {
+		return this.color;
+	}
+	
 	
 	public void giveCard(Card card) {
 		this.myCards.add(card);
@@ -75,16 +80,9 @@ public abstract class Player {
 	abstract public void showCard(Card card);
 	
 	public void draw(Graphics g){
-		
 		width = BoardCell.width;
 		height = BoardCell.height;
-		
 		g.setColor(this.color);
-		
-		
 		g.fillOval(getCol()*width, getRow()*height, width, height);
-		
-		
-		
 	}
 }
