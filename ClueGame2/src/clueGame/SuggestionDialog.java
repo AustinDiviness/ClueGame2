@@ -24,9 +24,29 @@ public class SuggestionDialog extends JDialog {
 	
 	public void createSections() {
 		JPanel panel = new JPanel();
+		JTextField roomText = new JTextField("Room");
+        JTextField playerText = new JTextField("Player");
+        JTextField weaponText = new JTextField("Weapon");
+        JComboBox roomCombo = new ComboBox(new String[] = {roomName});
 		panel.setLayout(new GridLayout(0, 2));
-		JTextField roomText = new JTextField(roomName);
 		roomText.setEditable(false);
+        roomCombo.setEnabled(false;
+        panel.add(roomText);
+        panel.add(roomCombo);
+        panel.add(playerText);
+        panel.add(createComboBox(playerNames)):
+        panel.add(weaponNames);
+        panel.add(createComboBox(weaponNames));
 	}
+
+    public void createComboBox(ArrayList<String> options) {
+        String[] stringArray = new String[options.size()];
+        for (int i  = 0; i < stringArray.length; ++i) {
+            stringArray[i] = options.get(i);
+        }
+        JComboBox box = new JComboBox(stringArray);
+        box.setSelectedIndex(0);
+        return box;
+    }
 	
 }
