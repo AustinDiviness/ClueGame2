@@ -52,11 +52,16 @@ public class ClueGame extends JFrame {
 	private int humanPlayerIndex;
 	private Player activePlayer = null;
 	public static ClueGame instance = null;
-	private int dieRoll;
+	private int die;
+	private boolean canGoToNextPlayer;
+	// gui controls objects
+	JTextField whoseTurn;
+	JTextField dieRoll;
+	JTextField guess;
+	JTextField guessResult;
+	JButton nextPlayer;
+	JButton makeAccusation;
 
-	public ClueGame(){
-		
-	}
 	
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		solution = new Solution();
@@ -69,6 +74,13 @@ public class ClueGame extends JFrame {
 		this.peopleConfig = peopleConfig;
 		this.weaponsConfig = weaponsConfig;
 		instance = this;
+		this.canGoToNextPlayer = false;
+		this.whoseTurn = new JTextField();
+		this.dieRoll = new JTextField();
+		this.guess = new JTextField();
+		this.guessResult = new JTextField();
+		this.nextPlayer = new JButton();
+		this.makeAccusation = new JButton();
 	}
 
 	public void deal() {
@@ -123,7 +135,7 @@ public class ClueGame extends JFrame {
 	public void loadSplashScreen() {
 		//Create JFrame 
 		JFrame splashScreen = new JFrame();
-		JOptionPane.showMessageDialog(splashScreen, "You are "+human.getName()+ ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(splashScreen, "You are " + human.getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void loadMenu(){
@@ -165,8 +177,7 @@ public class ClueGame extends JFrame {
 		
 	}
 	
-	public void createAndUpdateGameControls() {
-		///////////////////////Creation
+	public void createGameControls() {
 		//size of panels
 		int widthPanel = 520;
 		int heightPanel = 75;
@@ -176,18 +187,12 @@ public class ClueGame extends JFrame {
 		//create gui pieces
 		JPanel total = new JPanel(new BorderLayout());
 		JPanel top = new JPanel();
-		top.setPreferredSize(new Dimension(widthPanel, heightPanel));
+		//top.setPreferredSize(new Dimension(widthPanel, heightPanel));
 		JPanel bottom = new JPanel();
-		bottom.setPreferredSize(new Dimension(widthPanel, heightPanel));
-		JTextField whoseTurn = new JTextField();
+		//bottom.setPreferredSize(new Dimension(widthPanel, heightPanel));
 		JLabel whoseTurnLabel = new JLabel();
-		JButton nextPlayer = new JButton();
-		JButton makeAccusation = new JButton();
-		JTextField dieRoll = new JTextField();
 		JLabel dieRollLabel = new JLabel();
-		JTextField guess = new JTextField();
 		JLabel guessLabel = new JLabel();
-		JTextField guessResult = new JTextField();
 		JLabel guessResultLabel = new JLabel();
 		
 		// set editable state for text fields
@@ -232,73 +237,72 @@ public class ClueGame extends JFrame {
 		total.add(bottom, BorderLayout.SOUTH);
 		total.setVisible(true);
 		this.add(total, BorderLayout.SOUTH);
-		
-		//////////////////Updates when running the game
-		//will handle all updates here
-		
-		//handles button presses
-		//nextPlayer will also update the whoseTurn and die
-		nextPlayer.addActionListener(new ActionListener(){
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				nextPlayer();
-				//something to change whose turn
-				//also should check if current player is human,
-				//and if so, keeps from moving on until 
-				//human is finished
-				//something to change die number
-			}	
-		});
-		//
-		makeAccusation.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				makingAccusation();
-				//Something here will take the accusation info
-				//in a seperate frame, to input accusation
-				//info and handle it.
-			}	
-		});
-		
-		//handles text inputs
-		//guess will handle checking and returning guesses
-		guess.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//something to input the text from the 
-				//guess field
-				
-				//something to return the guess result into 
-				//the guessResultField
-			}
-		});
 	}
-	/////////////////////CONTROL PANEL UPDATER HELPER FUNCTIONS
-
-	//buttons
-	public void nextPlayer(){
-		//determine next player with currentIndex
-		//update display
-		//player move- makeMove function
-		//roll die and update number
-		//determine target and highlight- should be in the board class
-	
-	}
-	
-	public void makingAccusation(){
-		
-	}
-//	//text boxes
-//	public ActionListener guess(){
-//		return null;
 //		
+//		//////////////////Updates when running the game
+//		//will handle all updates here
+//		
+//		//handles button presses
+//		//nextPlayer will also update the whoseTurn and die
+//		nextPlayer.addActionListener(new ActionListener(){
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				nextPlayer();
+//				//something to change whose turn
+//				//also should check if current player is human,
+//				//and if so, keeps from moving on until 
+//				//human is finished
+//				//something to change die number
+//			}	
+//		});
+//		//
+//		makeAccusation.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				makingAccusation();
+//				//Something here will take the accusation info
+//				//in a seperate frame, to input accusation
+//				//info and handle it.
+//			}	
+//		});
+//		
+//		//handles text inputs
+//		//guess will handle checking and returning guesses
+//		guess.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				//something to input the text from the 
+//				//guess field
+//				
+//				//something to return the guess result into 
+//				//the guessResultField
+//			}
+//		});
+//}
+//	/////////////////////CONTROL PANEL UPDATER HELPER FUNCTIONS
+//
+//	//buttons
+//	public void nextPlayer(){
+//		//determine next player with currentIndex
+//		//update display
+//		//player move- makeMove function
+//		//roll die and update number
+//		//determine target and highlight- should be in the board class
+//	
 //	}
 //	
+//	public void makingAccusation(){
+//		
+//	}
+////	//text boxes
+////	public ActionListener guess(){
+////		return null;
+////		
+////	}
+////	
 
-	//////////////////////////////////////////
-	//creating Human Cards
 	public void createHumanCards() {
 		int THICKNESS = 2;
 		JTextField tempField = null;
@@ -312,12 +316,12 @@ public class ClueGame extends JFrame {
 			textFields.add(tempField);
 			System.out.println(card.getName());
 		}
-		//JPanel panel = new JPanel(new BoxLayout(textFields, BoxLayout.Y_AXIS));
 		textFields.setVisible(true);
 		this.add(textFields, BorderLayout.EAST);
 	}
-	//starting spots
+	
 	public void movePlayersToStartingSpots() {
+		// moves players to random predefined starting positions on the board
 		Random rand = new Random();
 		int i;
 		int[] startRow = {1,  1,  7, 16, 22, 22, 16, 5, 10,  8, 15};
@@ -348,7 +352,6 @@ public class ClueGame extends JFrame {
 		ArrayList<Card> weaponCards = new ArrayList<Card>();
 		ArrayList<Card> roomCards = new ArrayList<Card>();
 		for (Card card: deck) {
-			//System.out.println("number of players: " + players.size());
 			switch(card.getType()) {
 				case PERSON:
 					personCards.add(card);
@@ -373,17 +376,12 @@ public class ClueGame extends JFrame {
 	
 	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
 		ArrayList<Card> disproveCards = new ArrayList<Card>();
-		//System.out.println(players.size());
-		//System.out.println("# of players :"+ players.size());
 		Card card;
 		for (Player player: players) {
-			//System.out.println("Player has " + player.getCards().size() + " cards");
 			for (Object c: player.getCards().toArray()) {
 				card = (Card) c;
-				//System.out.println("x");
 				if (card.toString().equals(person) || card.toString().equals(weapon) || card.toString().equals(room)) {
 					disproveCards.add(card);
-					//System.out.println(card.toString());
 				}
 			}
 		}
@@ -510,15 +508,22 @@ public class ClueGame extends JFrame {
 		// loads room cards to card deck
 		for (Entry<Character, String> item: board.getRooms().entrySet()) {
 			deck.add(new Card(CardType.ROOM, item.getValue()));
-			//System.out.println(item.getValue()); // test code to print out rooms that were turned into cards
 		}
-		//System.out.println("-----------"); // test code
 	}
 	
 	public void paintBoard(Graphics g) {
 		board.paintComponent(g);
 	}
 	
+	public void rollDie() {
+		Random rand = new Random();
+		die = rand.nextInt(5) + 1;
+	}
+	
+	public void loop() {
+		rollDie();
+		canGoToNextPlayer = false;
+	}
 
     // getters and setters
 	
@@ -563,12 +568,12 @@ public class ClueGame extends JFrame {
 		return activePlayer;
 	}
 	
-	public void setDieRoll(int roll) {
-		dieRoll = roll;
+	public void setDie(int roll) {
+		die = roll;
 	}
 	
-	public int getDieRoll() {
-		return dieRoll;
+	public int getDie() {
+		return die;
 	}
 	
 	public static void main(String[] args) {
@@ -585,20 +590,21 @@ public class ClueGame extends JFrame {
 		game.setMinimumSize(new Dimension((26 * BoardCell.width) + EXTRA_WIDTH, (26 * BoardCell.height) +EXTRA_HEIGHT));
 		game.setTitle(gameTitle);
 		game.loadMenu();
-		game.createAndUpdateGameControls();
+		game.createGameControls();
 		game.setSize(26 * BoardCell.width + 200, 26 * BoardCell.height + 200);
 		game.setTitle(gameTitle);
 		game.loadMenu();
-		game.createAndUpdateGameControls();
+		game.createGameControls();
 		game.createHumanCards();
 		game.setActivePlayer(game.human);
-		game.setDieRoll(4);
+		game.setDie(4);
 		game.setVisible(true);
 		//loading the splash screen
 		game.loadSplashScreen();
 		
 		//Running the game, looping through until finished
-		game.createAndUpdateGameControls();
+		game.createGameControls();
+		game.loop();
 			
 		
 	}

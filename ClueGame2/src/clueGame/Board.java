@@ -272,7 +272,7 @@ public class Board extends JPanel {
 		  ClueGame game = ClueGame.instance;
 		  int row = game.getActivePlayer().getRow();
 		  int col = game.getActivePlayer().getCol();
-		  calcTargets(row, col, game.getDieRoll());
+		  calcTargets(row, col, game.getDie());
 		  Set<BoardCell> cells = getTargets();
 		  for (BoardCell cell: cells) {
 			  cell.highlight(g);
