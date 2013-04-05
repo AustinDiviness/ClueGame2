@@ -9,6 +9,10 @@ public class Solution {
 		
 	}
 	
+	public String toString() {
+		return "Person: " + person + " Weapon: " + weapon + " Room: " + room;
+	}
+	
 	public Solution(String person, String room, String weapon) {
 		this.person = person;
 		this.room = room;

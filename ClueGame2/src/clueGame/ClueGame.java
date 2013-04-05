@@ -110,11 +110,18 @@ public class ClueGame extends JFrame {
 	
 	public void loadConfigFiles() throws FileNotFoundException {
 		board.loadConfigFiles();
+		// remove closet and walkway from the list. this is a bad way to do it, but the code
+		// used to load the config files for the board uses the mapping a bunch and I don't
+		// want to risk screwing something up in code I didn't write.
+		board.getRooms().remove('W');
+		board.getRooms().remove('X');
 		loadWeapons(weaponsConfig);
 		loadPeople(peopleConfig);
 		loadRoomCards();
 		allCards.addAll(deck); // should store all cards that exist in game into a separate ArrayList
 		selectAnswer(); // select answer to game
+		// TODO remove print line below after debugging
+		System.out.println(solution.toString());
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
 		deal();
