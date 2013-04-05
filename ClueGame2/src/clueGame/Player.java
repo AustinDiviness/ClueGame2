@@ -80,6 +80,10 @@ public abstract class Player {
 		return this.color;
 	}
 	
+	public boolean isHuman() {
+		return (this instanceof HumanPlayer);
+	}
+	
 	
 	public void giveCard(Card card) {
 		this.myCards.add(card);

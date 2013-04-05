@@ -514,9 +514,8 @@ public class ClueGame extends JFrame {
 				System.exit(0);
 			}
 			else {
-				// TODO is the player eliminated? should ask professor does an accusation mean the player can't move?
-				JOptionPane.showMessageDialog(this, "You were incorrect and have been eliminated from the game.", "Wrong Accusation", JOptionPane.INFORMATION_MESSAGE);
-				players.remove(activePlayer);
+				// TODO does an accusation mean the player can't move?
+				JOptionPane.showMessageDialog(this, "You were incorrect.", "Wrong Accusation", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
@@ -542,9 +541,12 @@ public class ClueGame extends JFrame {
 				if (canGoToNextPlayer == false) {
 					runAccusation();
 				}
-				else {
+				else if (activePlayer.isHuman()) {
 					JOptionPane.showMessageDialog(ClueGame.instance, "You may only make an accusation at the beginning of your turn.", 
 							"Too Late!", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(ClueGame.instance, "You can only make an accusation on your own turn!", "Not Your Turn", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
