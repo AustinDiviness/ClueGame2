@@ -47,6 +47,9 @@ public class ClueGame extends JFrame {
 	public static final String gameTitle = "Clue!";
 	public HumanPlayer human = null;
 	private JDialog notes = null;
+	private ArrayList<String> playerNames;
+	private ArrayList<String> roomNames;
+	private ArrayList<String> weaponNames;
 	
 	//used to make sure the board has a fixed minimum size
 	//so everything displays
@@ -87,6 +90,9 @@ public class ClueGame extends JFrame {
 		this.nextPlayer = new JButton();
 		this.makeAccusation = new JButton();
 		this.turnCount = 0;
+		this.playerNames = new ArrayList<String>();
+		this.roomNames = new ArrayList<String>();
+		this.weaponNames = new ArrayList<String>();
 		instance = this;
 	}
 
@@ -112,29 +118,24 @@ public class ClueGame extends JFrame {
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
 		deal();
-		createDetectiveNotes();
-	}
-	
-	public void createDetectiveNotes() {
-			ArrayList<String> playerNames = new ArrayList<String>();
-			ArrayList<String> rooms = new ArrayList<String>();
-			ArrayList<String> weapons = new ArrayList<String>();
-		
-			// get names of all weapons
-			for (Card card: allCards) {
-				switch(card.getType()) {
+		for (Card card: allCards) {
+			switch(card.getType()) {
 				case PERSON:
 					playerNames.add(card.getName());
 					break;
 				case ROOM:
-					rooms.add(card.getName());
+					roomNames.add(card.getName());
 					break;
 				case WEAPON:
-					weapons.add(card.getName());
+					weaponNames.add(card.getName());
 					break;
-				}
 			}
-			notes = new DetectiveNotes(playerNames, rooms, weapons);
+		}
+		createDetectiveNotes();
+	}
+	
+	public void createDetectiveNotes() {
+			notes = new DetectiveNotes(playerNames, roomNames, weaponNames);
 	}
 	
 	public void loadSplashScreen() {
@@ -345,8 +346,6 @@ public class ClueGame extends JFrame {
 	}
 	
 	public boolean checkAccusation(Solution solution) {
-		// should this function eliminate player if accusation is incorrect, or should that
-		// be handled by a separate function? I lean towards the latter option.
 		return (this.solution.getPerson().equals(solution.getPerson()) &&
 				this.solution.getWeapon().equals(solution.getWeapon()) &&
 				this.solution.getRoom().equals(solution.getRoom()));
@@ -497,27 +496,14 @@ public class ClueGame extends JFrame {
 		BoardCell tempCell = targets.get(index);
 		activePlayer.setRow(tempCell.getRow());
 		activePlayer.setCol(tempCell.getCol());
+		if (tempCell.isDoorway()) {
+			ComputerPlayer computerPlayer = (ComputerPlayer) activePlayer;
+			computerPlayer.createSuggestion();
+		}
 		canGoToNextPlayer = true;
 	}
 	
 	public void runAccusation() {
-		ArrayList<String> roomNames = new ArrayList<String>();
-		ArrayList<String> playerNames = new ArrayList<String>();
-		ArrayList<String> weaponNames = new ArrayList<String>();
-		for (Card card: allCards) {
-			switch(card.getType()) {
-			case ROOM:
-				roomNames.add(card.getName());
-			case PERSON:
-				playerNames.add(card.getName());
-				break;
-			case WEAPON:
-				weaponNames.add(card.getName());
-				break;
-			default:
-				break;
-			}
-		}
 		AccusationDialog dialog = new AccusationDialog(roomNames, playerNames, weaponNames);
 		if (dialog.wasSubmitted()) {
 			if (checkAccusation(new Solution(dialog.getPlayer(), dialog.getRoom(), dialog.getWeapon()))) {
@@ -525,6 +511,7 @@ public class ClueGame extends JFrame {
 				System.exit(0);
 			}
 			else {
+				// TODO is the player eliminated? should ask professor does an accusation mean the player can't move?
 				JOptionPane.showMessageDialog(this, "You were incorrect and have been eliminated from the game.", "Wrong Accusation", JOptionPane.INFORMATION_MESSAGE);
 				players.remove(activePlayer);
 			}

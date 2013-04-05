@@ -10,25 +10,28 @@ import java.util.Set;
 public class ComputerPlayer extends Player {
 	private char lastRoomVisited;
 	private Set<Card> seenCards;
+	private Solution suggestion;
 	
 	public ComputerPlayer(String string) {
 		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
-		name = string;
+		this.name = string;
 		this.color = null;
-		seenCards = new HashSet<Card>();
-		myCards = new HashSet<Card>();
-		row = 0;
-		col = 0;
+		this.seenCards = new HashSet<Card>();
+		this.myCards = new HashSet<Card>();
+		this.row = 0;
+		this.col = 0;
+		this.suggestion = new Solution();
 	}
 	
 	public ComputerPlayer(String string, Color color) {
 		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
-		name = string;
+		this.name = string;
 		this.color = color;
-		seenCards = new HashSet<Card>();
-		myCards = new HashSet<Card>();
-		row = 0;
-		col = 0;
+		this.seenCards = new HashSet<Card>();
+		this.myCards = new HashSet<Card>();
+		this.row = 0;
+		this.col = 0;
+		this.suggestion = new Solution();
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
@@ -54,6 +57,7 @@ public class ComputerPlayer extends Player {
 	
 	public void createSuggestion() {
 		// TODO create function. are we going to store previous suggestion so the computer learns somehow?
+		
 	}
 	
 	public void updateSeen(Card seen) {
