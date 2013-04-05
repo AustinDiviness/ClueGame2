@@ -260,7 +260,6 @@ public class ClueGame extends JFrame {
 			tempField = new JTextField(card.getName(), 30);
 			tempField.setEditable(false);
 			textFields.add(tempField);
-			System.out.println(card.getName());
 		}
 		textFields.setVisible(true);
 		this.add(textFields, BorderLayout.EAST);
@@ -343,8 +342,10 @@ public class ClueGame extends JFrame {
 		for (Player player: players) {
 			for (Object c: player.getCards().toArray()) {
 				card = (Card) c;
-				if (card.toString().equals(person) || card.toString().equals(weapon) || card.toString().equals(room)) {
-					disproveCards.add(card);
+				if (card.getName().equals(person) || card.getName().equals(weapon) || card.getName().equals(room)) {
+					if (activePlayer.getCards().contains(card) == false) {
+						disproveCards.add(card);
+					}
 				}
 			}
 		}
@@ -437,8 +438,6 @@ public class ClueGame extends JFrame {
 			if (i == humanPlayerIndex) {
 				player = new HumanPlayer(splitLine[0]);
 				human = (HumanPlayer) player;
-				// TODO remove line later
-				System.out.println(splitLine[0]);
 			}
 			else {
 				player = new ComputerPlayer(splitLine[0]);
