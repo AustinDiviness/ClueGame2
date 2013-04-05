@@ -497,8 +497,11 @@ public class ClueGame extends JFrame {
 		activePlayer.setRow(tempCell.getRow());
 		activePlayer.setCol(tempCell.getCol());
 		if (tempCell.isDoorway()) {
+			String room = board.getRooms().get(tempCell.getCellCharacter());
 			ComputerPlayer computerPlayer = (ComputerPlayer) activePlayer;
-			computerPlayer.createSuggestion();
+			computerPlayer.createSuggestion(playerNames, room, weaponNames);
+			Solution suggestion = computerPlayer.getSolution();
+			handleSuggestion(suggestion.getPerson(), suggestion.getRoom(), suggestion.getWeapon(), activePlayer);
 		}
 		canGoToNextPlayer = true;
 	}

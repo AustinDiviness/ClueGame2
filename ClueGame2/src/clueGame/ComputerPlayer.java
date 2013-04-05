@@ -55,9 +55,34 @@ public class ComputerPlayer extends Player {
 		
 	}
 	
-	public void createSuggestion() {
-		// TODO create function. are we going to store previous suggestion so the computer learns somehow?
-		
+	public void createSuggestion(ArrayList<String> playerNames, String roomName, ArrayList<String> weaponNames) {
+		Random rand = new Random();
+		String playerChoice = null;
+		String roomChoice = roomName;
+		String weaponChoice = null;
+		// find player to suggest
+		while (playerChoice == null) {
+			playerChoice = playerNames.get(rand.nextInt(playerNames.size() - 1));
+			for (Card card: seenCards) {
+				if (card.getName().equals(playerChoice)) {
+					playerChoice = null;
+					break;
+				}
+			}
+		}
+		// find weapon to suggest
+		while(weaponChoice == null) {
+			weaponChoice = weaponNames.get(rand.nextInt(weaponNames.size() - 1));
+			for (Card card: seenCards) {
+				if (card.getName().equals(weaponChoice)) {
+					weaponChoice = null;
+					break;
+				}
+			}
+		}
+		suggestion.setPerson(playerChoice);
+		suggestion.setRoom(roomChoice);
+		suggestion.setWeapon(weaponChoice);
 	}
 	
 	public void updateSeen(Card seen) {
@@ -70,5 +95,9 @@ public class ComputerPlayer extends Player {
 	
 	public void showCard(Card card) {
 		updateSeen(card);
+	}
+	
+	public Solution getSolution() {
+		return this.suggestion;
 	}
 }
