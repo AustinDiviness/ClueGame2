@@ -519,6 +519,16 @@ public class ClueGame extends JFrame {
 			}
 		}
 		AccusationDialog dialog = new AccusationDialog(roomNames, playerNames, weaponNames);
+		if (dialog.wasSubmitted()) {
+			if (checkAccusation(new Solution(dialog.getPlayer(), dialog.getRoom(), dialog.getWeapon()))) {
+				JOptionPane.showMessageDialog(this, "You are correct!", "You Win!", JOptionPane.INFORMATION_MESSAGE);
+				System.exit(0);
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "You were incorrect and have been eliminated from the game.", "Wrong Accusation", JOptionPane.INFORMATION_MESSAGE);
+				players.remove(activePlayer);
+			}
+		}
 	}
 	
 	public void addEvents() {
@@ -539,7 +549,13 @@ public class ClueGame extends JFrame {
 		makeAccusation.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				runAccusation();
+				if (canGoToNextPlayer == false) {
+					runAccusation();
+				}
+				else {
+					JOptionPane.showMessageDialog(ClueGame.instance, "You may only make an accusation at the beginning of your turn.", 
+							"Too Late!", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		
