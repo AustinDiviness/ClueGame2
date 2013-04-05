@@ -55,10 +55,10 @@ public class AccusationDialog extends JDialog {
 		roomText.setEditable(false);
 		playerText.setEditable(false);
 		weaponText.setEditable(false);
-        panel.add(roomText);
-        panel.add(roomCombo);
         panel.add(playerText);
         panel.add(playerCombo);
+        panel.add(roomText);
+        panel.add(roomCombo);
         panel.add(weaponText);
         panel.add(weaponCombo);
         panel.add(cancelButton);
