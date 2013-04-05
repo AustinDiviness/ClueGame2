@@ -122,6 +122,9 @@ public class ClueGame extends JFrame {
 		selectAnswer(); // select answer to game
 		// TODO remove print line below after debugging
 		System.out.println(solution.toString());
+		for (Card card: allCards) {
+			System.out.println(card.toString());
+		}
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
 		deal();
@@ -298,19 +301,25 @@ public class ClueGame extends JFrame {
 			switch(card.getType()) {
 				case PERSON:
 					personCards.add(card);
+					break;
 				case WEAPON:
 					weaponCards.add(card);
+					break;
 				case ROOM:
 					roomCards.add(card);
+					break;
 			}
 		}
 		Random rand = new Random();
-		solution.setPerson(personCards.get(rand.nextInt(personCards.size())).toString());
-		solution.setWeapon(weaponCards.get(rand.nextInt(personCards.size())).toString());
-		solution.setRoom(weaponCards.get(rand.nextInt(personCards.size())).toString());
+		String personPick = personCards.get(rand.nextInt(personCards.size() - 1)).getName();
+		String weaponPick = weaponCards.get(rand.nextInt(weaponCards.size() - 1)).getName();
+		String roomPick = roomCards.get(rand.nextInt(roomCards.size() - 1)).getName();
+		solution.setPerson(personPick);
+		solution.setWeapon(weaponPick);
+		solution.setRoom(roomPick);
 		// remove cards that were chosen from deck
 		for (int i = deck.size() - 1; i >= 0; --i) {
-			String tempString = deck.get(i).toString();
+			String tempString = deck.get(i).getName();
 			if (tempString.equals(solution.getPerson()) || tempString.equals(solution.getWeapon()) || tempString.equals(solution.getRoom())) {
 				deck.remove(i);
 			}

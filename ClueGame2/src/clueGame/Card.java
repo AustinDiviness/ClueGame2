@@ -12,7 +12,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return name;
+		return "Name: " + name + " Type: " + type;
 	}
 	
 	public String getName() {
