@@ -33,8 +33,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
-	// TODO somehow there is cards being created for the closet room (which has no entrance) and for the walkways. this
-	// needs to be fixed or the game might pick a room card that is impossible to guess
+	// TODO Computer players need to have their lastRoomVisited flag set and have their movement logic updated
+	// TODO Computer players need to be able to make accusations
+	// TODO Computer accusations need to have dialogs to show the human player what is going on
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -120,11 +121,6 @@ public class ClueGame extends JFrame {
 		loadRoomCards();
 		allCards.addAll(deck); // should store all cards that exist in game into a separate ArrayList
 		selectAnswer(); // select answer to game
-		// TODO remove print line below after debugging
-		System.out.println(solution.toString());
-		for (Card card: allCards) {
-			System.out.println(card.toString());
-		}
 		movePlayersToStartingSpots();
 		board.setPlayers(players);
 		deal();

@@ -37,14 +37,7 @@ public class ComputerPlayer extends Player {
 	public void pickLocation(Set<BoardCell> targets) {
 		Random rand = new Random();
 		
-		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);
-		// TODO what is this old code?
-		/*
-		for (Object bc : targets.toArray()) {
-			setArray.add((BoardCell) bc);
-		}
-		*/
-		
+		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);		
 		BoardCell pick = setArray.get(rand.nextInt(setArray.size()));
 		while (pick.getCellCharacter() == (lastRoomVisited)) {
 			pick = setArray.get(rand.nextInt(setArray.size()));
