@@ -3,11 +3,10 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
-/* DESCRIPTION
- * This is a cell to denote a Room
- * 
- * If a room does not have a Door it is given the direction of NONE
- */
+//DESCRIPTION
+//This is a cell to denote a Room
+//If a room does not have a Door it is given the direction of NONE
+
 public class RoomCell extends BoardCell {
 	public enum DoorDirection {
 		UP, DOWN, LEFT, RIGHT, NONE
@@ -17,33 +16,28 @@ public class RoomCell extends BoardCell {
 	public static final int doorWidth = 5;
 	private DoorDirection doorDirection;
 
-	public RoomCell(char roomName)
-	{
+	public RoomCell(char roomName) {
 		init(roomName, DoorDirection.NONE);
 	}
 	
-	public RoomCell(char roomName, int row, int col)
-	{
+	public RoomCell(char roomName, int row, int col) {
 		init(roomName, DoorDirection.NONE);
 		this.row = row;
 		this.col = col;
 	}
 
-	public RoomCell(char roomName, DoorDirection direction, int row, int col)
-	{
+	public RoomCell(char roomName, DoorDirection direction, int row, int col) {
 		init(roomName, direction);
 		this.row = row;
 		this.col = col;
 	}
 
 	
-	public RoomCell(char roomName, DoorDirection direction)
-	{
+	public RoomCell(char roomName, DoorDirection direction) {
 		init(roomName, direction);
 	}
 	
-	private void init(char roomName, DoorDirection direction)
-	{
+	private void init(char roomName, DoorDirection direction) {
 		cellIdentifer = roomName;
 		doorDirection = direction;
 	}
@@ -91,15 +85,13 @@ public class RoomCell extends BoardCell {
 				break;
 		}
 	}
-	
-	// FOR TESTING PURPOSES ONLY
+
 	public DoorDirection getDoorDirection() {
 		return doorDirection;
 	}
 	
-	public char getInitial()
-	{
+	public char getInitial() {
 		return cellIdentifer;
 	}
 	
-}
+} // end class bracket

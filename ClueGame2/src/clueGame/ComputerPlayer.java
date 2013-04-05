@@ -35,6 +35,7 @@ public class ComputerPlayer extends Player {
 		Random rand = new Random();
 		
 		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);
+		// TODO what is this old code?
 		/*
 		for (Object bc : targets.toArray()) {
 			setArray.add((BoardCell) bc);

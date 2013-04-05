@@ -3,21 +3,16 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
-/* DESCRIPTION
- * Cell that is a walkway
- */
 
 public class WalkwayCell extends BoardCell {
-
 	public static final Color backgroundColor = Color.black;
 	public static final Color color = Color.DARK_GRAY;
-	public WalkwayCell(char type)
-	{
+	
+	public WalkwayCell(char type) {
 		cellIdentifer = type;
 	}
 
-	public WalkwayCell(char type, int row, int col)
-	{
+	public WalkwayCell(char type, int row, int col) {
 		this.row = row;
 		this.col = col;
 		cellIdentifer = type;
@@ -38,4 +33,4 @@ public class WalkwayCell extends BoardCell {
 	public boolean isWalkway() {
 		return true;
 	}
-}
+} // end class bracket

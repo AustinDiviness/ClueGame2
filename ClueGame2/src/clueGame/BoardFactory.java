@@ -17,19 +17,14 @@ import clueGame.RoomCell.DoorDirection;
 
 /* DESCRIPTION
  *  This class takes two fileNames the board and legend file
- *  
  *  and will make a ArrayList of BoardCells and the Map for the characters
- *  
  *  and will tell the number of rows, number of columns and the number or Rooms
- *  
  *  This class throws a FileNotFoundException and a BadConfigFormatException in function parse()
- *  
  *  Rooms can be named anything but walkways must have the char 'W' as the identifier
- *  
  *  This class has a lot of nested if statements. These statements are used to produce good error messages
- *  
  *  Functions that take a row and or column for a parameters is for the error messages
  */
+
 public class BoardFactory {
 	private String boardFileName;
 	private String legendFileName;

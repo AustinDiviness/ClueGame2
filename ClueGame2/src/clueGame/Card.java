@@ -31,4 +31,4 @@ public class Card {
 		this.type = type;
 	}
 	
-}
+} // end class bracket

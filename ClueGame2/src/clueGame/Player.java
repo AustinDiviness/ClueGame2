@@ -28,6 +28,15 @@ public abstract class Player {
 	public String toString() {
 		return name;
 	}
+	
+	abstract public void showCard(Card card);
+	
+	public void draw(Graphics g){
+		width = BoardCell.width;
+		height = BoardCell.height;
+		g.setColor(this.color);
+		g.fillOval(getCol()*width, getRow()*height, width, height);
+	}
 
 	// getters and setters
 	public Set<Card> getCards() {
@@ -75,14 +84,4 @@ public abstract class Player {
 	public void giveCard(Card card) {
 		this.myCards.add(card);
 	}
-	
-
-	abstract public void showCard(Card card);
-	
-	public void draw(Graphics g){
-		width = BoardCell.width;
-		height = BoardCell.height;
-		g.setColor(this.color);
-		g.fillOval(getCol()*width, getRow()*height, width, height);
-	}
-}
+} // end class bracket

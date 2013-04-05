@@ -3,11 +3,10 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
-/* DESCRIPTION
- * This is an abstract class for each cell of the board
- *  A cell can be a room or a walk way.
- *  If a cell is a room it can also hold a door
- */
+//DESCRIPTION
+//This is an abstract class for each cell of the board. 
+
+
 public abstract class BoardCell {
 	// Location of cell
 	// Type of Cell
@@ -57,10 +56,9 @@ public abstract class BoardCell {
 		g.setColor(highlightColor);
 		g.fillRect(x, y, width, height);
 	}
-	// FOR TESTING
-	public char getCellCharacter()
-	{
+	
+	public char getCellCharacter() {
 		return cellIdentifer;
 	}
 
-}
+} // end class bracket
