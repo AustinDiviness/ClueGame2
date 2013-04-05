@@ -33,6 +33,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
+	// TODO somehow there is cards being created for the closet room (which has no entrance) and for the walkways. this
+	// needs to be fixed or the game might pick a room card that is impossible to guess
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -89,9 +91,7 @@ public class ClueGame extends JFrame {
 	}
 
 	public void deal() {
-		// deal cards to all players. Tests currently think that deal() function is non destructive if I remember right,
-		// however testDealTest expects the deck to be empty after dealing, so we need to decide if it's destructive or not.
-		// was solved by having a destructive deck of cards, and a separate ArrayList that stores all the cards in the game.
+		// deal cards to all players
 		int cardCount = 0;
 		Player tempPlayer = null;
 		for (Card card: deck) {
@@ -144,15 +144,13 @@ public class ClueGame extends JFrame {
 	public void loadMenu(){
 		//Create menu bar
 		JMenuBar menuBar = new JMenuBar();
-
 		//File Menu
 		JMenu fileMenu = new JMenu("File");
 		menuBar.add(fileMenu);
-
 		//Create Detective Notes and exit
 		JMenuItem detectiveNotes = new JMenuItem("Show Detective Notes");
 		JMenuItem exitAction = new JMenuItem("Exit");
-		
+
 		detectiveNotes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -160,26 +158,21 @@ public class ClueGame extends JFrame {
 				notes.setVisible(true);
 			}
 		});
-
-		//Adding Actions to menuItems
-		exitAction.addActionListener(
-				new ActionListener(){
-					@Override
-					public void actionPerformed(ActionEvent e){
-						System.exit(0);
-					}
-				});
 		
+		//Adding Actions to menuItems
+		exitAction.addActionListener( new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
 		//Add different menuItems to menu
 		fileMenu.add(detectiveNotes);
 		fileMenu.add(exitAction);
-		
-		
 		//setting menuBar on JFrame
 		setJMenuBar(menuBar);
-		
 	}
-	
+
 	public void createGameControls() {
 
 		//size of stuff in panels
@@ -268,8 +261,6 @@ public class ClueGame extends JFrame {
 		int i;
 		int[] startRow = {0, 0, 6, 15, 21, 21, 15, 4, 9, 7, 14};
 		int[] startCol = {8, 16, 22, 22, 16, 7, 0, 0, 9, 12, 14};
-//		int[] startRow = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
-//		int[] startCol = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
 		ArrayList<Integer> usedLocations = new ArrayList<Integer>();
 		for (Player player: players) {
 			while (true) {
@@ -390,6 +381,7 @@ public class ClueGame extends JFrame {
 		}
 		deck.addAll(weaponCards);
 	}
+	
 	public void loadPeople(String inputFile) {
 		// loads people from config file into card deck and as Player objects to players list
 		ArrayList<Card> playerCards = new ArrayList<Card>();
@@ -461,6 +453,7 @@ public class ClueGame extends JFrame {
 		}
 
 	}
+	
 	public void loadRoomCards() {
 		// loads room cards to card deck
 		for (Entry<Character, String> item: board.getRooms().entrySet()) {
@@ -508,8 +501,24 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void runAccusation() {
-		// TODO check accusation, remove player from game if they get it wrong. should probably 
-		// have some popup dialogs about what's happening too
+		ArrayList<String> roomNames = new ArrayList<String>();
+		ArrayList<String> playerNames = new ArrayList<String>();
+		ArrayList<String> weaponNames = new ArrayList<String>();
+		for (Card card: allCards) {
+			switch(card.getType()) {
+			case ROOM:
+				roomNames.add(card.getName());
+			case PERSON:
+				playerNames.add(card.getName());
+				break;
+			case WEAPON:
+				weaponNames.add(card.getName());
+				break;
+			default:
+				break;
+			}
+		}
+		AccusationDialog dialog = new AccusationDialog(roomNames, playerNames, weaponNames);
 	}
 	
 	public void addEvents() {
