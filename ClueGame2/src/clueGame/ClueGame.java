@@ -494,22 +494,32 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void runAI() {
+		ComputerPlayer computerPlayer = (ComputerPlayer) activePlayer;
+		boolean validMove = false;
+		
 		board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
 		ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
 		Random rand = new Random();
 		int index;
-		if (targets.size() > 1) {
-			index = rand.nextInt(targets.size() - 1);
+		BoardCell tempCell = null;
+		while (validMove == false) {
+			if (targets.size() > 1) {
+				index = rand.nextInt(targets.size() - 1);
+			}
+			else {
+				index = 0;
+			}
+			tempCell = targets.get(index);
+			// check that the cell chosen isn't the last room visited
+			if (tempCell.getCellCharacter() != computerPlayer.getLastRoomVisited()) {
+				validMove = true;
+			}
 		}
-		else {
-			index = 0;
-		}
-		BoardCell tempCell = targets.get(index);
-		activePlayer.setRow(tempCell.getRow());
-		activePlayer.setCol(tempCell.getCol());
+		computerPlayer.setRow(tempCell.getRow());
+		computerPlayer.setCol(tempCell.getCol());
 		if (tempCell.isDoorway()) {
 			String room = board.getRooms().get(tempCell.getCellCharacter());
-			ComputerPlayer computerPlayer = (ComputerPlayer) activePlayer;
+			computerPlayer.setLastRoomVisited(tempCell.getCellCharacter());
 			computerPlayer.createSuggestion(playerNames, room, weaponNames);
 			Solution suggestion = computerPlayer.getSolution();
 			handleSuggestion(suggestion.getPerson(), suggestion.getRoom(), suggestion.getWeapon(), activePlayer);

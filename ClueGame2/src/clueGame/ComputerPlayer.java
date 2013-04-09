@@ -93,4 +93,8 @@ public class ComputerPlayer extends Player {
 	public Solution getSolution() {
 		return this.suggestion;
 	}
+	
+	public char getLastRoomVisited() {
+		return this.lastRoomVisited;
+	}
 }
