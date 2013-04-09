@@ -31,6 +31,7 @@ public abstract class Player {
 	}
 	
 	abstract public void showCard(Card card);
+	abstract public boolean isComputer();
 	
 	public void draw(Graphics g){
 		width = BoardCell.width;
@@ -97,4 +98,6 @@ public abstract class Player {
 	public boolean getShouldAccuse() {
 		return this.shouldAccuse;
 	}
+	
+	
 } // end class bracket

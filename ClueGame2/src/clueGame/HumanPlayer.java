@@ -18,5 +18,9 @@ public class HumanPlayer extends Player {
 		// TODO add method
 		
 	}
+	
+	public boolean isComputer() {
+		return false;
+	}
 
 }

@@ -11,6 +11,7 @@ public class ComputerPlayer extends Player {
 	private char lastRoomVisited;
 	private Set<Card> seenCards;
 	private Solution suggestion;
+	private RoomCell travelTarget;
 	
 	public ComputerPlayer(String string) {
 		this.name = string;
@@ -21,6 +22,7 @@ public class ComputerPlayer extends Player {
 		this.col = 0;
 		this.suggestion = new Solution();
 		this.shouldAccuse = false;
+		this.travelTarget = null;
 	}
 	
 	public ComputerPlayer(String string, Color color) {
@@ -32,6 +34,7 @@ public class ComputerPlayer extends Player {
 		this.col = 0;
 		this.suggestion = new Solution();
 		this.shouldAccuse = false;
+		this.travelTarget = null;
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
@@ -86,6 +89,10 @@ public class ComputerPlayer extends Player {
 		this.myCards.add(card);
 		this.seenCards.add(card);
 	}
+	
+	public void setRoomToTravel(ArrayList<RoomCell> cells) {
+		
+	}
 
 	public void setLastRoomVisited(char c) {
 		this.lastRoomVisited = c;
@@ -101,6 +108,10 @@ public class ComputerPlayer extends Player {
 	
 	public char getLastRoomVisited() {
 		return this.lastRoomVisited;
+	}
+	
+	public boolean isComputer() {
+		return true;
 	}
 
 }

@@ -459,6 +459,9 @@ public class ClueGame extends JFrame {
 			}
 			player.setColor(color);
 			players.add(player);
+			if (player.isComputer()) {
+				((ComputerPlayer) player).setRoomToTravel(this.board.getDoorCells());
+			}
 		}
 
 	}
@@ -508,8 +511,9 @@ public class ClueGame extends JFrame {
 			canGoToNextPlayer = true;
 		}
 		else {
-			board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
+			board.calcTargets(computerPlayer.getRow(), activePlayer.getCol(), die);
 			ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
+			
 			Random rand = new Random();
 			int index;
 			BoardCell tempCell = null;
@@ -534,6 +538,7 @@ public class ClueGame extends JFrame {
 				computerPlayer.createSuggestion(playerNames, room, weaponNames);
 				Solution suggestion = computerPlayer.getSolution();
 				handleSuggestion(suggestion.getPerson(), suggestion.getRoom(), suggestion.getWeapon(), activePlayer);
+				computerPlayer.setRoomToTravel(this.board.getDoorCells());
 			}
 			canGoToNextPlayer = true;
 		}

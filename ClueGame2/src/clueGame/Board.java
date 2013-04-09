@@ -176,6 +176,10 @@ public class Board extends JPanel {
 		targets = new HashSet<BoardCell>();
 		startTargets(calcIndex(row, column), numberOfSteps, true);
 	}
+	
+	public ArrayList<RoomCell> getDoorCells() {
+		return this.doorCells;
+	}
 
 	  public void startTargets(int location, int steps, boolean firstTime) {
 			// adds location to targetCells if last step
