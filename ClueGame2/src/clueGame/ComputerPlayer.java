@@ -12,6 +12,7 @@ public class ComputerPlayer extends Player {
 	private Set<Card> seenCards;
 	private Solution suggestion;
 	private RoomCell travelTarget;
+	private int previousRow = 0, previousCol = 0;
 	
 	public ComputerPlayer(String string) {
 		this.name = string;
@@ -23,6 +24,8 @@ public class ComputerPlayer extends Player {
 		this.suggestion = new Solution();
 		this.shouldAccuse = false;
 		this.travelTarget = null;
+		this.previousRow = 0;
+		this.previousCol = 0;
 	}
 	
 	public ComputerPlayer(String string, Color color) {
@@ -39,15 +42,26 @@ public class ComputerPlayer extends Player {
 
 	public void pickLocation(Set<BoardCell> targets) {
 		Random rand = new Random();
+		boolean cellFound = false;
 		
 		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);		
 		BoardCell pick = setArray.get(rand.nextInt(setArray.size()));
-		while (pick.getCellCharacter() == (lastRoomVisited)) {
+		while (pick.getCellCharacter() == (lastRoomVisited) && !cellFound) {
 			pick = setArray.get(rand.nextInt(setArray.size()));
+			if(row < (travelTarget.getRow() - previousRow) && col < (travelTarget.getCol() - previousCol)){
+				row = pick.getRow();
+				col = pick.getCol();
+				cellFound = true;
+			}else{
+				continue;
+			}
 		}
-	
-		row = pick.getRow();
-		col = pick.getCol();
+		
+		cellFound = false;
+		
+		
+		
+		
 		
 	}
 	
@@ -91,7 +105,18 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void setRoomToTravel(ArrayList<RoomCell> cells) {
-		
+		char c = getLastRoomVisited();
+		Random generator = new Random();
+		boolean cont = true;
+		int roomToPick = generator.nextInt(cells.size());
+		do{
+			if(cells.get(roomToPick).getCellCharacter() != c){
+				travelTarget = cells.get(roomToPick);
+				cont = false;
+			} else{
+				roomToPick = generator.nextInt(cells.size());
+			}
+		}while(cont);
 	}
 
 	public void setLastRoomVisited(char c) {
