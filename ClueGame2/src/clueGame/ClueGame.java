@@ -34,8 +34,6 @@ import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
 	// TODO Computer players need to have their lastRoomVisited flag set and have their movement logic updated
-	// TODO Computer players need to be able to make accusations
-	// TODO Computer accusations need to have dialogs to show the human player what is going on
 
     private Solution solution;
     private ArrayList<Player> players;

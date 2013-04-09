@@ -13,7 +13,6 @@ public class ComputerPlayer extends Player {
 	private Solution suggestion;
 	
 	public ComputerPlayer(String string) {
-		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
 		this.name = string;
 		this.color = null;
 		this.seenCards = new HashSet<Card>();
@@ -25,7 +24,6 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public ComputerPlayer(String string, Color color) {
-		// TODO should seenCards include the players own cards? should row/col be set with parameters from the constructor?
 		this.name = string;
 		this.color = color;
 		this.seenCards = new HashSet<Card>();
@@ -82,6 +80,11 @@ public class ComputerPlayer extends Player {
 	
 	public void updateSeen(Card seen) {
 		seenCards.add(seen);
+	}
+	
+	public void giveCard(Card card) {
+		this.myCards.add(card);
+		this.seenCards.add(card);
 	}
 
 	public void setLastRoomVisited(char c) {
