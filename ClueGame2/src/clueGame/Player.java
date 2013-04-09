@@ -15,6 +15,7 @@ public abstract class Player {
 	protected int row;
 	protected int col;
 	protected Color color;
+	protected boolean shouldAccuse;
 	
 	protected static int width, height;
 	
@@ -87,5 +88,13 @@ public abstract class Player {
 	
 	public void giveCard(Card card) {
 		this.myCards.add(card);
+	}
+	
+	public void setShouldAccuse(boolean value) {
+		this.shouldAccuse = value;
+	}
+	
+	public boolean getShouldAccuse() {
+		return this.shouldAccuse;
 	}
 } // end class bracket

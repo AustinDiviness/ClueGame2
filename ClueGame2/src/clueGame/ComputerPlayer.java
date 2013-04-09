@@ -21,6 +21,7 @@ public class ComputerPlayer extends Player {
 		this.row = 0;
 		this.col = 0;
 		this.suggestion = new Solution();
+		this.shouldAccuse = false;
 	}
 	
 	public ComputerPlayer(String string, Color color) {
@@ -32,6 +33,7 @@ public class ComputerPlayer extends Player {
 		this.row = 0;
 		this.col = 0;
 		this.suggestion = new Solution();
+		this.shouldAccuse = false;
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
@@ -97,4 +99,5 @@ public class ComputerPlayer extends Player {
 	public char getLastRoomVisited() {
 		return this.lastRoomVisited;
 	}
+
 }

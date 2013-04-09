@@ -355,6 +355,7 @@ public class ClueGame extends JFrame {
 		else {
 			lastCardShown = new Card(CardType.ROOM, "");
 			guessResult.setText("No New Clue");
+			activePlayer.setShouldAccuse(true);
 		}
 	}
 	
@@ -496,35 +497,48 @@ public class ClueGame extends JFrame {
 	public void runAI() {
 		ComputerPlayer computerPlayer = (ComputerPlayer) activePlayer;
 		boolean validMove = false;
-		
-		board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
-		ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
-		Random rand = new Random();
-		int index;
-		BoardCell tempCell = null;
-		while (validMove == false) {
-			if (targets.size() > 1) {
-				index = rand.nextInt(targets.size() - 1);
+		if (computerPlayer.getShouldAccuse()) {
+			// create accusation
+			if (checkAccusation(computerPlayer.getSolution())) {
+				JOptionPane.showMessageDialog(this, computerPlayer.getName() + " has won!", "Accusation was Correct",  JOptionPane.INFORMATION_MESSAGE);
+				System.exit(0);
 			}
 			else {
-				index = 0;
+				JOptionPane.showMessageDialog(this, computerPlayer.getName() + " was incorrect.", "Wrong Accusation", JOptionPane.INFORMATION_MESSAGE);
+				computerPlayer.setShouldAccuse(false);
 			}
-			tempCell = targets.get(index);
-			// check that the cell chosen isn't the last room visited
-			if (tempCell.getCellCharacter() != computerPlayer.getLastRoomVisited()) {
-				validMove = true;
+			canGoToNextPlayer = true;
+		}
+		else {
+			board.calcTargets(activePlayer.getRow(), activePlayer.getCol(), die);
+			ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
+			Random rand = new Random();
+			int index;
+			BoardCell tempCell = null;
+			while (validMove == false) {
+				if (targets.size() > 1) {
+					index = rand.nextInt(targets.size() - 1);
+				}
+				else {
+					index = 0;
+				}
+				tempCell = targets.get(index);
+				// check that the cell chosen isn't the last room visited
+				if (tempCell.getCellCharacter() != computerPlayer.getLastRoomVisited()) {
+					validMove = true;
+				}
 			}
+			computerPlayer.setRow(tempCell.getRow());
+			computerPlayer.setCol(tempCell.getCol());
+			if (tempCell.isDoorway()) {
+				String room = board.getRooms().get(tempCell.getCellCharacter());
+				computerPlayer.setLastRoomVisited(tempCell.getCellCharacter());
+				computerPlayer.createSuggestion(playerNames, room, weaponNames);
+				Solution suggestion = computerPlayer.getSolution();
+				handleSuggestion(suggestion.getPerson(), suggestion.getRoom(), suggestion.getWeapon(), activePlayer);
+			}
+			canGoToNextPlayer = true;
 		}
-		computerPlayer.setRow(tempCell.getRow());
-		computerPlayer.setCol(tempCell.getCol());
-		if (tempCell.isDoorway()) {
-			String room = board.getRooms().get(tempCell.getCellCharacter());
-			computerPlayer.setLastRoomVisited(tempCell.getCellCharacter());
-			computerPlayer.createSuggestion(playerNames, room, weaponNames);
-			Solution suggestion = computerPlayer.getSolution();
-			handleSuggestion(suggestion.getPerson(), suggestion.getRoom(), suggestion.getWeapon(), activePlayer);
-		}
-		canGoToNextPlayer = true;
 	}
 	
 	public void runAccusation() {
