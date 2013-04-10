@@ -57,10 +57,10 @@ public class SuggestionDialog extends JDialog {
 		playerText.setEditable(false);
 		weaponText.setEditable(false);
         roomCombo.setEnabled(false);
-        panel.add(roomText);
-        panel.add(roomCombo);
         panel.add(playerText);
         panel.add(playerCombo);
+        panel.add(roomText);
+        panel.add(roomCombo);
         panel.add(weaponText);
         panel.add(weaponCombo);
         panel.add(cancelButton);
