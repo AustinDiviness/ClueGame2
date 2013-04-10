@@ -91,9 +91,7 @@ public class ComputerPlayer extends Player {
 				}
 			}
 			// remove cells that match a cell already in closed cells
-			for (BoardCell cell: boardCellRemove) {
-				adjCells.remove(cell);
-			}
+			adjCells.removeAll(boardCellRemove);
 			ArrayList<PathCell> pathCellRemove = new ArrayList<PathCell>();
 			for (BoardCell boardCell: adjCells) {
 				// check to see if its already on the open list
@@ -108,9 +106,7 @@ public class ComputerPlayer extends Player {
 				openCells.add(new PathCell(boardCell, cheapest, calcG(boardCell), calcH(boardCell)));
 			}
 			// remove path cells that need to be
-			for (PathCell pathCell: pathCellRemove) {
-				openCells.remove(pathCell);
-			}
+			openCells.removeAll(pathCellRemove);
 			if (cheapest.boardCell == travelTarget) {
 				path.add(cheapest.boardCell);
 				while (cheapest.parentCell != null) {
@@ -242,6 +238,10 @@ public class ComputerPlayer extends Player {
 	
 	public boolean isComputer() {
 		return true;
+	}
+	
+	public void setTravelTarget(RoomCell cell) {
+		this.travelTarget = cell;
 	}
 
 }

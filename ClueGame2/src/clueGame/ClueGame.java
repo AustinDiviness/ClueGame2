@@ -74,7 +74,6 @@ public class ClueGame extends JFrame {
 	
 	public ClueGame(String peopleConfig, String weaponsConfig, String boardConfig, String roomLegendConfig) {
 		this.solution = new Solution();
-		this.lastCardShown = new Card(CardType.WEAPON, "Something");
 		this.board = new Board(boardConfig, roomLegendConfig);
 		this.deck = new ArrayList<Card>();
 		this.allCards = new ArrayList<Card>();
@@ -737,6 +736,15 @@ public class ClueGame extends JFrame {
 		game.rollDie();
 		game.createGameControls();
 		game.setVisible(true);
+		// TODO debug, remove
+		for (Player player: game.players) {
+			player.setRow(8);
+			player.setCol(3);
+			if (player.isComputer()) {
+				((ComputerPlayer) player).setTravelTarget((RoomCell) game.board.cellAt(5, 2));
+			}
+		}
+		
 		//loading the splash screen
 		game.loadSplashScreen();
 		

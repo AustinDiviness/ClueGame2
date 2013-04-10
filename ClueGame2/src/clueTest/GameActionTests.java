@@ -25,7 +25,7 @@ import clueGame.Solution;
 
 public class GameActionTests {
 	ClueGame cg;
-	private final int TOTALCARDS = 16;
+	private final int TOTALCARDS = 14;
 	private final int TOTALPEOPLE = 3;
 	private Color color = Color.BLUE;
 	
@@ -46,7 +46,7 @@ public class GameActionTests {
 		ArrayList<Card> allCards = cg.getCards();
 		ArrayList<String> cardNames = new ArrayList<String>();
 		for (Card card: allCards) {
-			cardNames.add(card.toString());
+			cardNames.add(card.getName());
 		}
 		assertEquals(TOTALCARDS, allCards.size());
 		assertTrue(cardNames.contains("Lead Pipe")); // tests weapon cards

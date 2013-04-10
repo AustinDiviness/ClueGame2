@@ -157,7 +157,7 @@ public class Board extends JPanel {
 	public ArrayList<BoardCell> getMovableAdj(BoardCell cell) {
 		ArrayList<BoardCell> cells = new ArrayList<BoardCell>();
 		BoardCell tempCell = null;
-		if (cell.getRow() >= 0) {
+		if (cell.getRow() > 0) {
 			tempCell = this.cellAt(cell.getRow() - 1, cell.getCol());
 			if (tempCell.getRow() + 1 == cell.getRow() &&
 					tempCell.getCol() == cell.getCol() &&
@@ -165,26 +165,26 @@ public class Board extends JPanel {
 				cells.add(tempCell);
 			}
 		}
-		if (cell.getRow() < numRows) {
+		if (cell.getRow() < 21 - 1) {
 			tempCell = this.cellAt(cell.getRow() + 1, cell.getCol());
-			if (tempCell.getRow() + 1 == cell.getRow() &&
+			if (tempCell.getRow() - 1 == cell.getRow() &&
 					tempCell.getCol() == cell.getCol() &&
 					(tempCell.isDoorway() || tempCell.isWalkway())) {
 				cells.add(tempCell);
 			}
 		} 
-		if (cell.getCol() >= 0) {
+		if (cell.getCol() > 0) {
 			tempCell = this.cellAt(cell.getRow(), cell.getCol() - 1);
-			if (tempCell.getRow() + 1 == cell.getRow() &&
-					tempCell.getCol() == cell.getCol() &&
+			if (tempCell.getRow() == cell.getRow() &&
+					tempCell.getCol() + 1 == cell.getCol() &&
 					(tempCell.isDoorway() || tempCell.isWalkway())) {
 				cells.add(tempCell);
 			}
 		}
-		if (cell.getCol() < numColumns) {
+		if (cell.getCol() < 22 - 1) {
 			tempCell = this.cellAt(cell.getRow(), cell.getCol() + 1);
-			if (tempCell.getRow() + 1 == cell.getRow() &&
-					tempCell.getCol() == cell.getCol() &&
+			if (tempCell.getRow() == cell.getRow() &&
+					tempCell.getCol() - 1 == cell.getCol() &&
 					(tempCell.isDoorway() || tempCell.isWalkway())) {
 				cells.add(tempCell);
 			}
