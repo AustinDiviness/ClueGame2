@@ -34,6 +34,7 @@ import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
 	// TODO Computer players need to have their lastRoomVisited flag set and have their movement logic updated
+	// TODO we need to make sure that if a player makes an accusation that they can't make another one or move that turn
 
     private Solution solution;
     private ArrayList<Player> players;
@@ -513,25 +514,25 @@ public class ClueGame extends JFrame {
 		else {
 			board.calcTargets(computerPlayer.getRow(), activePlayer.getCol(), die);
 			ArrayList<BoardCell> targets = new ArrayList<BoardCell>(board.getTargets());
-			
-			Random rand = new Random();
-			int index;
-			BoardCell tempCell = null;
-			while (validMove == false) {
-				if (targets.size() > 1) {
-					index = rand.nextInt(targets.size() - 1);
-				}
-				else {
-					index = 0;
-				}
-				tempCell = targets.get(index);
-				// check that the cell chosen isn't the last room visited
-				if (tempCell.getCellCharacter() != computerPlayer.getLastRoomVisited()) {
-					validMove = true;
-				}
-			}
-			computerPlayer.setRow(tempCell.getRow());
-			computerPlayer.setCol(tempCell.getCol());
+			computerPlayer.pickLocation(board.getTargets());
+//			Random rand = new Random();
+//			int index;
+			BoardCell tempCell = board.getCellAt(board.calcIndex(computerPlayer.getRow(), computerPlayer.getCol()));
+//			while (validMove == false) {
+//				if (targets.size() > 1) {
+//					index = rand.nextInt(targets.size() - 1);
+//				}
+//				else {
+//					index = 0;
+//				}
+//				tempCell = targets.get(index);
+//				// check that the cell chosen isn't the last room visited
+//				if (tempCell.getCellCharacter() != computerPlayer.getLastRoomVisited()) {
+//					validMove = true;
+//				}
+//			}
+//			computerPlayer.setRow(tempCell.getRow());
+//			computerPlayer.setCol(tempCell.getCol());
 			if (tempCell.isDoorway()) {
 				String room = board.getRooms().get(tempCell.getCellCharacter());
 				computerPlayer.setLastRoomVisited(tempCell.getCellCharacter());

@@ -39,31 +39,128 @@ public class ComputerPlayer extends Player {
 		this.shouldAccuse = false;
 		this.travelTarget = null;
 	}
+	
+	public int abs(int x) {
+		if (x < 0) {
+			x = x * -1;
+		}
+		return x;
+	}
+	
+	public int calcH(BoardCell cell) {
+		int h = abs(cell.getRow() - travelTarget.getRow()) +
+				abs(cell.getCol() - travelTarget.getCol());
+		return h;
+	}
+	
+	public int calcG(BoardCell cell) {
+		int g = abs(cell.getRow() - row) +
+				abs(cell.getCol() - col);
+		return g;
+	}
 
 	public void pickLocation(Set<BoardCell> targets) {
-		Random rand = new Random();
-		boolean cellFound = false;
-		
-		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);		
-		BoardCell pick = setArray.get(rand.nextInt(setArray.size()));
-		while (pick.getCellCharacter() == (lastRoomVisited) && !cellFound) {
-			pick = setArray.get(rand.nextInt(setArray.size()));
-			if(row < (travelTarget.getRow() - previousRow) && col < (travelTarget.getCol() - previousCol)){
-				row = pick.getRow();
-				col = pick.getCol();
-				cellFound = true;
-			}else{
-				continue;
+		Board board = ClueGame.instance.board;
+		ArrayList<PathCell> closedCells = new ArrayList<PathCell>();
+		ArrayList<PathCell> openCells = new ArrayList<PathCell>();
+		ArrayList<BoardCell> path = new ArrayList<BoardCell>();
+		// add the starting cell to the open cells
+		int h = abs(board.getCellAt(board.calcIndex(row, col)).getRow() - travelTarget.getRow()) + 
+				abs(board.getCellAt(board.calcIndex(row, col)).getCol() - travelTarget.getCol());
+		openCells.add(new PathCell(board.getCellAt(board.calcIndex(row, col)), null, 0, h));
+		while (true) {
+			// find lowest cost cell in the openCells
+			PathCell cheapest = openCells.get(0);
+			for (PathCell cell: openCells) {
+				if (cell.cost < cheapest.cost) {
+					cheapest = cell;
+				}
+			}
+			// move cheapest to closeCells
+			closedCells.add(cheapest);
+			openCells.remove(cheapest);
+			// get adjacencies
+			ArrayList<BoardCell> adjCells = board.getMovableAdj(cheapest.boardCell);
+			ArrayList<BoardCell> boardCellRemove = new ArrayList<BoardCell>();
+			// find cells that need to be removed
+			for (BoardCell boardCell: adjCells) {
+				for (PathCell pathCell: closedCells) {
+					if (pathCell.boardCell == boardCell) {
+						boardCellRemove.add(boardCell);
+					}
+				}
+			}
+			// remove cells that match a cell already in closed cells
+			for (BoardCell cell: boardCellRemove) {
+				adjCells.remove(cell);
+			}
+			ArrayList<PathCell> pathCellRemove = new ArrayList<PathCell>();
+			for (BoardCell boardCell: adjCells) {
+				// check to see if its already on the open list
+				for (PathCell pathCell: openCells) {
+					// if the boardCell is already on the list and its g value is less than the current one, replace it
+					if (pathCell.boardCell == boardCell && calcG(boardCell) < pathCell.g) {
+						pathCellRemove.add(pathCell);
+					}
+
+				}
+				// add the board cell to the open cells
+				openCells.add(new PathCell(boardCell, cheapest, calcG(boardCell), calcH(boardCell)));
+			}
+			// remove path cells that need to be
+			for (PathCell pathCell: pathCellRemove) {
+				openCells.remove(pathCell);
+			}
+			if (cheapest.boardCell == travelTarget) {
+				path.add(cheapest.boardCell);
+				while (cheapest.parentCell != null) {
+					cheapest = cheapest.parentCell;
+					path.add(cheapest.boardCell);
+				}
+				break;
 			}
 		}
+		// remove cells that are on the path and not in the targets
+		ArrayList<BoardCell> boardCellRemove = new ArrayList<BoardCell>();
+		for (BoardCell cell: path) {
+			if (targets.contains(cell) == false) {
+				boardCellRemove.add(cell);
+			}
+		}
+		for (BoardCell cell: boardCellRemove) {
+			path.remove(cell);
+		}
+		BoardCell possTarget = path.get(0);
+		for (BoardCell cell: path) {
+			if (calcG(cell) < calcG(possTarget)) {
+				possTarget = cell;
+			}
+		}
+		this.row = possTarget.getRow();
+		this.col = possTarget.getCol();
 		
-		cellFound = false;
+//		Random rand = new Random();
+//		boolean cellFound = false;
+//		
+//		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);		
+//		BoardCell pick = setArray.get(rand.nextInt(setArray.size()));
+//		while (pick.getCellCharacter() == (lastRoomVisited) && !cellFound) {
+//			pick = setArray.get(rand.nextInt(setArray.size()));
+//			if(row < (travelTarget.getRow() - previousRow) && col < (travelTarget.getCol() - previousCol)){
+//				row = pick.getRow();
+//				col = pick.getCol();
+//				cellFound = true;
+//			}else{
+//				continue;
+//			}
+//		}
+//		
+//		cellFound = false;
+		
+	}		
 		
 		
 		
-		
-		
-	}
 	
 	public void createSuggestion(ArrayList<String> playerNames, String roomName, ArrayList<String> weaponNames) {
 		Random rand = new Random();
@@ -106,17 +203,25 @@ public class ComputerPlayer extends Player {
 	
 	public void setRoomToTravel(ArrayList<RoomCell> cells) {
 		char c = getLastRoomVisited();
+		RoomCell possRoomCell = null;
 		Random generator = new Random();
-		boolean cont = true;
-		int roomToPick = generator.nextInt(cells.size());
-		do{
-			if(cells.get(roomToPick).getCellCharacter() != c){
-				travelTarget = cells.get(roomToPick);
-				cont = false;
-			} else{
-				roomToPick = generator.nextInt(cells.size());
+		while (true) {
+			possRoomCell = cells.get(generator.nextInt(cells.size()));
+			if (possRoomCell.getCellCharacter() != c) {
+				travelTarget = possRoomCell;
+				break;
 			}
-		}while(cont);
+		}
+//		boolean cont = true;
+//		int roomToPick = generator.nextInt(cells.size());
+//		do{
+//			if(cells.get(roomToPick).getCellCharacter() != c){
+//				travelTarget = cells.get(roomToPick);
+//				cont = false;
+//			} else{
+//				roomToPick = generator.nextInt(cells.size());
+//			}
+//		}while(cont);
 	}
 
 	public void setLastRoomVisited(char c) {
