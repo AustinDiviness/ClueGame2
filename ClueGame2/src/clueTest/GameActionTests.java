@@ -343,7 +343,7 @@ public class GameActionTests {
 
         cg.board.calcTargets(player.getRow(), player.getCol(), distance);
         HashSet<BoardCell> targets = (HashSet<BoardCell>) cg.board.getTargets();
-        
+        player.setTravelTarget(cg.board.getDoorCells().get(0));
         for (int i = 1; i < 100; i++) {
         	player.pickLocation(targets);
         	assertTrue(player.getCol() != 11 && player.getRow() != 4);
