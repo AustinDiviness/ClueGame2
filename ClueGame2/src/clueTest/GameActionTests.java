@@ -147,6 +147,7 @@ public class GameActionTests {
         players.add(one);
         players.add(two);
         cg.setPlayers(players);
+        cg.setActivePlayer(two);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, two);
         assertEquals(tempString, cg.getLastCardShown().getName());
         
@@ -173,6 +174,7 @@ public class GameActionTests {
         one.giveCard(new Card(CardType.WEAPON, tempString));
         one.giveCard(new Card(CardType.ROOM, tempString2));
         cg.setPlayers(players);
+        cg.setActivePlayer(two);
         for (int i = 0; i < 100; ++i) {
             cg.handleSuggestion(solution.getPerson(), tempString2, tempString, two);
             if (cg.getLastCardShown().getName().equals(tempString)) {
@@ -211,6 +213,7 @@ public class GameActionTests {
         one.giveCard(new Card(CardType.WEAPON, tempString));
         two.giveCard(new Card(CardType.ROOM, tempString2));
         cg.setPlayers(players);
+        cg.setActivePlayer(three);
         for (int i = 0; i < 100; ++i) {
             cg.handleSuggestion(solution.getPerson(), tempString2, tempString, three);
             if (cg.getLastCardShown().getName().equals(tempString)) {
@@ -249,6 +252,7 @@ public class GameActionTests {
         one.giveCard(new Card(CardType.WEAPON, tempString));
         two.giveCard(new Card(CardType.ROOM, tempString2));
         cg.setPlayers(players);
+        cg.setActivePlayer(three);
         for (int i = 0; i < 100; ++i) {
             cg.handleSuggestion(solution.getPerson(), tempString2, tempString, three);
             if (cg.getLastCardShown().getName().equals(tempString)) {
@@ -279,6 +283,7 @@ public class GameActionTests {
         //cards.add(new Card(CardType.WEAPON, tempString));
         one.giveCard(new Card(CardType.WEAPON, tempString));
         cg.setPlayers(players);
+        cg.setActivePlayer(two);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), solution.getWeapon(), two);
         assertTrue(cg.getLastCardShown().getName() == "");
 	}
