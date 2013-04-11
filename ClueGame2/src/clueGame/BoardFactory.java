@@ -2,6 +2,7 @@ package clueGame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,7 +13,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import clueGame.BadConfigFormatException;
 import clueGame.RoomCell.DoorDirection;
 
 /* DESCRIPTION
@@ -109,8 +109,8 @@ public class BoardFactory {
 // LEGEND PARSE FUNCTIONS
 	private void loadLegend() throws FileNotFoundException
 	{ // Takes each line in the legend and gives it parseLegend to evaluate it
-		File file = new File(legendFileName);
-		Scanner scan = new Scanner(file);
+		InputStream is = getClass().getClassLoader().getResourceAsStream(legendFileName);
+		Scanner scan = new Scanner(is);
 		int count = 0;
 		while(scan.hasNextLine())
 		{
@@ -151,8 +151,8 @@ public class BoardFactory {
 // BOARD PARSE FUNCTONS
 	private void loadBoard() throws FileNotFoundException
 	{ // takes each line of the board and gives it to parseBoard for evaluation
-		File file = new File(boardFileName);
-		Scanner scan = new Scanner(file);
+		InputStream is = getClass().getClassLoader().getResourceAsStream(boardFileName);
+		Scanner scan = new Scanner(is);
 		
 		while(scan.hasNextLine())
 		{

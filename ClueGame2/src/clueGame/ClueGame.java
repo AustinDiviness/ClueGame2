@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -366,7 +367,7 @@ public class ClueGame extends JFrame {
 	public void loadWeapons(String inputFile) {
 		// loads weapons from config file into card deck
 		ArrayList<Card> weaponCards = new ArrayList<Card>();
-		FileReader fileReader = null;
+		InputStream inputStream = null;
 		String currentPath = "";
 		String line = null;
 		try {
@@ -379,13 +380,13 @@ public class ClueGame extends JFrame {
 		}
 		currentPath = currentPath + File.separatorChar;
 		try {
-			fileReader = new FileReader(currentPath + inputFile);
+			inputStream = getClass().getClassLoader().getResourceAsStream(inputFile);
 		}
-		catch (FileNotFoundException e) {
+		catch (Exception e) {
 			System.out.println("Unable to load file: " + currentPath + inputFile);
 			System.exit(1);
 		}
-		Scanner in = new Scanner(fileReader);
+		Scanner in = new Scanner(inputStream);
 		while (in.hasNext()) {
 			line = in.nextLine().trim();
 			deck.add(new Card(CardType.WEAPON, line));
@@ -398,7 +399,7 @@ public class ClueGame extends JFrame {
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		ArrayList<String> playerInputStrings = new ArrayList<String>();
 		String[] splitLine = null;
-		FileReader fileReader = null;
+		InputStream inputStream = null;
 		String currentPath = "";
 		String line = null;
 		try {
@@ -411,13 +412,13 @@ public class ClueGame extends JFrame {
 		}
 		currentPath = currentPath + File.separatorChar;
 		try {
-			fileReader = new FileReader(currentPath + inputFile);
+			inputStream = getClass().getClassLoader().getResourceAsStream(inputFile);
 		}
-		catch (FileNotFoundException e) {
+		catch (Exception e) {
 			System.out.println("Unable to load file: " + currentPath + inputFile);
 			System.exit(1);
 		}
-		Scanner in = new Scanner(fileReader);
+		Scanner in = new Scanner(inputStream);
 		while (in.hasNext()) {
 			line = in.nextLine().trim();
 			playerInputStrings.add(line);
