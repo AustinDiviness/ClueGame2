@@ -548,6 +548,7 @@ public class ClueGame extends JFrame {
 		AccusationDialog dialog = new AccusationDialog(roomNames, playerNames, weaponNames);
 		if (dialog.wasSubmitted()) {
 			this.canGoToNextPlayer = true;
+			this.repaint();
 			if (checkAccusation(new Solution(dialog.getPlayer(), dialog.getRoom(), dialog.getWeapon()))) {
 				JOptionPane.showMessageDialog(this, "You are correct!", "You Win!", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
