@@ -737,13 +737,13 @@ public class ClueGame extends JFrame {
 		game.createGameControls();
 		game.setVisible(true);
 		// TODO debug, remove
-		for (Player player: game.players) {
-			player.setRow(8);
-			player.setCol(3);
-			if (player.isComputer()) {
-				((ComputerPlayer) player).setTravelTarget((RoomCell) game.board.cellAt(5, 2));
-			}
-		}
+//		for (Player player: game.players) {
+//			player.setRow(8);
+//			player.setCol(3);
+//			if (player.isComputer()) {
+//				((ComputerPlayer) player).setTravelTarget((RoomCell) game.board.cellAt(5, 2));
+//			}
+//		}
 		
 		//loading the splash screen
 		game.loadSplashScreen();

@@ -61,6 +61,7 @@ public class ComputerPlayer extends Player {
 
 	public void pickLocation(Set<BoardCell> targets) {
 		Board board = ClueGame.instance.board;
+		int limit = 1000;
 		ArrayList<PathCell> closedCells = new ArrayList<PathCell>();
 		ArrayList<PathCell> openCells = new ArrayList<PathCell>();
 		ArrayList<BoardCell> path = new ArrayList<BoardCell>();
@@ -68,7 +69,9 @@ public class ComputerPlayer extends Player {
 		int h = abs(board.getCellAt(board.calcIndex(row, col)).getRow() - travelTarget.getRow()) + 
 				abs(board.getCellAt(board.calcIndex(row, col)).getCol() - travelTarget.getCol());
 		openCells.add(new PathCell(board.getCellAt(board.calcIndex(row, col)), null, 0, h));
-		while (true) {
+		int breakCount = 0;
+		while (breakCount < limit) {
+			++breakCount;
 			// find lowest cost cell in the openCells
 			PathCell cheapest = openCells.get(0);
 			for (PathCell cell: openCells) {
@@ -124,15 +127,15 @@ public class ComputerPlayer extends Player {
 			}
 		}
 		path.removeAll(boardCellRemove);
-		if (path.size() == 0) {
-			if (board.cellAt(row, col).isDoorway()) {
-				Random rand = new Random();
-				BoardCell target = (BoardCell) (targets.toArray())[rand.nextInt(targets.size())];
-				this.row = target.getRow();
-				this.col = target.getCol();
-				return;
-			}
+		// hacky error fix
+		if (path.size() == 0 || breakCount >= limit) {
+			Random rand = new Random();
+			BoardCell target = (BoardCell) (targets.toArray())[rand.nextInt(targets.size())];
+			this.row = target.getRow();
+			this.col = target.getCol();
+			return;
 		}
+		// what normally should happen
 		BoardCell possTarget = path.get(0);
 		for (BoardCell cell: path) {
 			if (calcG(cell) < calcG(possTarget)) {
