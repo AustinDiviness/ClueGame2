@@ -365,6 +365,7 @@ public class GameActionTests {
         cards.add(new Card(CardType.WEAPON, tempString));
         one.setCards(cards);
         cg.setPlayers(players);
+        cg.setActivePlayer(two);
         cg.handleSuggestion(solution.getPerson(), solution.getRoom(), solution.getWeapon(), two);
         assertTrue(cg.getLastCardShown().getName() == "");
 	}
@@ -392,6 +393,7 @@ public class GameActionTests {
         one.setCards(cards);
         two.setCards(otherCards);
         cg.setPlayers(players);
+        cg.setActivePlayer(three);
         for (int i = 0; i < 100; ++i) {
             if (rand.nextInt(2) == 1) { 
                 cg.handleSuggestion(solution.getPerson(), solution.getRoom(), tempString, three);
