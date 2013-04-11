@@ -123,8 +123,15 @@ public class ComputerPlayer extends Player {
 				boardCellRemove.add(cell);
 			}
 		}
-		for (BoardCell cell: boardCellRemove) {
-			path.remove(cell);
+		path.removeAll(boardCellRemove);
+		if (path.size() == 0) {
+			if (board.cellAt(row, col).isDoorway()) {
+				Random rand = new Random();
+				BoardCell target = (BoardCell) (targets.toArray())[rand.nextInt(targets.size())];
+				this.row = target.getRow();
+				this.col = target.getCol();
+				return;
+			}
 		}
 		BoardCell possTarget = path.get(0);
 		for (BoardCell cell: path) {
