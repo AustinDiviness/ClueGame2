@@ -60,6 +60,7 @@ public class ComputerPlayer extends Player {
 	}
 
 	public void pickLocation(Set<BoardCell> targets) {
+		// tries to implement the A* pathfinding algorithm. is buggy....
 		Board board = ClueGame.instance.board;
 		int limit = 1000;
 		ArrayList<PathCell> closedCells = new ArrayList<PathCell>();
@@ -144,25 +145,6 @@ public class ComputerPlayer extends Player {
 		}
 		this.row = possTarget.getRow();
 		this.col = possTarget.getCol();
-		
-//		Random rand = new Random();
-//		boolean cellFound = false;
-//		
-//		ArrayList<BoardCell> setArray = new ArrayList<BoardCell>(targets);		
-//		BoardCell pick = setArray.get(rand.nextInt(setArray.size()));
-//		while (pick.getCellCharacter() == (lastRoomVisited) && !cellFound) {
-//			pick = setArray.get(rand.nextInt(setArray.size()));
-//			if(row < (travelTarget.getRow() - previousRow) && col < (travelTarget.getCol() - previousCol)){
-//				row = pick.getRow();
-//				col = pick.getCol();
-//				cellFound = true;
-//			}else{
-//				continue;
-//			}
-//		}
-//		
-//		cellFound = false;
-		
 	}		
 		
 		
