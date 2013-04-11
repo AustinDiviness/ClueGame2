@@ -368,22 +368,12 @@ public class ClueGame extends JFrame {
 		// loads weapons from config file into card deck
 		ArrayList<Card> weaponCards = new ArrayList<Card>();
 		InputStream inputStream = null;
-		String currentPath = "";
 		String line = null;
-		try {
-			currentPath = new java.io.File(".").getCanonicalPath();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Unable to find path.");
-			System.exit(2);
-		}
-		currentPath = currentPath + File.separatorChar;
 		try {
 			inputStream = getClass().getClassLoader().getResourceAsStream(inputFile);
 		}
 		catch (Exception e) {
-			System.out.println("Unable to load file: " + currentPath + inputFile);
+			System.out.println("Unable to load file: " + inputFile);
 			System.exit(1);
 		}
 		Scanner in = new Scanner(inputStream);
@@ -400,22 +390,12 @@ public class ClueGame extends JFrame {
 		ArrayList<String> playerInputStrings = new ArrayList<String>();
 		String[] splitLine = null;
 		InputStream inputStream = null;
-		String currentPath = "";
 		String line = null;
-		try {
-			currentPath = new java.io.File(".").getCanonicalPath();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Unable to find path.");
-			System.exit(2);
-		}
-		currentPath = currentPath + File.separatorChar;
 		try {
 			inputStream = getClass().getClassLoader().getResourceAsStream(inputFile);
 		}
 		catch (Exception e) {
-			System.out.println("Unable to load file: " + currentPath + inputFile);
+			System.out.println("Unable to load file: " + inputFile);
 			System.exit(1);
 		}
 		Scanner in = new Scanner(inputStream);
