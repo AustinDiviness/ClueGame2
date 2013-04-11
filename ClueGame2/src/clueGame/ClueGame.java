@@ -547,12 +547,12 @@ public class ClueGame extends JFrame {
 	public void runAccusation() {
 		AccusationDialog dialog = new AccusationDialog(roomNames, playerNames, weaponNames);
 		if (dialog.wasSubmitted()) {
+			this.canGoToNextPlayer = true;
 			if (checkAccusation(new Solution(dialog.getPlayer(), dialog.getRoom(), dialog.getWeapon()))) {
 				JOptionPane.showMessageDialog(this, "You are correct!", "You Win!", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			else {
-				// TODO does an accusation mean the player can't move?
 				JOptionPane.showMessageDialog(this, "You were incorrect.", "Wrong Accusation", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
